@@ -58,15 +58,18 @@ class Bail
     #[ORM\OneToMany(mappedBy: 'bail', targetEntity: Paiement::class)]
     private Collection $paiements;
 
-    #[ORM\ManyToOne(inversedBy: 'bails')]
-    private ?Locataire $locataire = null;
+
 
     #[ORM\ManyToOne(inversedBy: 'bails')]
     private ?Associe $associe = null;
 
+    #[ORM\ManyToMany(targetEntity: Locataire::class, inversedBy: 'bails')]
+    private Collection $locataire;
+
     public function __construct()
     {
         $this->paiements = new ArrayCollection();
+        $this->locataire = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -260,7 +263,7 @@ class Bail
         return $this;
     }
 
-    public function getLocataire(): ?Locataire
+    public function getLocataire(): Collection
     {
         return $this->locataire;
     }
@@ -280,6 +283,22 @@ class Bail
     public function setAssocie(?Associe $associe): static
     {
         $this->associe = $associe;
+
+        return $this;
+    }
+
+    public function addLocataire(Locataire $locataire): static
+    {
+        if (!$this->locataire->contains($locataire)) {
+            $this->locataire->add($locataire);
+        }
+
+        return $this;
+    }
+
+    public function removeLocataire(Locataire $locataire): static
+    {
+        $this->locataire->removeElement($locataire);
 
         return $this;
     }
