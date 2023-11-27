@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="generator" content="Hugo 0.104.2">
+    <meta name="robots" content="noindex">
+    <!-- Google fonts - Roboto -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700">
+    <!-- Choices CSS-->
+    <link rel="stylesheet" href="https://d19m59y37dris4.cloudfront.net/dashboard/2-1-1/vendor/choices.js/public/assets/styles/choices.min.css">
+    <!-- Custom Scrollbar-->
+    <link rel="stylesheet" href="https://d19m59y37dris4.cloudfront.net/dashboard/2-1-1/vendor/overlayscrollbars/css/OverlayScrollbars.min.css">
+    <!-- theme stylesheet-->
+    <link rel="stylesheet" href="https://d19m59y37dris4.cloudfront.net/dashboard/2-1-1/css/style-0b81726209.default.css" id="theme-stylesheet">
+    <!-- Custom stylesheet - for your changes-->
+    <link rel="stylesheet" href="https://d19m59y37dris4.cloudfront.net/dashboard/2-1-1/css/custom-fa45e3ee3c.css">
+    <!-- Favicon-->
+    <link rel="shortcut icon" href="https://d19m59y37dris4.cloudfront.net/dashboard/2-1-1/img/favicon-643f0e127f.ico">
+    <title></title>
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.2/examples/headers/">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+
+     <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
+
+      .custom-lg-1-5 {
+            flex: 0 0 12.5%;
+            max-width: 12.5%;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+        /* Add styles for the left sidebar */
+            .sidebar {
+                background-color: #9A9D9D; /* Same color as the header */
+                padding: 20px;
+                height: 100vh; /* Adjust the height as needed */
+            }
+
+            .sidebar a {
+                color: white; /* Text color for links in the sidebar */
+            }
+      }
+    </style>
+
+    <style>
+        .custom-lg-1-5 {
+            flex: 0 0 12.5%;
+            max-width: 12.5%;
+        }
+    </style>
+
+    <!-- Custom styles for this template -->
+    <link href="headers.css" rel="stylesheet">
+</head>
+<main>
+    <header class="p-3 bg-dark text-white">
+    <div class="container">
+      <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+        <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
+          <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap"><use xlink:href="#bootstrap"/></svg>
+        </a>
+
+        <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+          <li><a href="#" class="nav-link px-2 text-secondary">Home</a></li>
+          <li class="nav-item dropdown">
+                <a class="nav-link px-2 text-white dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Appartement
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="{{ asset('paiement/listerLoyer') }}">Loyers reçus</a>
+                    <a class="dropdown-item" href="{{ asset('baux/lister') }}">Apparts et Locataire</a>
+                    <!-- Add more menu items as needed -->
+                </div>
+          </li>
+          <li class="nav-item dropdown">
+                <a class="nav-link px-2 text-white dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Contrat de Location
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="#">Apparts</a>
+                    <a class="dropdown-item" href="#">Cloturer</a>
+                    <!-- Add more menu items as needed -->
+                </div>
+          </li>
+          <li class="nav-item dropdown">
+                <a class="nav-link px-2 text-white dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Paiement
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="#">Effectuer un paiement</a>
+                    <!-- Add more menu items as needed -->
+                </div>
+          </li>
+          <li class="nav-item dropdown">
+                <a class="nav-link px-2 text-white dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Mouvement
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="{{ asset('mouvement/lister') }}">Liste des derniers mouvement importés</a>
+                    <!-- Add more menu items as needed -->
+                </div>
+          </li>
+          <li class="nav-item dropdown">
+                <a class="nav-link px-2 text-white dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Categorie/Sous-Categories
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="{{ asset('mouvement/lister') }}">Liste des Categories</a>
+                    <a class="dropdown-item" href="{{ asset('mouvement/lister') }}">Liste des Sous-Categories</a>
+                    <!-- Add more menu items as needed -->
+                </div>
+          </li>
+          <li class="nav-item dropdown">
+                <a class="nav-link px-2 text-white dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Bilan
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="{{ asset('mouvement/lister') }}">2022</a>
+                    <a class="dropdown-item" href="{{ asset('mouvement/lister') }}">2023</a>
+                    <!-- Add more menu items as needed -->
+                </div>
+          </li>
+        </ul>
+        <div class="text-end">
+          <button type="button" class="btn btn-outline-light me-2">Se connecter</button>
+          <button type="button" class="btn btn-warning">S'inscrire</button>
+        </div>
+      </div>
+    </div>
+  </header>
+</main>
+  <br>
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  <script src="path/to/popper.min.js"></script>
+  <script src="path/to/bootstrap.min.js"></script>
+  </body>
+</html>

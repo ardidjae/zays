@@ -1,0 +1,69 @@
+{# templates/mouvement/modifier.html.twig #}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>{% block title %}ZAYS{% endblock %}</title>
+
+    {# Inclure les stylesheets Bootstrap (assurez-vous d'avoir Bootstrap installé dans votre projet) #}
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    {% block stylesheets %}{% endblock %}
+</head>
+<body>
+
+    {% include 'header.html.twig' %}
+
+    <div class="container mt-5">
+        <div class="d-flex align-items-center mb-3">
+            <h5>MODIFIER MOUVEMENT</h5>
+        </div>
+
+        <form method="post">
+            {{ form_start(form) }}
+
+            <div class="form-group">
+                {{ form_label(form.dateM) }}
+                {{ form_widget(form.dateM, {'attr': {'class': 'form-control'}}) }}
+            </div>
+
+            <div class="form-group">
+                {{ form_label(form.libelle) }}
+                {{ form_widget(form.libelle, {'attr': {'class': 'form-control'}}) }}
+            </div>
+
+            <div class="form-group">
+                {{ form_label(form.debit) }}
+                {{ form_widget(form.debit, {'attr': {'class': 'form-control'}}) }}
+            </div>
+
+            <div class="form-group">
+                {{ form_label(form.credit) }}
+                {{ form_widget(form.credit, {'attr': {'class': 'form-control'}}) }}
+            </div>
+
+            <div class="form-group">
+                {# Vous pouvez ajouter une liste déroulante pour la sous-catégorie ici #}
+                {{ form_label(form.souscategorie) }}
+                {{ form_widget(form.souscategorie, {'attr': {'class': 'form-control'}}) }}
+            </div>
+
+            <div class="form-group">
+                {{ form_label(form.enregistrer) }}
+                {{ form_widget(form.enregistrer, {'attr': {'class': 'btn btn-primary'}}) }}
+            </div>
+
+            <a href="#" class="btn btn-danger" onclick="history.back()">Annuler</a>
+
+            {{ form_end(form) }}
+        </form>
+    </div>
+
+    {% include 'footer.html.twig' %}
+
+    {# Inclure les scripts Bootstrap (assurez-vous d'avoir Bootstrap installé dans votre projet) #}
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+</html>

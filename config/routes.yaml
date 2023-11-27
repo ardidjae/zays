@@ -1,0 +1,33 @@
+controllers:
+    resource: ../src/Controller/
+    type: attribute
+
+# ACCUEIL
+route_accueil:
+    path: /accueil
+    controller: App\Controller\BailController::index
+
+# LISTER MOUVEMENT
+bauxLister:
+    path: /baux/lister
+    controller: App\Controller\BailController::listerBaux
+
+# LISTER PAIEMENT
+paiementLister:
+    path: /paiement/listerLoyer
+    controller: App\Controller\PaiementController::listerLoyer
+
+# LISTER MOUVEMENT
+mouvementLister:
+    path: /mouvement/lister
+    controller: App\Controller\MouvementController::listerMouvement
+
+# UPLOAD FILE MOUVEMENT
+mouvementUploadFile:
+    path: /mouvement/uploadFile
+    controller: App\Controller\MouvementController::uploadFileMouvement
+
+# MODIFIER MOUVEMENT
+modifierMouvement:
+    path: /mouvement/modifier/{id}
+    controller: App\Controller\MouvementController::modifierMouvement
