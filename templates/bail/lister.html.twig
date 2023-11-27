@@ -31,13 +31,31 @@
                                 <th scope="col">Caution</th>
                                 <th scope="col">Loyer TTC</th>
                                 <th scope="col">Date entrée</th>
-                                <th scope="col">Surface</th>
+                                <th scope="col">Surface Habitation</th>
                             </tr>
                           </thead>
                         </tr>
                       </thead>
+                      {% for b in pBails %}
                       <tr>
+                      <td>{{ b.appartement.porte }}</a></td>
+                      <td>
+                      {{ b.locataire[0].nom }} {{ b.locataire[0].prenom }}
+                        {% if b.locataire[1] is defined %}
+                            et {{ b.locataire[1].nom }} {{ b.locataire[1].prenom }}
+                      {% endif %}
+                      </td>
+                      <td>{{ b.montantHC }} {% if b.montantHC != null %}€{% endif %}</td>
+                      <td>{{ b.montantCaution }} {% if b.montantCaution != null %}€{% endif %}</td>
+                      <td>{{ b.montantHC + b.montantCharges }} {% if b.montantHC + b.montantCharges != null %}€{% endif %}</td>
+                      <td>{{ b.dateDebut|date("d/m/Y") }}</td>
+                      <td>{{ b.appartement.surfaceHabitable }} {% if b.appartement.surfaceHabitable != null %}m²{% endif %}</td>
                       </tr>
+                      {% else %}
+                      <tr>
+                          <td colspan="2">Aucun baux n'a été trouvé.</td>
+                      </tr>
+                      {% endfor %}
                     </table></br>
                     <button type="button" class="btn btn-primary mt-3">
                         Anciens locataires

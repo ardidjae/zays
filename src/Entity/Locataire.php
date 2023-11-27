@@ -34,11 +34,13 @@ class Locataire
     #[ORM\Column]
     private ?float $Archive = null;
 
-    #[ORM\OneToMany(mappedBy: 'locataire', targetEntity: Bail::class)]
-    private Collection $bails;
+
 
     #[ORM\OneToMany(mappedBy: 'locataire', targetEntity: PieceJointe::class)]
     private Collection $pieceJointes;
+
+    #[ORM\ManyToMany(targetEntity: Bail::class, mappedBy: 'locataire')]
+    private Collection $bails;
 
     public function __construct()
     {
