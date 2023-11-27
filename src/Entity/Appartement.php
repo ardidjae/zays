@@ -18,14 +18,23 @@ class Appartement
     #[ORM\Column(length: 255)]
     private ?string $description = null;
 
-    #[ORM\Column]
-    private ?float $Surface = null;
-
     #[ORM\OneToMany(mappedBy: 'appartement', targetEntity: Bail::class)]
     private Collection $bails;
 
     #[ORM\ManyToOne(inversedBy: 'appartements')]
     private ?Immeuble $immeuble = null;
+
+    #[ORM\Column]
+    private ?int $porte = null;
+
+    #[ORM\Column]
+    private ?float $surfaceHabitable = null;
+
+    #[ORM\Column]
+    private ?float $surfaceSol = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $situation = null;
 
     public function __construct()
     {
@@ -45,18 +54,6 @@ class Appartement
     public function setDescription(string $description): static
     {
         $this->description = $description;
-
-        return $this;
-    }
-
-    public function getSurface(): ?float
-    {
-        return $this->Surface;
-    }
-
-    public function setSurface(float $Surface): static
-    {
-        $this->Surface = $Surface;
 
         return $this;
     }
@@ -99,6 +96,54 @@ class Appartement
     public function setImmeuble(?Immeuble $immeuble): static
     {
         $this->immeuble = $immeuble;
+
+        return $this;
+    }
+
+    public function getPorte(): ?int
+    {
+        return $this->porte;
+    }
+
+    public function setPorte(int $porte): static
+    {
+        $this->porte = $porte;
+
+        return $this;
+    }
+
+    public function getSurfaceHabitable(): ?float
+    {
+        return $this->surfaceHabitable;
+    }
+
+    public function setSurfaceHabitable(float $surfaceHabitable): static
+    {
+        $this->surfaceHabitable = $surfaceHabitable;
+
+        return $this;
+    }
+
+    public function getSurfaceSol(): ?float
+    {
+        return $this->surfaceSol;
+    }
+
+    public function setSurfaceSol(float $surfaceSol): static
+    {
+        $this->surfaceSol = $surfaceSol;
+
+        return $this;
+    }
+
+    public function getSituation(): ?string
+    {
+        return $this->situation;
+    }
+
+    public function setSituation(string $situation): static
+    {
+        $this->situation = $situation;
 
         return $this;
     }
