@@ -33,12 +33,35 @@
                                 <th scope="col">Loyer dû</th>
                                 <th scope="col">Solde du mois</th>
                                 <th scope="col">Solde locataire</th>
+                                <th scope="col">Action</th>
                             </tr>
                           </thead>
                         </tr>
                       </thead>
                       <tr>
+                      {% for p in pPaiements %}
+                        <td>{{ p.bail.appartement.porte }}</td>
+                        <td>
+                        {{ p.bail.locataire[0].nom }} {{ p.bail.locataire[0].prenom }}
+                        {% if p.bail.locataire[1] is defined %}
+                            et {{ p.bail.locataire[1].nom }} {{ p.bail.locataire[1].prenom }}
+                      {% endif %}
+                        </td>
+                        <td>{{ p.montant }}</td>
+                        <td></td>
+                        <td>{{ p.montant}}</td>
+                        <td>{{ p.bail.montantHC + p.bail.montantCharges }}</td>
+                        <td>{{ p.bail.montantHC + p.bail.montantCharges - p.montant }}</td>
+                        <td>{{ p.bail.montantHC + p.bail.montantCharges - p.montant }}</td>
+                        <td>
+                          <button class="btn btn-danger btn-outline" onclick="genererQuittance()">Générer Quittance</button>
+                        </td>
                       </tr>
+                      {% else %}
+                      <tr>
+                          <td colspan="2">Aucun paiement n'a été trouvé.</td>
+                      </tr>
+                      {% endfor %}
                     </table></br>
                     <input type="button" class="btn btn-dark" value="Retour" onclick="history.back()">
                   </div>
