@@ -31,3 +31,7 @@ mouvementUploadFile:
 modifierMouvement:
     path: /mouvement/modifier/{id}
     controller: App\Controller\MouvementController::modifierMouvement
+
+quittancePDF:
+    path: /baux/{id}/quittance
+    controller: App\Controller\BailController::quittancePDF
