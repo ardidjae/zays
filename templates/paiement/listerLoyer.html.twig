@@ -54,7 +54,11 @@
                         <td>{{ p.bail.montantHC + p.bail.montantCharges - p.montant }}</td>
                         <td>{{ p.bail.montantHC + p.bail.montantCharges - p.montant }}</td>
                         <td>
-                          <button class="btn btn-danger btn-outline" onclick="genererQuittance()">Générer Quittance</button>
+                          <button class="btn btn-danger btn-outline" onclick="genererQuittance()" style="color: black; background-color: transparent; border-color: red;">
+                              <a href="{{ path('quittancePDF', { 'id': p.bail.id }) }}" style="color: black; text-decoration: none;">
+                                  Générer Quittance
+                              </a>
+                          </button>
                         </td>
                       </tr>
                       {% else %}
