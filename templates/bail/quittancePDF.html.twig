@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rental Quittance</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .quittance {
+            width: 100%;
+            margin: 0 auto;
+            padding: 0px;
+        }
+
+        .quittance p {
+            margin: 0;
+        }
+
+        .quittance h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .quittance table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        .quittance th, .quittance td {
+            border: 1px solid #000;
+            padding: 8px;
+            text-align: left;
+        }
+
+        .quittance th {
+            background-color: #f2f2f2;
+        }
+
+        .quittance hr {
+            border: none;
+            border-top: 1px solid #000;
+            margin-bottom: 20px;
+        }
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .th, td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h2 align="center">QUITTANCE DE LOYER</h2>
+    <p align="center">
+        Quittance de loyer pour la période du .. au ..
+    </p>
+    <div class="quittance">
+        <table width="100%" cellpadding="0" cellspacing="0" style="border: 1px solid black">
+            <colgroup>
+                <col width="50*"/>
+                <col width="50*"/>
+                <col width="50*"/>
+            </colgroup>
+            <tbody>
+                <tr valign="top">
+                    <td width="33%">
+                        <p align="center">
+                            <strong>BAILLEUR</strong>
+                        </p>
+                        <p align="center">
+                            {{bail.appartement.immeuble.societe.nom}}
+                        </p>
+                        <p align="center">
+                            {{bail.appartement.immeuble.societe.numRue}} {{bail.appartement.immeuble.societe.rue}}
+                        </p>
+                        <p align="center">
+                            {{bail.appartement.immeuble.societe.copos}} {{bail.appartement.immeuble.societe.ville}}
+                        </p>
+                        <p align="center">
+                            R.C.S. CAEN 819 317 991
+                        </p>
+                    </td>
+                    <td width="33%">
+                    </td>
+                    <td width="33%">
+                        <p align="center">
+                            <strong>LOCATAIRE</strong>
+                        </p>
+                        <p align="center">
+                            {{bail.locataire[0].nom}} {{bail.locataire[0].prenom}}
+                        </p>
+                        <p align="center">
+                            Porte {{bail.appartement.porte}}
+                        </p>
+                        <p align="center">
+                            {{bail.appartement.immeuble.numRue}} {{bail.appartement.immeuble.rue}}
+                        </p>
+                        <p align="center">
+                            {{bail.appartement.immeuble.copos}} {{bail.appartement.immeuble.ville}}
+                        </p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <p>
+            Fait à Caen, le {{"now"|date("d/m/Y")}}
+        </p></br>
+        <p align="center">
+            <strong>Adresse de la location</strong>
+            </p>
+            <p align="center">
+                {{bail.appartement.immeuble.numRue}} {{bail.appartement.immeuble.rue}}
+            </p>
+            <p align="center">
+                Porte {{bail.appartement.porte}}
+            </p>
+            <p align="center">
+                {{bail.appartement.immeuble.copos}} {{bail.appartement.immeuble.ville}}
+            </p>
+        </p></br>
+        <table>
+            <tr>
+                <th>Libellé</th>
+                <th>Montant</th>
+            </tr>
+            <tr>
+                <td>Loyer (hors charges)</td>
+                <td>{{bail.montantHC}} €</td>
+            </tr>
+            <tr>
+                <td>Provision pour charges</td>
+                <td>{{bail.montantCharges}} €</td>
+            </tr>
+            <tr>
+                <td>Somme totale perçue sur le compte SCI le 05/11/2022</td>
+                <td>{{(bail.montantHC + bail.montantCharges) - bail.locataire[0].montantCaf}} €</td>
+            </tr>
+        </table>
+
+        <p>Dont quittance, sans préjudice du terme en cours, sous réserve de tous suppléments pouvant être dus en vertu des lois ou conventions applicables et sous réserve de tous les droits et actions du propriétaire, de toutes poursuites qui auraient pu être engagées et de toutes décisions de justice qui auraient pu être obtenues. En cas de congé précédemment donné, cette quittance représenterait l'indemnité d'occupation et ne saurait être considérée comme un titre de location. Cette quittance annule tous les reçus qui auraient pu être donnés pour acompte versé sur le présent terme, même si ces reçus portent une date postérieure à la date ci-contre. Le paiement de la présente quittance n'emporte pas présomption de paiement des termes antérieurs.</p>
+    </div>
+</body>
