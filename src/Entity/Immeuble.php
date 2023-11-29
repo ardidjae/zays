@@ -33,6 +33,9 @@ class Immeuble
     #[ORM\OneToMany(mappedBy: 'immeuble', targetEntity: Appartement::class)]
     private Collection $appartements;
 
+    #[ORM\ManyToOne(inversedBy: 'immeubles')]
+    private ?Societe $societe = null;
+
     public function __construct()
     {
         $this->appartements = new ArrayCollection();
@@ -129,6 +132,18 @@ class Immeuble
                 $appartement->setImmeuble(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getSociete(): ?Societe
+    {
+        return $this->societe;
+    }
+
+    public function setSociete(?Societe $societe): static
+    {
+        $this->societe = $societe;
 
         return $this;
     }
