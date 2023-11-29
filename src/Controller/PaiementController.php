@@ -7,6 +7,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\Persistence\ManagerRegistry;
 use App\Entity\Paiement;
+use App\Entity\Bail;
 
 class PaiementController extends AbstractController
 {
@@ -22,9 +23,14 @@ class PaiementController extends AbstractController
 
         $repository = $doctrine->getRepository(Paiement::class);
 
+        $repositoryBail = $doctrine->getRepository(Bail::class);
+        $bails= $repositoryBail->findAll();
+
         $paiements= $repository->findAll();
         return $this->render('paiement/listerLoyer.html.twig', [
-            'pPaiements' => $paiements,]);
+            'pPaiements' => $paiements,
+            'pBails' => $bails,
+        ]);
 
     }
 }
