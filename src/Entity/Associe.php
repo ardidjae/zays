@@ -45,6 +45,9 @@ class Associe
     #[ORM\OneToMany(mappedBy: 'associe', targetEntity: Bail::class)]
     private Collection $bails;
 
+    #[ORM\ManyToOne(inversedBy: 'associes')]
+    private ?Societe $societe = null;
+
     public function __construct()
     {
         $this->bails = new ArrayCollection();
@@ -189,6 +192,18 @@ class Associe
                 $bail->setAssocie(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getSociete(): ?Societe
+    {
+        return $this->societe;
+    }
+
+    public function setSociete(?Societe $societe): static
+    {
+        $this->societe = $societe;
 
         return $this;
     }
