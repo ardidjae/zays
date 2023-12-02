@@ -67,9 +67,54 @@
                       </tr>
                       {% endfor %}
                     </table></br>
-                    <input type="button" class="btn btn-dark" value="Retour" onclick="history.back()">
                   </div>
                 </div>
               </div>
             </div>
 </section>
+<section class="tables">
+        <div class="container-fluid">
+            <div class="row">
+                <!-- Graphique du montant des loyers reçus -->
+                <div class="col-lg-6">
+                    <div class="card">
+                        <div class="card-header border-bottom">
+                            <h3 class="h4 mb-0">Graphique du montant des loyers reçus</h3>
+                        </div>
+                        <div class="card-body">
+                            <canvas id="loyersChart" width="100%" height="50"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</section>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI/tu61E9RCpSLOF0ekKuO1QTsIuhJh6QFqFUyoE=" crossorigin="anonymous"></script>
+    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        $(document).ready(function() {
+            // Configuration du graphique
+            var ctx = document.getElementById('loyersChart').getContext('2d');
+            var myChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: [{% for p in pPaiements %}"{{ p.bail.locataire[0].nom }} {{ p.bail.locataire[0].prenom }}",{% endfor %}],
+                    datasets: [{
+                        label: 'Montant des loyers reçus',
+                        data: [{% for p in pPaiements %}{{ p.montant }},{% endfor %}],
+                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        });
+    </script>
