@@ -23,7 +23,7 @@
                     <table class="table text-sm mb-0 table-striped">
                       <thead>
                         <tr>
-                          <thead>
+                          <thead class="thead-dark">
                             <tr>
                                 <th scope="col">Appt</th>
                                 <th scope="col">Locataire</th>
@@ -33,7 +33,7 @@
                                 <th scope="col">Loyer dû</th>
                                 <th scope="col">Solde du mois</th>
                                 <th scope="col">Solde locataire</th>
-                                <th scope="col">Action</th>
+                                <th scope="col"></th>
                             </tr>
                           </thead>
                         </tr>
@@ -54,9 +54,9 @@
                         <td>{{ p.bail.montantHC + p.bail.montantCharges - p.montant }}</td>
                         <td>{{ p.bail.montantHC + p.bail.montantCharges - p.montant }}</td>
                         <td>
-                          <button class="btn btn-danger btn-outline" onclick="genererQuittance()" style="color: black; background-color: transparent; border-color: red;">
-                              <a href="{{ path('quittancePDF', { 'id': p.bail.id }) }}" style="color: black; text-decoration: none;">
-                                  Générer Quittance
+                          <button class="btn btn-success" onclick="genererQuittance()">
+                              <a href="{{ path('quittancePDF', { 'id': p.bail.id }) }}" style="color: white; text-decoration: none;">
+                                  Générer quittance
                               </a>
                           </button>
                         </td>
