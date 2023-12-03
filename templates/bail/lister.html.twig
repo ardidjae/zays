@@ -40,10 +40,12 @@
                       <tr>
                       <td>{{ b.appartement.porte }}</a></td>
                       <td>
-                      {{ b.locataire[0].nom }} {{ b.locataire[0].prenom }}
-                        {% if b.locataire[1] is defined %}
-                            et {{ b.locataire[1].nom }} {{ b.locataire[1].prenom }}
-                      {% endif %}
+                        <a href="{{ path('bauxConsulter', { 'id': b.id }) }}">
+                          {{ b.locataire[0].nom }} {{ b.locataire[0].prenom }}
+                            {% if b.locataire[1] is defined %}
+                                et {{ b.locataire[1].nom }} {{ b.locataire[1].prenom }}
+                          {% endif %}
+                        </a>
                       </td>
                       <td>{{ b.montantHC }} {% if b.montantHC != null %}€{% endif %}</td>
                       <td>{{ b.montantCaution }} {% if b.montantCaution != null %}€{% endif %}</td>
