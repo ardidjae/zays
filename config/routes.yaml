@@ -7,10 +7,15 @@ route_accueil:
     path: /accueil
     controller: App\Controller\BailController::index
 
-# LISTER MOUVEMENT
+# LISTER BAUX
 bauxLister:
     path: /baux/lister
     controller: App\Controller\BailController::listerBaux
+
+# CONSULTER BAUX
+bauxConsulter:
+    path: /baux/consulter/{id}
+    controller: App\Controller\BailController::consulterBaux
 
 # LISTER PAIEMENT
 paiementLister:
