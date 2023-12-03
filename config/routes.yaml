@@ -7,6 +7,11 @@ route_accueil:
     path: /accueil
     controller: App\Controller\BailController::index
 
+# AJOUTER BAIL
+ajouterBail:
+    path: /baux/ajouter
+    controller: App\Controller\BailController::ajouterBail
+
 # LISTER BAUX
 bauxLister:
     path: /baux/lister
