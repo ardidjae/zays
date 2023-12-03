@@ -78,4 +78,19 @@ class BailController extends AbstractController
             "Attachment" => false
         ]);
     }
+
+    public function consulterBaux(ManagerRegistry $doctrine, int $id){
+
+        $bail = $doctrine->getRepository(Bail::class)->find($id);
+
+        if (!$bail) {
+            throw $this->createNotFoundException(
+            'Aucun bail trouvé'
+            );
+        }
+
+        return $this->render('bail/consulter.html.twig', [
+            'bail' => $bail,
+        ]);
+    }
 }
