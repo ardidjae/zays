@@ -117,4 +117,50 @@ class BailController extends AbstractController
             return $this->render('bail/ajouterBail.html.twig', array('form' => $form->createView(),));
 	    }
     }
+
+    public function listerContratLocation(ManagerRegistry $doctrine){
+
+        $repository = $doctrine->getRepository(Bail::class);
+
+        $bails= $repository->findAll();
+        return $this->render('bail/listerContratLocation.html.twig', [
+            'pBails' => $bails,]);
+
+    }
+
+    // Générer le contrat de location sous forme PDF pour un bail donné
+    public function contratLocationPDF(ManagerRegistry $doctrine, int $id){
+
+        $bail = $doctrine->getRepository(Bail::class)->find($id);
+        $repositoryPaiement = $doctrine->getRepository(Paiement::class);
+        $paiements= $repositoryPaiement->findAll();
+
+        if (!$bail) {
+            throw $this->createNotFoundException(
+            'Aucun bail trouvé'
+            );
+        }
+
+        // Instanciation de la librairie DOMPDF
+        $dompdf = new Dompdf();
+
+        // Contenu HTML
+        $html = $this->renderView('bail/contratLocationPDF.html.twig', [
+            'bail' => $bail,
+        ]);
+
+        // Chargement du contenu HTML
+        $dompdf->loadHtml($html);
+
+        // Configuration des options
+        $dompdf->setPaper('A4', 'portrait');
+
+        // Rendu du PDF
+        $dompdf->render();
+
+        // Envoi du PDF dans la réponse
+        $dompdf->stream("bail_".$bail->getId().".pdf", [
+            "Attachment" => false
+        ]);
+    }
 }
