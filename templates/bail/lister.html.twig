@@ -38,7 +38,7 @@
                       </thead>
                       {% for b in pBails %}
                       <tr>
-                      <td>{{ b.appartement.porte }}</a></td>
+                      <td><a href="{{ path('appartementConsulter', { 'id': b.appartement.id }) }}">{{ b.appartement.porte }}</a></td>
                       <td>
                         <a href="{{ path('bauxConsulter', { 'id': b.id }) }}">
                           {{ b.locataire[0].nom }} {{ b.locataire[0].prenom }}
