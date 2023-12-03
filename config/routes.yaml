@@ -51,3 +51,13 @@ quittancePDF:
 appartementConsulter:
     path: /appartement/consulter/{id}
     controller: App\Controller\AppartementController::consulterAppartement
+
+# LISTER CONTRAT DE LOCATION
+contratLocationLister:
+    path: /baux/listerContratLocation
+    controller: App\Controller\BailController::listerContratLocation
+
+# PDF CONTRAT DE LOCATION
+contratLocationPDF:
+    path: /baux/{id}/contratLocation
+    controller: App\Controller\BailController::contratLocationPDF
