@@ -1,0 +1,141 @@
+{# templates/bail/ajouterBail.html.twig #}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>{% block title %}ZAYS{% endblock %}</title>
+
+    {# Inclure les stylesheets Bootstrap (assurez-vous d'avoir Bootstrap installé dans votre projet) #}
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    {% block stylesheets %}{% endblock %}
+</head>
+<body>
+
+    {% include 'header.html.twig' %}
+
+    <div class="container my-4">
+        <div class="d-flex justify-content-center align-items-center mb-3">
+            <h5 class="text-center">AJOUTER UN NOUVEAU BAIL</h5>
+        </div>
+
+        {{ form_start(form) }}
+
+        <div class="mb-3">
+            <h6 class="font-weight-bold">Locataire</h6>
+            {% for locataire in form.locataire %}
+                <div class="locataire-group border p-3 rounded mb-3">
+                    <div class="form-group">
+                        <label class="form-label">Nom locataire</label>
+                        {{ form_row(locataire.Nom) }}
+                        {{ form_row(locataire.Nom, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Prénom locataire</label>
+                        {{ form_row(locataire.Prenom) }}
+                        {{ form_row(locataire.Prenom, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Date de naissance locataire</label>
+                        {{ form_row(locataire.dateNaissance) }}
+                        {{ form_row(locataire.dateNaissance, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Lieu de naissance locataire</label>
+                        {{ form_row(locataire.LieuNaissance) }}
+                        {{ form_row(locataire.LieuNaissance, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+
+        <div class="mb-3">
+            <div class="form-group">
+                {{ form_row(form.dateDebut, {'attr': {'class': 'form-control'}}) }}
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <div class="form-group">
+                {{ form_row(form.MontantHC, {'attr': {'class': 'form-control'}}) }}
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <div class="form-group">
+                {{ form_row(form.MontantCharges, {'attr': {'class': 'form-control'}}) }}
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <div class="form-group">
+                {{ form_row(form.NomCaution1, {'attr': {'class': 'form-control'}}) }}
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <div class="form-group">
+                {{ form_row(form.NomCaution2, {'attr': {'class': 'form-control'}}) }}
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <div class="form-group">
+                {{ form_row(form.MontantCaution, {'attr': {'class': 'form-control'}}) }}
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <div class="form-group">
+                {{ form_row(form.DateFin, {'attr': {'class': 'form-control'}}) }}
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <div class="form-group">
+                {{ form_row(form.DureeBail, {'attr': {'class': 'form-control'}}) }}
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <div class="form-group">
+                {{ form_row(form.BailSigne, {'attr': {'class': 'form-control'}}) }}
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <div class="form-group">
+                {{ form_row(form.EtatLieuEntree, {'attr': {'class': 'form-control'}}) }}
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <div class="form-group">
+                {{ form_row(form.EtatLieuSortie, {'attr': {'class': 'form-control'}}) }}
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <div class="form-group">
+                {{ form_row(form.AttestationAssurance, {'attr': {'class': 'form-control'}}) }}
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <div class="form-group">
+                {{ form_row(form.appartement, {'attr': {'class': 'form-control'}}) }}
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <div class="form-group">
+                {{ form_row(form.associe, {'attr': {'class': 'form-control'}}) }}
+            </div>
+        </div>
+        {{ form_end(form) }}
+    </div>
+</body>
+</html>

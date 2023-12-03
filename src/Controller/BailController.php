@@ -6,9 +6,12 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Component\HttpFoundation\Request;
 use App\Entity\Bail;
 use App\Entity\Paiement;
 use Dompdf\Dompdf;
+use App\Form\BailType;
+use App\Entity\Locataire;
 
 class BailController extends AbstractController
 {
@@ -92,5 +95,26 @@ class BailController extends AbstractController
         return $this->render('bail/consulter.html.twig', [
             'bail' => $bail,
         ]);
+    }
+
+    public function ajouterBail(ManagerRegistry $doctrine,Request $request){
+        $bail = new bail();
+        $form = $this->createForm(BailType::class, $bail);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+                $bail = $form->getData();
+
+                $entityManager = $doctrine->getManager();
+                $entityManager->persist($bail);
+                $entityManager->flush();
+
+            return $this->render('bail/consulter.html.twig', ['bail' => $bail,]);
+        }
+        else
+        {
+            return $this->render('bail/ajouterBail.html.twig', array('form' => $form->createView(),));
+	    }
     }
 }
