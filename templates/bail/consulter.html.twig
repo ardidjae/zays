@@ -87,16 +87,12 @@
                         <div class="card-body">
                             <div class="information-container">
                                 <!-- États des Lieux information -->
-                                <div class="information-item">
-                                    <strong>Eléments :</strong> 
-                                </div>
-                                <div class="information-item">
-                                    <strong>Etat :</strong> 
-                                </div>
-                                <div class="information-item">
-                                    <strong>Observation :</strong> 
-                                </div>
                                 <!-- Add more information as needed -->
+                                    <button class="btn btn-success" onclick="genererQuittance()">
+                                        <a href="{{ path('quittancePDF', { 'id': bail.id }) }}" style="color: white; text-decoration: none;">
+                                            Générer états des Lieux(d'entrée)
+                                        </a>
+                                    </button>
                             </div>
                         </div>
                     </div>
@@ -107,15 +103,11 @@
                         <div class="card-body">
                             <div class="information-container">
                                 <!-- États des Lieux information -->
-                                <div class="information-item">
-                                    <strong>Eléments :</strong>
-                                </div>
-                                <div class="information-item">
-                                    <strong>Etat :</strong>
-                                </div>
-                                <div class="information-item">
-                                    <strong>Observation :</strong>
-                                </div>
+                                <button class="btn btn-danger" onclick="genererQuittance()">
+                                    <a href="{{ path('quittancePDF', { 'id': bail.id }) }}" style="color: white; text-decoration: none;">
+                                        Générer états des Lieux(sortie)
+                                    </a>
+                                </button>
                             </div>
                         </div>
                     </div>
