@@ -40,7 +40,9 @@ class LocataireType extends AbstractType
             ->add('Archive', TextType::class, [
                 'label' => 'Archive',
             ])
-            ->add('bails')
+            //->add('bails')
+
+            ->add('enregistrer', SubmitType::class, array('label' => 'Nouvel locataire'))
         ;
     }
 
