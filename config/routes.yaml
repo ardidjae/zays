@@ -45,3 +45,18 @@ modifierMouvement:
 quittancePDF:
     path: /baux/{id}/quittance
     controller: App\Controller\BailController::quittancePDF
+
+
+
+
+
+
+# AJOUTER LOCATAIRE
+ajouterLocataire:
+    path: /locataire/ajouter
+    controller: App\Controller\LocataireController::ajouterLocataire
+
+# CONSULTER LOCATAIRE
+locataireConsulter:
+    path: /locataire/consulter/{id}
+    controller: App\Controller\LocataireController::consulterLocataire
