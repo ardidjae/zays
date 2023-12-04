@@ -1,0 +1,62 @@
+{# templates/locataire/ajouter.html.twig #}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>{% block title %}ZAYS{% endblock %}</title>
+
+    {# Inclure les stylesheets Bootstrap (assurez-vous d'avoir Bootstrap installé dans votre projet) #}
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    {% block stylesheets %}{% endblock %}
+</head>
+<body>
+
+    {% include 'header.html.twig' %}
+
+    <div class="container my-4">
+        <div class="d-flex justify-content-center align-items-center mb-3">
+            <h5 class="text-center">AJOUT D'UN NOUVEAU LOCATAIRE</h5>
+        </div>
+
+        {{ form_start(form) }}
+
+        <div class="mb-3">
+            <div class="form-group">
+                {{ form_row(form.Nom, {'attr': {'class': 'form-control'}}) }}
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <div class="form-group">
+                {{ form_row(form.Prenom, {'attr': {'class': 'form-control'}}) }}
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <div class="form-group">
+                {{ form_row(form.DateNaissance, {'attr': {'class': 'form-control'}}) }}
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <div class="form-group">
+                {{ form_row(form.LieuNaissance, {'attr': {'class': 'form-control'}}) }}
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <div class="form-group">
+                {{ form_row(form.MontantCaf, {'attr': {'class': 'form-control'}}) }}
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <div class="form-group">
+                {{ form_row(form.Archive, {'attr': {'class': 'form-control'}}) }}
+            </div>
+        </div>
+        {{ form_end(form) }}
+    </div>
+</body>
+</html>
