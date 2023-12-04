@@ -42,21 +42,23 @@ modifierMouvement:
     path: /mouvement/modifier/{id}
     controller: App\Controller\MouvementController::modifierMouvement
 
+# PDF QUITTANCE
 quittancePDF:
     path: /baux/{id}/quittance
     controller: App\Controller\BailController::quittancePDF
 
+# CONSULTER APPARTEMENT
+appartementConsulter:
+    path: /appartement/consulter/{id}
+    controller: App\Controller\AppartementController::consulterAppartement
 
+# LISTER CONTRAT DE LOCATION
+contratLocationLister:
+    path: /baux/listerContratLocation
+    controller: App\Controller\BailController::listerContratLocation
 
+# PDF CONTRAT DE LOCATION
+contratLocationPDF:
+    path: /baux/{id}/contratLocation
+    controller: App\Controller\BailController::contratLocationPDF
 
-
-
-# AJOUTER LOCATAIRE
-ajouterLocataire:
-    path: /locataire/ajouter
-    controller: App\Controller\LocataireController::ajouterLocataire
-
-# CONSULTER LOCATAIRE
-locataireConsulter:
-    path: /locataire/consulter/{id}
-    controller: App\Controller\LocataireController::consulterLocataire

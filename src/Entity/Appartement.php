@@ -36,9 +36,13 @@ class Appartement
     #[ORM\Column(length: 255)]
     private ?string $situation = null;
 
+    #[ORM\ManyToMany(targetEntity: Equipement::class, inversedBy: 'appartements')]
+    private Collection $equipement;
+
     public function __construct()
     {
         $this->bails = new ArrayCollection();
+        $this->equipement = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -144,6 +148,30 @@ class Appartement
     public function setSituation(string $situation): static
     {
         $this->situation = $situation;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Equipement>
+     */
+    public function getEquipement(): Collection
+    {
+        return $this->equipement;
+    }
+
+    public function addEquipement(Equipement $equipement): static
+    {
+        if (!$this->equipement->contains($equipement)) {
+            $this->equipement->add($equipement);
+        }
+
+        return $this;
+    }
+
+    public function removeEquipement(Equipement $equipement): static
+    {
+        $this->equipement->removeElement($equipement);
 
         return $this;
     }

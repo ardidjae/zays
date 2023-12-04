@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contrat de Location</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      margin: 20px;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 24px;
+    }
+
+    p {
+      margin-bottom: 10px;
+    }
+
+    strong, em {
+      font-weight: bold;
+    }
+
+    ul, ol {
+      margin-top: 10px;
+      margin-bottom: 10px;
+      margin-left: 20px;
+    }
+
+    table {
+      width: 100%;
+      margin-top: 20px;
+      border-collapse: collapse;
+    }
+
+    td {
+      border: 1px solid #ddd;
+      padding: 10px;
+      text-align: left;
+    }
+
+    td:first-child {
+      text-align: right;
+    }
+  </style>
+</head>
+<body>
+	<h1 align="center">
+		<strong>CONTRAT DE LOCATION</strong>
+	</h1>
+	<p align="center">
+		Loi n°89-462 du 6 juillet 1989
+	</p>
+	<ol type="I">
+		<li>
+			<p>
+				<strong>DÉSIGNATION DES PARTIES</strong>
+			</p>
+		</li>
+	</ol>
+	<p>
+		Le présent contrat est conclu entre les soussignés :
+	</p>
+	<ul>
+		<li>
+			<p>
+				<strong>La {{bail.appartement.immeuble.societe.nom}}</strong>
+			</p>
+		</li>
+
+        <li>
+			<p>
+				<strong>{{bail.appartement.immeuble.societe.numRue}} {{bail.appartement.immeuble.societe.rue}}, {{bail.appartement.immeuble.societe.copos}} {{bail.appartement.immeuble.societe.ville}} </strong>
+			</p>
+		</li>
+
+        <li>
+			<p>
+				<strong>Personne morale</strong>
+			</p>
+		</li>
+	</ul>
+	<p>
+	désignée ci-après <strong>« </strong><u><strong>le bailleur</strong></u>	<strong> »</strong> ;
+	</p>
+	<p>
+		et
+	</p>
+	<ul>
+		<li>
+			<p>
+				<strong> {{bail.locataire[0].prenom}} {{bail.locataire[0].nom}}, né le {{bail.locataire[0].dateNaissance|date("d/m/Y")}} à {{bail.locataire[0].lieuNaissance}}</strong>
+			</p>
+		</li>
+	</ul>
+	<p>
+	désignée ci-après <strong>« </strong><u><strong>le locataire</strong></u>	<strong> ».</strong>
+	</p>
+	<p>
+		Il a été convenu ce qui suit :
+	</p>
+	<ol type="I" start="2">
+		<li>
+			<p>
+				<strong>OBJET DU CONTRAT</strong>
+			</p>
+		</li>
+	</ol>
+	<p>
+		Le présent contrat a pour objet la location d'un logement ainsi déterminé :
+	</p>
+	<ol type="A">
+		<li>
+			<p>
+				<strong>Consistance du logement</strong>
+			</p>
+		</li>
+	</ol>
+	<ul>
+		<li>
+				<strong>Localisation du logement :</strong>
+					{{bail.appartement.immeuble.numRue}} {{bail.appartement.immeuble.rue}}, {{bail.appartement.immeuble.copos}} {{bail.appartement.immeuble.ville}},
+					{{bail.appartement.situation}}, porte {{bail.appartement.porte}}.
+
+		</li>
+		<li>
+			<p>
+				<em><strong>Type d'habitat : </strong></em>
+				collectif
+			</p>
+		<li>
+				<strong>Régime juridique de l'immeuble : </strong>
+				Propriété de la {{bail.appartement.immeuble.societe.nom}}
+		</li>
+		<li>
+			<p>
+				<strong>Période de construction :</strong>
+				avant 1949
+			</p>
+		</li>
+		<li>
+				<strong>Surface habitable :</strong>
+				{{bail.appartement.surfaceHabitable}} m2
+		</li>
+		<li>
+			<p>
+				<strong>Nombre de pièces principales :</strong>
+				studio
+			</p>
+		</li>
+		<li>
+				<strong>Éléments d'équipements du logement : </strong>
+				<em> </em>
+		</li>
+		<li>
+			<p>
+				<strong>Modalité de production de chauffage : </strong>
+				chauffage individuel électrique
+			</p>
+		</li>
+		<li>
+				<strong>Modalité de production d'eau chaude sanitaire : </strong>
+				individuelle (provisions sur charges)
+		</li>
+	</ul>
+	<ol type="A" start="2">
+		<li>
+			<p>
+				<strong>Destination des locaux</strong>
+			</p>
+		</li>
+	</ol>
+	<p>
+		Appartement à usage d’habitation
+	</p>
+	<ol type="A" start="3">
+		<li>
+			<p>
+				<strong>
+					Désignation des locaux et équipements accessoires de l'immeuble
+					à usage privatif du locataire
+				</strong>
+			</p>
+		</li>
+	</ol>
+	<p>
+		Néant.
+	</p>
+	<ol type="A" start="4">
+		<li>
+			<p>
+				<strong>
+					Locaux, parties, équipements et accessoires de l'immeuble à
+					usage commun
+				</strong>
+			</p>
+		</li>
+	</ol>
+	<p>
+		Cour extérieure, jardin.
+	</p>
+	<ol type="A" start="5">
+		<li>
+			<p>
+				<strong>
+					Équipement d'accès aux technologies de l'information et de la
+					communication
+				</strong>
+			</p>
+		</li>
+	</ol>
+	<p>
+		Antenne TV collective.
+	</p>
+	<ol type="A" start="6">
+		<li>
+			<p>
+				<strong>Ventilation</strong>
+			</p></br>
+
+            A droite de la porte d’entrée, boitier de Ventilation nécanique par Insufation, livrée avec
+            une télécommande.
+            Cet appareil doit rester en fonctionnement permanent.
+		</li>
+	</ol>
+	<p>
+		<em> </em>
+	</p>
+	<ol type="I" start="3">
+		<li>
+			<p>
+				<strong>Date de prise d'effet et durée du contrat</strong>
+			</p>
+		</li>
+	</ol>
+	<p>
+		La durée du contrat et sa date de prise d'effet sont ainsi définies :
+	</p>
+	<ol type="A">
+		<li>
+			<p>
+				<strong>Date de prise d'effet du contrat :</strong>
+				{{bail.dateDebut|date("d/m/Y")}}
+			</p>
+		</li>
+	</ol>
+	<ol type="A" start="2">
+		<li>
+			<p>
+				<strong>Durée du contrat :</strong>
+				{{bail.dureeBail}}
+			</p>
+		</li>
+		<li>
+			<p>
+				<strong>
+					Événement et raison justifiant la durée réduite du contrat de
+					location
+				</strong>
+			</p>
+			<p>
+				En l'absence de proposition de renouvellement du contrat, celui-ci
+				est, à son terme, reconduit tacitement pour 6 ans et dans les mêmes
+				conditions.
+			</p>
+		</li>
+	</ol>
+	<p>
+		Le locataire peut mettre fin au bail à tout moment, après avoir donné congé
+	conformément à l’article 12 de la	<strong><em>Loi n° 89-462 du 6 juillet 1989</em></strong>.
+	</p>
+	<p>
+		Le bailleur, quant à lui, peut mettre fin au bail à son échéance et après
+		avoir donné congé, soit pour reprendre le logement en vue de l'occuper
+		lui-même ou une personne de sa famille, soit pour le vendre, soit pour un
+		motif sérieux et légitime.
+	</p>
+	<ol type="I" start="4">
+		<li>
+			<p>
+				<strong>Conditions financiÈres</strong>
+			</p>
+		</li>
+	</ol>
+	<p>
+		Les parties conviennent des conditions financières suivantes :
+	</p>
+	<ol type="A">
+		<li>
+			<p>
+				<strong>Loyer</strong>
+			</p>
+			<ol>
+				<li>
+					<p>
+						<strong>Fixation du loyer initial</strong>
+					</p>
+				</li>
+			</ol>
+		</li>
+	</ol>
+	<p>
+		<strong>Montant du loyer mensuel :</strong>
+		<em> {{bail.montantHC}} €</em>
+
+	</p>
+	<p>
+		<strong>Informations relatives au loyer du dernier locataire : </strong>
+		<em><strong> {{bail.montantHC}} € </strong></em>
+
+	</p>
+	<ol type="A">
+		<ol start="2">
+			<li>
+				<p>
+					<strong>Modalités de révision</strong>
+				</p>
+			</li>
+		</ol>
+	</ol>
+	<p>
+		<strong>Date de révision :</strong>
+		<em> le 1</em>
+		<sup><em>er</em></sup>
+		<em> janvier de chaque année</em>
+	</p>
+	<p>
+		<strong>Trimestre de référence de l'IRL : </strong>
+		2<sup>nd</sup> t<em>rimestre 20</em><em>21</em>
+	</p>
+	<ol type="A" start="2">
+		<li>
+			<p>
+				<strong>Charges récupérables</strong>
+			</p>
+			<ol>
+				<li>
+					<p>
+						<strong>
+							Modalités de règlement des charges récupérables
+						</strong>
+					</p>
+				</li>
+			</ol>
+		</li>
+	</ol>
+	<p>
+		Provisions sur charges
+	</p>
+	<ol type="A">
+		<ol start="2">
+			<li>
+				<p>
+					<strong>Montant des charges</strong>
+				</p>
+			</li>
+		</ol>
+	</ol>
+	<p>
+		<em> {{bail.montantCharges}} €</em>
+	</p>
+	<ol type="A" start="3">
+		<li>
+			<p>
+				<strong>Total mensuel à payer</strong>
+			</p>
+		</li>
+	</ol>
+	<p>
+		{{bail.montantHC + bail.montantCharges}} €
+	</p>
+	<ol type="A" start="4">
+		<li>
+			<p>
+				<strong>Modalités de paiement</strong>
+			</p>
+		</li>
+	</ol>
+	<p>
+		<strong>Périodicité du paiement : </strong>
+		<em>Mensuelle</em>
+	</p>
+	<p>
+		<strong>Paiement : </strong>
+		<em>À échoir</em>
+	</p>
+	<p>
+		<strong>Date ou période de paiement :</strong>
+		<em> Avant le 7 de chaque mois</em>
+	</p>
+	<p>
+		<strong>Lieu de paiement : </strong>
+		<em>Virement bancaire</em>
+	</p>
+	<p>
+		<strong>
+			Montant total dû à la première échéance de paiement pour une période
+			complète de location :
+		</strong>
+	</p>
+	<p>
+		... €
+	</p>
+	<ol type="I" start="5">
+		<li>
+			<p>
+				<strong>Travaux</strong>
+			</p>
+		</li>
+	</ol>
+	<p>
+		<strong>
+			Montant et nature des travaux d'amélioration ou de mise en conformité
+			avec les caractéristiques de décence effectués depuis la fin du dernier
+			contrat de location ou depuis le dernier renouvellement :
+		</strong>
+	</p>
+	<p>
+		<em>
+			Rénovation de l’appartement au 15 aout 2021 : toiture, étanchéité,
+			isolation plafond, rénovation des murs et du plafond, peintures
+			plafonds et murs, pose d’un ventilation mécanique par insufflation.
+		</em>
+	</p>
+	<ol type="I" start="6">
+		<li>
+			<p>
+				<strong>Garanties</strong>
+			</p>
+		</li>
+	</ol>
+	<p>
+		<strong>
+			Montant du dépôt de garantie / Garantie autonome (inférieur ou égal à
+			un mois de loyers hors charges) :
+		</strong>
+		<em> {{bail.montantCaution}} € </em>
+
+	</p>
+	<ol type="I" start="7">
+		<li>
+			<p>
+				<strong>Clause de solidarité</strong>
+			</p>
+		</li>
+	</ol>
+	<p>
+		<strong>
+			Modalités particulières des obligations en cas de pluralité de
+			locataires :
+		</strong>
+		<em>sans objet</em>
+	</p>
+	<ol type="I" start="8">
+		<li>
+			<p>
+				<strong>Clause résolutoire</strong>
+			</p>
+		</li>
+	</ol>
+	<p>
+		<strong>Modalités de résiliation de plein droit du contrat :</strong>
+	</p>
+	<p>
+		<strong>-</strong>
+		<em>Défaut de paiement du loyer ou des charges aux termes convenus</em>
+	</p>
+	<p>
+		<em>-Non versement du dépôt de garantie</em>
+	</p>
+	<p>
+		<em>-Non-souscription d'une assurance des risques locatifs </em>
+	</p>
+	<p>
+		<em>
+			-Non-respect de l'obligation d'user paisiblement des locaux loués,
+			résultant de troubles de voisinage constatés par une décision de
+			justice passée en force de chose jugée.
+		</em>
+	</p>
+	<ol type="I" start="9">
+		<li>
+			<p>
+				<strong>CAUTIONNEMENT</strong>
+			</p>
+		</li>
+	</ol>
+	<p>
+		<em> {{bail.nomCaution1}} {% if bail.nomCaution2 is not null %} , {{bail.nomCaution2}} {% endif %} </em>
+	</p>
+	<ol type="I" start="10">
+		<li>
+			<p>
+				<strong>Annexes</strong>
+			</p>
+		</li>
+	</ol>
+	<p>
+		Sont annexées et jointes au contrat de location les pièces suivantes :
+	</p>
+	<ul>
+		<li>
+			<p>
+				Un dossier de diagnostic technique comprenant :
+			</p>
+			<ul>
+				<li>
+					<p>
+						un diagnostic de performance énergétique
+					</p>
+				</li>
+				<li>
+					<p>
+						un état des risques naturels miniers et technologiques
+						(ERNMT)
+					</p>
+				</li>
+				<li>
+					<p>
+						une copie d'un état mentionnant l'absence ou la présence de
+						matériaux ou de produits de la construction contenant de
+						l'amiante
+					</p>
+				</li>
+				<li>
+					<p>
+						un certificat de surface (loi Boutin )
+					</p>
+				</li>
+			</ul>
+		</li>
+		<li>
+			<p>
+				Un état des lieux
+			</p>
+		</li>
+	</ul>
+	<p>
+		Le {{"now"|date("d/m/Y")}} à Caen,
+	</p>
+	<table width="756" cellpadding="9" cellspacing="0">
+		<colgroup>
+			<col width="359"/>
+			<col width="359"/>
+		</colgroup>
+		<tbody>
+			<tr valign="top">
+				<td width="359">
+				</td>
+				<td width="359">
+				</td>
+			</tr>
+			<tr valign="top">
+				<td width="359">
+					<p align="left">
+						<strong>Signature du bailleur </strong>
+					</p>
+				</td>
+				<td width="359">
+					<p align="left">
+						<strong>Signature du locataire</strong>
+					</p>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	<br/>
+	</html>
