@@ -61,3 +61,13 @@ contratLocationLister:
 contratLocationPDF:
     path: /baux/{id}/contratLocation
     controller: App\Controller\BailController::contratLocationPDF
+
+# AJOUTER LOCATAIRE
+ajouterLocataire:
+    path: /locataire/ajouter
+    controller: App\Controller\LocataireController::ajouterLocataire
+
+# CONSULTER LOCATAIRE
+locataireConsulter:
+    path: /locataire/consulter/{id}
+    controller: App\Controller\LocataireController::consulterLocataire

@@ -98,7 +98,11 @@ class BailController extends AbstractController
     }
 
     public function ajouterBail(ManagerRegistry $doctrine,Request $request){
-        $bail = new bail();
+        $bail = new Bail();
+
+        $locataire = new Locataire();
+        $bail->getLocataires()->add($locataire);
+
         $form = $this->createForm(BailType::class, $bail);
         $form->handleRequest($request);
 

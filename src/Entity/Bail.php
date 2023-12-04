@@ -63,13 +63,27 @@ class Bail
     #[ORM\ManyToOne(inversedBy: 'bails')]
     private ?Associe $associe = null;
 
-    #[ORM\ManyToMany(targetEntity: Locataire::class, inversedBy: 'bails')]
-    private Collection $locataire;
+    /**
+     * @ORM\ManyToMany(targetEntity=Locataire::class, inversedBy="bails", cascade={"persist"})
+     */
+    private Collection $locataires;
+
+    #[ORM\Column]
+    private ?float $MontantPremEcheance = null;
+
+    #[ORM\Column]
+    private ?float $MontantDerEcheance = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $TrimestreReference = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $PieceJustificative = null;
 
     public function __construct()
     {
         $this->paiements = new ArrayCollection();
-        $this->locataire = new ArrayCollection();
+        $this->locataires = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -263,14 +277,26 @@ class Bail
         return $this;
     }
 
-    public function getLocataire(): Collection
+    /**
+     * @return Collection<int, Locataire>
+     */
+    public function getLocataires(): Collection
     {
-        return $this->locataire;
+        return $this->locataires;
     }
 
-    public function setLocataire(?Locataire $locataire): static
+    public function addLocataire(Locataire $locataire): self
     {
-        $this->locataire = $locataire;
+        if (!$this->locataires->contains($locataire)) {
+            $this->locataires->add($locataire);
+        }
+
+        return $this;
+    }
+
+    public function removeLocataire(Locataire $locataire): self
+    {
+        $this->locataires->removeElement($locataire);
 
         return $this;
     }
@@ -287,18 +313,55 @@ class Bail
         return $this;
     }
 
-    public function addLocataire(Locataire $locataire): static
+
+
+    
+
+
+    public function getMontantPremEcheance(): ?float
     {
-        if (!$this->locataire->contains($locataire)) {
-            $this->locataire->add($locataire);
-        }
+        return $this->MontantPremEcheance;
+    }
+
+    public function setMontantPremEcheance(float $MontantPremEcheance): static
+    {
+        $this->MontantPremEcheance = $MontantPremEcheance;
 
         return $this;
     }
 
-    public function removeLocataire(Locataire $locataire): static
+    public function getMontantDerEcheance(): ?float
     {
-        $this->locataire->removeElement($locataire);
+        return $this->MontantDerEcheance;
+    }
+
+    public function setMontantDerEcheance(float $MontantDerEcheance): static
+    {
+        $this->MontantDerEcheance = $MontantDerEcheance;
+
+        return $this;
+    }
+
+    public function getTrimestreReference(): ?string
+    {
+        return $this->TrimestreReference;
+    }
+
+    public function setTrimestreReference(string $TrimestreReference): static
+    {
+        $this->TrimestreReference = $TrimestreReference;
+
+        return $this;
+    }
+
+    public function getPieceJustificative(): ?string
+    {
+        return $this->PieceJustificative;
+    }
+
+    public function setPieceJustificative(string $PieceJustificative): static
+    {
+        $this->PieceJustificative = $PieceJustificative;
 
         return $this;
     }

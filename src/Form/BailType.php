@@ -34,6 +34,12 @@ class BailType extends AbstractType
             ->add('MontantCaution', TextType::class, [
                 'label' => 'Montant de la caution :',
             ])
+            ->add('MontantPremEcheance', TextType::class, [
+                'label' => 'Montant Premiere Echeance :',
+            ])
+            ->add('MontantDerEcheance', TextType::class, [
+                'label' => 'Montant Derniere Echeance :',
+            ])
             ->add('NomCaution1', TextType::class, [
                 'label' => 'Nom Caution 1 :',
             ])
@@ -60,6 +66,12 @@ class BailType extends AbstractType
             ->add('AttestationAssurance', TextType::class, [
                 'label' => 'Attestation d\'assurance :',
             ])
+            ->add('TrimestreReference', TextType::class, [
+                'label' => 'Trimestre de référence de l\'IRL  :',
+            ])
+            ->add('PieceJustificative', TextType::class, [
+                'label' => 'Piece Justificative :',
+            ])
             ->add('appartement', EntityType::class, [
                 'class' => 'App\Entity\Appartement',
                 'choice_label' => 'porte',
@@ -73,8 +85,10 @@ class BailType extends AbstractType
                 'label' => 'Associé',
                 'required' => false,
             ])
-            ->add('locataire', CollectionType::class, ['entry_type' => LocataireType::class,
+            ->add('locataires', CollectionType::class, ['entry_type' => LocataireType::class,
             'entry_options' => ['label' => false],])
+
+            
             ->add('enregistrer', SubmitType::class, array('label' => 'Nouvel Bail'))
         ;
     }
