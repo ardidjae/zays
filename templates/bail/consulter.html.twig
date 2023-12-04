@@ -11,7 +11,7 @@
     {% include 'header.html.twig' %}
     {% include 'footer.html.twig' %}
     <h2 class="text-center display-5">
-        Information du bail de {{bail.locataire[0].nom}} {% if bail.locataire[1] is defined %} {{bail.locataire[1].nom}}  {% endif %}
+        Information du bail de {{bail.locataires[0].nom}} {% if bail.locataires[1] is defined %} {{bail.locataires[1].nom}}  {% endif %}
     </h2></br>
     <!-- Section d'information -->
     <section class="information">
