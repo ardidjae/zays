@@ -42,9 +42,9 @@
                       {% for p in pPaiements %}
                         <td>{{ p.bail.appartement.porte }}</td>
                         <td>
-                        {{ p.bail.locataire[0].nom }} {{ p.bail.locataire[0].prenom }}
-                        {% if p.bail.locataire[1] is defined %}
-                            et {{ p.bail.locataire[1].nom }} {{ p.bail.locataire[1].prenom }}
+                        {{ p.bail.locataires[0].nom }} {{ p.bail.locataires[0].prenom }}
+                        {% if p.bail.locataires[1] is defined %}
+                            et {{ p.bail.locataires[1].nom }} {{ p.bail.locataires[1].prenom }}
                       {% endif %}
                         </td>
                         <td>{{ p.montant }}</td>
@@ -99,7 +99,7 @@
             var myChart = new Chart(ctx, {
                 type: 'bar',
                 data: {
-                    labels: [{% for p in pPaiements %}"{{ p.bail.locataire[0].nom }} {{ p.bail.locataire[0].prenom }}",{% endfor %}],
+                    labels: [{% for p in pPaiements %}"{{ p.bail.locataires[0].nom }} {{ p.bail.locataires[0].prenom }}",{% endfor %}],
                     datasets: [{
                         label: 'Montant des loyers reçus',
                         data: [{% for p in pPaiements %}{{ p.montant }},{% endfor %}],
