@@ -133,23 +133,20 @@ class Locataire
         return $this->bails;
     }
 
-    public function addBail(Bail $bail): static
+    public function addBail(Bail $bail): self
     {
         if (!$this->bails->contains($bail)) {
             $this->bails->add($bail);
-            $bail->setLocataire($this);
+            $bail->addLocataire($this);
         }
 
         return $this;
     }
 
-    public function removeBail(Bail $bail): static
+    public function removeBail(Bail $bail): self
     {
         if ($this->bails->removeElement($bail)) {
-            // set the owning side to null (unless already changed)
-            if ($bail->getLocataire() === $this) {
-                $bail->setLocataire(null);
-            }
+            $bail->removeLocataire($this);
         }
 
         return $this;
