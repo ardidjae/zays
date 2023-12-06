@@ -68,10 +68,10 @@
                                 {% for b in appartement.bails %}
                                 <!-- États des Lieux information -->
                                 <div class="information-item">
-                                    <strong>Nom :</strong> {{b.locataire[0].nom}} {% if b.locataire[1] is defined %}{{b.locataire[1].nom}}{% endif %}
+                                    <strong>Nom :</strong> {{b.locataires[0].nom}} {% if b.locataires[1] is defined %}{{b.locataires[1].nom}}{% endif %}
                                 </div>
                                 <div class="information-item">
-                                    <strong>Prenom :</strong> {{b.locataire[0].prenom}} {% if b.locataire[1] is defined %}{{b.locataire[1].prenom}}{% endif %}
+                                    <strong>Prenom :</strong> {{b.locataires[0].prenom}} {% if b.locataires[1] is defined %}{{b.locataires[1].prenom}}{% endif %}
                                 </div>
                                 <div class="information-item">
                                     <strong>Numero de bail :</strong> <a href="{{ path('bauxConsulter', { 'id': b.id }) }}">{{ b.id }}

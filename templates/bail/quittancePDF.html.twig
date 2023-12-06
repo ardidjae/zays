@@ -99,7 +99,7 @@
                             <strong>LOCATAIRE</strong>
                         </p>
                         <p align="center">
-                            {{bail.locataire[0].nom}} {{bail.locataire[0].prenom}}
+                            {{bail.locataires[0].nom}} {{bail.locataires[0].prenom}}
                         </p>
                         <p align="center">
                             Porte {{bail.appartement.porte}}
@@ -145,7 +145,7 @@
             </tr>
             <tr>
                 <td>Somme totale perçue sur le compte SCI le 05/11/2022</td>
-                <td>{{(bail.montantHC + bail.montantCharges) - bail.locataire[0].montantCaf}} €</td>
+                <td>{{(bail.montantHC + bail.montantCharges) - bail.locataires[0].montantCaf}} €</td>
             </tr>
         </table>
 

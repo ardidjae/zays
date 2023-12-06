@@ -35,9 +35,9 @@
                       <tr>
                       <td>{{ b.appartement.porte }}</a></td>
                       <td>
-                          {{ b.locataire[0].nom }} {{ b.locataire[0].prenom }}
-                            {% if b.locataire[1] is defined %}
-                                et {{ b.locataire[1].nom }} {{ b.locataire[1].prenom }}
+                          {{ b.locataires[0].nom }} {{ b.locataires[0].prenom }}
+                            {% if b.locataires[1] is defined %}
+                                et {{ b.locataires[1].nom }} {{ b.locataires[1].prenom }}
                           {% endif %}
                         </a>
                       </td>
