@@ -58,14 +58,10 @@ class Bail
     #[ORM\OneToMany(mappedBy: 'bail', targetEntity: Paiement::class)]
     private Collection $paiements;
 
-
-
     #[ORM\ManyToOne(inversedBy: 'bails')]
     private ?Associe $associe = null;
 
-    /**
-     * @ORM\ManyToMany(targetEntity=Locataire::class, inversedBy="bails", cascade={"persist"})
-     */
+    #[ORM\ManyToMany(inversedBy: 'bails', targetEntity: Locataire::class, cascade: ['persist'])]
     private Collection $locataires;
 
     #[ORM\Column]
@@ -289,6 +285,7 @@ class Bail
     {
         if (!$this->locataires->contains($locataire)) {
             $this->locataires->add($locataire);
+            $locataire->addBail($this);
         }
 
         return $this;
