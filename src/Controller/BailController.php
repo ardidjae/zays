@@ -29,8 +29,18 @@ class BailController extends AbstractController
 
         $repository = $doctrine->getRepository(Bail::class);
 
-        $bails= $repository->findAll();
+        $bails = $repository->findBy(['archive' => 0]);
         return $this->render('bail/lister.html.twig', [
+            'pBails' => $bails,]);
+
+    }
+
+    public function listerBauxArchives(ManagerRegistry $doctrine){
+
+        $repository = $doctrine->getRepository(Bail::class);
+
+        $bails = $repository->findBy(['archive' => 1]);
+        return $this->render('bail/listerBauxArchives.html.twig', [
             'pBails' => $bails,]);
 
     }
@@ -130,8 +140,18 @@ class BailController extends AbstractController
 
         $repository = $doctrine->getRepository(Bail::class);
 
-        $bails= $repository->findAll();
+        $bails = $repository->findBy(['archive' => 0]);
         return $this->render('bail/listerContratLocation.html.twig', [
+            'pBails' => $bails,]);
+
+    }
+
+    public function listerContratLocationArchives(ManagerRegistry $doctrine){
+
+        $repository = $doctrine->getRepository(Bail::class);
+
+        $bails = $repository->findBy(['archive' => 1]);
+        return $this->render('bail/listerContratLocationArchives.html.twig', [
             'pBails' => $bails,]);
 
     }
