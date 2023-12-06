@@ -76,6 +76,9 @@ class Bail
     #[ORM\Column(length: 255)]
     private ?string $PieceJustificative = null;
 
+    #[ORM\Column]
+    private ?int $archive = null;
+
     public function __construct()
     {
         $this->paiements = new ArrayCollection();
@@ -359,6 +362,18 @@ class Bail
     public function setPieceJustificative(string $PieceJustificative): static
     {
         $this->PieceJustificative = $PieceJustificative;
+
+        return $this;
+    }
+
+    public function getArchive(): ?int
+    {
+        return $this->archive;
+    }
+
+    public function setArchive(int $archive): static
+    {
+        $this->archive = $archive;
 
         return $this;
     }
