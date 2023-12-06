@@ -130,6 +130,10 @@
                                         <td>{{ p.dateP|date("d/m/Y") }}</td>
                                         <td>{{ p.montant }},00 €</td>
                                     </tr>
+                                    {% else %}
+                                    <tr>
+                                        <td colspan="2">Aucun paiement n'a été trouvé.</td>
+                                    </tr>
                                     {% endfor %}
                                 </tbody>
                             </table>
