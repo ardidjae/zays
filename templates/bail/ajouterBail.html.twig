@@ -8,7 +8,42 @@
 
     {# Inclure les stylesheets Bootstrap (assurez-vous d'avoir Bootstrap installé dans votre projet) #}
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    {% block stylesheets %}{% endblock %}
+    {% block stylesheets %}
+    <style>
+            .Locataire {
+                display: flex;
+                justify-content: space-between; /* Ajoutez ceci pour l'espacement entre les formulaires */
+            }
+            .locataire-form {
+                width: 48%; /* Ajoutez ceci pour définir la largeur du formulaire */
+            }
+        </style>
+    {% endblock %}
+
+    {% block javascripts %}
+         <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const addButton = document.getElementById('addLocataireButton');
+                const locataireContainer = document.getElementById('locataireContainer');
+                const locataireTemplate = document.getElementById('locataireTemplate');
+                let locataireIndex = 1; // Initial index for locataire fields
+
+                addButton.addEventListener('click', function() {
+                    const newLocataire = locataireTemplate.cloneNode(true);
+                    newLocataire.removeAttribute('id');
+
+                    // Update field names with unique index
+                    newLocataire.querySelectorAll('[name]').forEach(function(element) {
+                        const name = element.getAttribute('name');
+                        element.setAttribute('name', name.replace('[0]', '[' + locataireIndex + ']'));
+                    });
+
+                    locataireContainer.appendChild(newLocataire);
+                    locataireIndex++;
+                });
+            });
+        </script>
+    {% endblock %}
 </head>
 <body>
 
@@ -22,40 +57,44 @@
         {{ form_start(form) }}
 
         <h3>Locataire</h3>
-        <div class="Locataire">
-            {% for locataire in form.locataires %}
-            <div class="mb-3">
-                <div class="form-group">
-                    {{ form_row(locataire.Nom, {'attr': {'class': 'form-control'}}) }}
+        <div id="locataireContainer" class="Locataire">
+            <div class="locataire-form" id="locataireTemplate">
+                {% for locataire in form.locataires %}
+                <div class="mb-3">
+                    <div class="form-group">
+                        {{ form_row(locataire.Nom, {'attr': {'class': 'form-control'}}) }}
+                    </div>
                 </div>
-            </div>
-            <div class="mb-3">
-                <div class="form-group">
-                    {{ form_row(locataire.Prenom, {'attr': {'class': 'form-control'}}) }}
+                <div class="mb-3">
+                    <div class="form-group">
+                        {{ form_row(locataire.Prenom, {'attr': {'class': 'form-control'}}) }}
+                    </div>
                 </div>
-            </div>
-            <div class="mb-3">
-                <div class="form-group">
-                    {{ form_row(locataire.DateNaissance, {'attr': {'class': 'form-control'}}) }}
+                <div class="mb-3">
+                    <div class="form-group">
+                        {{ form_row(locataire.DateNaissance, {'attr': {'class': 'form-control'}}) }}
+                    </div>
                 </div>
-            </div>
-            <div class="mb-3">
-                <div class="form-group">
-                    {{ form_row(locataire.LieuNaissance, {'attr': {'class': 'form-control'}}) }}
+                <div class="mb-3">
+                    <div class="form-group">
+                        {{ form_row(locataire.LieuNaissance, {'attr': {'class': 'form-control'}}) }}
+                    </div>
                 </div>
-            </div>
-            <div class="mb-3">
-                <div class="form-group">
-                    {{ form_row(locataire.MontantCaf, {'attr': {'class': 'form-control'}}) }}
+                <div class="mb-3">
+                    <div class="form-group">
+                        {{ form_row(locataire.MontantCaf, {'attr': {'class': 'form-control'}}) }}
+                    </div>
                 </div>
-            </div>
-            <div class="mb-3">
-                <div class="form-group">
-                    {{ form_row(locataire.Archive, {'attr': {'class': 'form-control'}}) }}
+                <div class="mb-3">
+                    <div class="form-group">
+                        {{ form_row(locataire.Archive, {'attr': {'class': 'form-control'}}) }}
+                    </div>
                 </div>
+                {% endfor %}
             </div>
-            {% endfor %}
-        </div></br>
+        </div>
+        <button type="button" id="addLocataireButton" class="btn btn-primary">Ajouter un autre locataire</button>
+        </br>
         <h3>Bail</h3>
         <div class="mb-3">
             <div class="form-group">
