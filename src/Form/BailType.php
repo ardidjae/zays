@@ -86,9 +86,10 @@ class BailType extends AbstractType
                 'required' => false,
             ])
             ->add('locataires', CollectionType::class, ['entry_type' => LocataireType::class,
-            'entry_options' => ['label' => false],])
+                'entry_options' => ['label' => false],
+                'allow_add' => true,
+            ])
 
-            
             ->add('enregistrer', SubmitType::class, array('label' => 'Nouvel Bail'))
         ;
     }
