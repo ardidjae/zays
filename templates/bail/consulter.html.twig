@@ -111,6 +111,30 @@
                             </div>
                         </div>
                     </div>
+                    <div class="card">
+                        <div class="card-header border-bottom">
+                            <h3 class="h4 mb-0">Historique des paiements</h3>
+                        </div>
+
+                        <div class="table-responsive">
+                            <table class="table text-sm mb-0 table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Date</th>
+                                        <th>Montant</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for p in bail.paiements %}
+                                    <tr>
+                                        <td>{{ p.dateP|date("d/m/Y") }}</td>
+                                        <td>{{ p.montant }},00 €</td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

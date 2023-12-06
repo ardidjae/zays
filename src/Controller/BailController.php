@@ -86,6 +86,9 @@ class BailController extends AbstractController
 
         $bail = $doctrine->getRepository(Bail::class)->find($id);
 
+        $repositoryPaiement = $doctrine->getRepository(Paiement::class);
+        $paiements= $repositoryPaiement->findAll();
+
         if (!$bail) {
             throw $this->createNotFoundException(
             'Aucun bail trouvé'
@@ -94,6 +97,7 @@ class BailController extends AbstractController
 
         return $this->render('bail/consulter.html.twig', [
             'bail' => $bail,
+            'pPaiements' => $paiements,
         ]);
     }
 
