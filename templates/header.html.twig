@@ -65,7 +65,7 @@
     <link href="headers.css" rel="stylesheet">
 </head>
 <main>
-    <header class="p-3 bg-dark text-white">
+    <header class="p-4 bg-dark text-white">
     <div class="container">
       <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
         <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
@@ -79,8 +79,8 @@
                     Appartement
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="{{ asset('paiement/listerLoyer') }}">Loyers reçus</a>
-                    <a class="dropdown-item" href="{{ asset('baux/lister') }}">Apparts et Locataire</a>
+                    <a class="dropdown-item" href="{{ asset('paiement/listerLoyer') }}">Liste des Loyers reçus</a>
+                    <a class="dropdown-item" href="{{ asset('baux/lister') }}">Liste des Apparts et Locataires</a>
                     <a class="dropdown-item" href="{{ asset('baux/ajouter') }}">Ajouter un nouveau Bail</a>
                     <a class="dropdown-item" href="{{ asset('locataire/ajouter') }}">Ajouter un nouveau Locataire</a>
                     <!-- Add more menu items as needed -->
@@ -91,8 +91,10 @@
                     Contrat de Location
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="{{ asset('baux/listerContratLocation') }}">Apparts</a>
-                    <a class="dropdown-item" href="#">Cloturer</a>
+                    <a class="dropdown-item" href="{{ asset('baux/listerContratLocation') }}">Liste des contrats</a>
+                    <a class="dropdown-item" href="#">Créer un nouveau contrat</a>
+                    <a class="dropdown-item" href="#">Modifier un contrat actuelles</a>
+                    <a class="dropdown-item" href="#">Cloturer un contrat</a>
                     <!-- Add more menu items as needed -->
                 </div>
           </li>

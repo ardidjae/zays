@@ -10,15 +10,15 @@
     {% include 'header.html.twig' %}
     {% include 'footer.html.twig' %}
     <h2 class="text-center display-5">
-        Liste des Appart et des Loc (Actuelles)
+        Liste des contrat de location(Archives)
     </h2></br>
       <section class="tables">
         <div class="container-fluid">
           <div class="row">
-            <div class="col-lg-12">
+            <div class="col-lg-5">
               <div class="card">
                 <div class="card-header border-bottom">
-                  <h3 class="h4 mb-0">Liste des appartements et des locataires</h3>
+                  <h3 class="h4 mb-0">Section Contrats Archivés</h3>
                 </div>
                 <div class="card-body">
                   <div class="table-responsive">
@@ -27,33 +27,22 @@
                         <tr>
                           <thead class="thead-dark">
                             <tr>
-                                <th width="10%" scope="col">Appartement</th>
-                                <th width="15%" scope="col">Locataire</th>
-                                <th scope="col">Loyer HC</th>
-                                <th scope="col">Caution</th>
-                                <th scope="col">Loyer TTC</th>
-                                <th scope="col">Date entrée</th>
-                                <th scope="col">Surface Habitation</th>
+                                <th scope="col" style="width: 10%;">Porte</th>
+                                <th scope="col" style="width: 30%;">Locataire(s)</th>
                             </tr>
                           </thead>
                         </tr>
                       </thead>
                       {% for b in pBails %}
                       <tr>
-                      <td><a href="{{ path('appartementConsulter', { 'id': b.appartement.id }) }}">{{ b.appartement.porte }}</a></td>
+                      <td>{{ b.appartement.porte }}</a></td>
                       <td>
-                        <a href="{{ path('bauxConsulter', { 'id': b.id }) }}">
                           {{ b.locataires[0].nom }} {{ b.locataires[0].prenom }}
                             {% if b.locataires[1] is defined %}
                                 et {{ b.locataires[1].nom }} {{ b.locataires[1].prenom }}
                           {% endif %}
                         </a>
                       </td>
-                      <td>{{ b.montantHC }} {% if b.montantHC != null %}€{% endif %}</td>
-                      <td>{{ b.montantCaution }} {% if b.montantCaution != null %}€{% endif %}</td>
-                      <td>{{ b.montantHC + b.montantCharges }} {% if b.montantHC + b.montantCharges != null %}€{% endif %}</td>
-                      <td>{{ b.dateDebut|date("d/m/Y") }}</td>
-                      <td>{{ b.appartement.surfaceHabitable }} {% if b.appartement.surfaceHabitable != null %}m²{% endif %}</td>
                       </tr>
                       {% else %}
                       <tr>
@@ -61,11 +50,6 @@
                       </tr>
                       {% endfor %}
                     </table></br>
-                    <button type="button" class="btn btn-primary mt-3">
-                      <a href="{{ asset('baux/listerBauxArchives') }}" style="color: white; text-decoration: none;">
-                          Anciens locataires
-                      </a>
-                    </button>
                   </div>
                 </div>
               </div>

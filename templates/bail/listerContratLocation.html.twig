@@ -9,13 +9,16 @@
 <body>
     {% include 'header.html.twig' %}
     {% include 'footer.html.twig' %}
+    <h2 class="text-center display-5">
+        Liste des contrat de location(Actuelles)
+    </h2></br>
       <section class="tables">
         <div class="container-fluid">
           <div class="row">
-            <div class="col-lg-7">
+            <div class="col-lg-6">
               <div class="card">
                 <div class="card-header border-bottom">
-                  <h3 class="h4 mb-0">Liste des contrat de location</h3>
+                  <h3 class="h4 mb-0">Section Contrats Actuelles</h3>
                 </div>
                 <div class="card-body">
                   <div class="table-responsive">
@@ -24,9 +27,9 @@
                         <tr>
                           <thead class="thead-dark">
                             <tr>
-                                <th width="10%" scope="col">Porte</th>
-                                <th width="15%" scope="col">Locataire</th>
-                                <th width="15%" scope="col"></th>
+                                <th scope="col" style="width: 10%;">Porte</th>
+                                <th scope="col" style="width: 30%;">Locataire(s)</th>
+                                <th scope="col" style="width: 20%;">Actions</th>
                             </tr>
                           </thead>
                         </tr>
@@ -42,7 +45,7 @@
                         </a>
                       </td>
                       <td>
-                          <button class="btn btn-success" onclick="genererQuittance()">
+                          <button class="btn btn-secondary" onclick="genererQuittance()">
                               <a href="{{ path('contratLocationPDF', { 'id': b.id }) }}" style="color: white; text-decoration: none;">
                                   Générer contrat de location
                               </a>
@@ -55,6 +58,11 @@
                       </tr>
                       {% endfor %}
                     </table></br>
+                    <button type="button" class="btn btn-primary mt-3">
+                      <a href="{{ asset('baux/listerContratLocationArchives') }}" style="color: white; text-decoration: none;">
+                          Contrat de location (Archivés)
+                      </a>
+                    </button>
                   </div>
                 </div>
               </div>

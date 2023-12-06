@@ -17,6 +17,11 @@ bauxLister:
     path: /baux/lister
     controller: App\Controller\BailController::listerBaux
 
+# LISTER BAUX ARCHIVES
+bauxArchivesLister:
+    path: /baux/listerBauxArchives
+    controller: App\Controller\BailController::listerBauxArchives
+
 # CONSULTER BAUX
 bauxConsulter:
     path: /baux/consulter/{id}
@@ -56,6 +61,11 @@ appartementConsulter:
 contratLocationLister:
     path: /baux/listerContratLocation
     controller: App\Controller\BailController::listerContratLocation
+
+# LISTER CONTRAT DE LOCATION ARCHIVES
+contratLocationArchivesLister:
+    path: /baux/listerContratLocationArchives
+    controller: App\Controller\BailController::listerContratLocationArchives
 
 # PDF CONTRAT DE LOCATION
 contratLocationPDF:
