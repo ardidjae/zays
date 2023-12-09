@@ -5,11 +5,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>{% block title %}ZAYS{% endblock %}</title>
-
-    {# Inclure les stylesheets Bootstrap (assurez-vous d'avoir Bootstrap installé dans votre projet) #}
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     {% block stylesheets %}
     <style>
+            body {
+                background-color: #f0f0f0 !important; /* Light gray background */
+                color: #333 !important; /* Dark gray text */
+            }
             .Locataire {
                 display: flex;
                 justify-content: space-between; /* Ajoutez ceci pour l'espacement entre les formulaires */
@@ -17,7 +18,14 @@
             .locataire-form {
                 width: 48%; /* Ajoutez ceci pour définir la largeur du formulaire */
             }
-        </style>
+            .separator {
+                border-top: 2px solid #000; /* Black separator line */
+                margin: 20px 0;
+            }
+            .placeholder-light {
+                color: rgba(0, 0, 0, 0.5); /* Réglage de l'opacité du texte du placeholder */
+            }
+    </style>
     {% endblock %}
 
     {% block javascripts %}
@@ -49,25 +57,25 @@
 
     {% include 'header.html.twig' %}
 
-    <div class="container my-4">
+    <div class="container my-4"></br></br></br></br>
         <div class="d-flex justify-content-center align-items-center mb-3">
-            <h5 class="text-center">CREER UN CONTRAT DE LOCATION</h5>
+            <h5 class="text-center"><i class="ri-file-edit-fill"></i>&nbsp; Contrat de location</h5>
         </div>
 
         {{ form_start(form) }}
 
-        <h3>Locataire</h3>
+        <h5><i class="ri-user-line"></i>&nbsp; LOCATAIRE</h5>
         <div id="locataireContainer" class="Locataire">
             <div class="locataire-form" id="locataireTemplate">
                 {% for locataire in form.locataires %}
                 <div class="mb-3">
                     <div class="form-group">
-                        {{ form_row(locataire.Nom, {'attr': {'class': 'form-control'}}) }}
+                        {{ form_row(locataire.Nom, {'attr': {'class': 'form-control','placeholder': 'Mickael'}}) }}
                     </div>
                 </div>
                 <div class="mb-3">
                     <div class="form-group">
-                        {{ form_row(locataire.Prenom, {'attr': {'class': 'form-control'}}) }}
+                        {{ form_row(locataire.Prenom, {'attr': {'class': 'form-control','placeholder': 'Bert'}}) }}
                     </div>
                 </div>
                 <div class="mb-3">
@@ -77,136 +85,141 @@
                 </div>
                 <div class="mb-3">
                     <div class="form-group">
-                        {{ form_row(locataire.LieuNaissance, {'attr': {'class': 'form-control'}}) }}
+                        {{ form_row(locataire.LieuNaissance, {'attr': {'class': 'form-control','placeholder': 'Washingthon'}}) }}
                     </div>
                 </div>
                 <div class="mb-3">
                     <div class="form-group">
-                        {{ form_row(locataire.MontantCaf, {'attr': {'class': 'form-control'}}) }}
+                        {{ form_row(locataire.MontantCaf, {'attr': {'class': 'form-control','placeholder': '400 €'}}) }}
                     </div>
                 </div>
                 <div class="mb-3">
                     <div class="form-group">
-                        {{ form_row(locataire.Archive, {'attr': {'class': 'form-control'}}) }}
+                        {{ form_row(locataire.Archive, {'attr': {'class': 'form-control','placeholder': 'Default: 0'}}) }}
                     </div>
                 </div>
                 {% endfor %}
             </div>
         </div>
-        <button type="button" id="addLocataireButton" class="btn btn-primary">Ajouter un autre locataire</button>
-        </br>
-        <h3>Bail</h3>
-        <div class="mb-3">
-            <div class="form-group">
-                {{ form_row(form.appartement, {'attr': {'class': 'form-control'}}) }}
-            </div>
-        </div>
+        <button type="button" id="addLocataireButton" class="btn btn-primary">Ajouter un autre locataire</button></br></br>
+        <div class="separator"></div>
+        <h5><i class="ri-file-text-line"></i>&nbsp; BAIL</h5>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="mb-3">
+                    <div class="form-group">
+                        {{ form_row(form.appartement, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+                </div>
 
-        <div class="mb-3">
-            <div class="form-group">
-                {{ form_row(form.dateDebut, {'attr': {'class': 'form-control'}}) }}
-            </div>
-        </div>
+                <div class="mb-3">
+                    <div class="form-group">
+                        {{ form_row(form.dateDebut, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+                </div>
 
-        <div class="mb-3">
-            <div class="form-group">
-                {{ form_row(form.MontantHC, {'attr': {'class': 'form-control'}}) }}
-            </div>
-        </div>
+                <div class="mb-3">
+                    <div class="form-group">
+                        {{ form_row(form.MontantHC, {'attr': {'class': 'form-control','placeholder': '400 €'}}) }}
+                    </div>
+                </div>
 
-        <div class="mb-3">
-            <div class="form-group">
-                {{ form_row(form.MontantCharges, {'attr': {'class': 'form-control'}}) }}
-            </div>
-        </div>
+                <div class="mb-3">
+                    <div class="form-group">
+                        {{ form_row(form.MontantCharges, {'attr': {'class': 'form-control','placeholder': '200 €'}}) }}
+                    </div>
+                </div>
 
-        <div class="mb-3">
-            <div class="form-group">
-                {{ form_row(form.MontantPremEcheance, {'attr': {'class': 'form-control'}}) }}
-            </div>
-        </div>
+                <div class="mb-3">
+                    <div class="form-group">
+                        {{ form_row(form.MontantPremEcheance, {'attr': {'class': 'form-control','placeholder': '200 €'}}) }}
+                    </div>
+                </div>
 
-        <div class="mb-3">
-            <div class="form-group">
-                {{ form_row(form.MontantDerEcheance, {'attr': {'class': 'form-control'}}) }}
-            </div>
-        </div>
+                <div class="mb-3">
+                    <div class="form-group">
+                        {{ form_row(form.MontantDerEcheance, {'attr': {'class': 'form-control','placeholder': '300 €'}}) }}
+                    </div>
+                </div>
 
-        <div class="mb-3">
-            <div class="form-group">
-                {{ form_row(form.NomCaution1, {'attr': {'class': 'form-control'}}) }}
-            </div>
-        </div>
+                <div class="mb-3">
+                    <div class="form-group">
+                        {{ form_row(form.NomCaution1, {'attr': {'class': 'form-control','placeholder': 'Franklin'}}) }}
+                    </div>
+                </div>
 
-        <div class="mb-3">
-            <div class="form-group">
-                {{ form_row(form.NomCaution2, {'attr': {'class': 'form-control'}}) }}
-            </div>
-        </div>
+                <div class="mb-3">
+                    <div class="form-group">
+                        {{ form_row(form.NomCaution2, {'attr': {'class': 'form-control','placeholder': 'Stonerik'}}) }}
+                    </div>
+                </div>
 
-        <div class="mb-3">
-            <div class="form-group">
-                {{ form_row(form.MontantCaution, {'attr': {'class': 'form-control'}}) }}
-            </div>
-        </div>
+                <div class="mb-3">
+                    <div class="form-group">
+                        {{ form_row(form.MontantCaution, {'attr': {'class': 'form-control','placeholder': '400 €'}}) }}
+                    </div>
+                </div>
 
-        <div class="mb-3">
-            <div class="form-group">
-                {{ form_row(form.DateFin, {'attr': {'class': 'form-control'}}) }}
+                <div class="mb-3">
+                    <div class="form-group">
+                        {{ form_row(form.DateFin, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+                </div>
             </div>
-        </div>
+            <div class="col-md-6">
+                <div class="mb-3">
+                    <div class="form-group">
+                        {{ form_row(form.DureeBail, {'attr': {'class': 'form-control','placeholder': 'Default: 6'}}) }}
+                    </div>
+                </div>
 
-        <div class="mb-3">
-            <div class="form-group">
-                {{ form_row(form.DureeBail, {'attr': {'class': 'form-control'}}) }}
-            </div>
-        </div>
+                <div class="mb-3">
+                    <div class="form-group">
+                        {{ form_row(form.BailSigne, {'attr': {'class': 'form-control','placeholder': 'Default: 0'}}) }}
+                    </div>
+                </div>
 
-        <div class="mb-3">
-            <div class="form-group">
-                {{ form_row(form.BailSigne, {'attr': {'class': 'form-control'}}) }}
-            </div>
-        </div>
+                <div class="mb-3">
+                    <div class="form-group">
+                        {{ form_row(form.EtatLieuEntree, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+                </div>
 
-        <div class="mb-3">
-            <div class="form-group">
-                {{ form_row(form.EtatLieuEntree, {'attr': {'class': 'form-control'}}) }}
-            </div>
-        </div>
+                <div class="mb-3">
+                    <div class="form-group">
+                        {{ form_row(form.EtatLieuSortie, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+                </div>
 
-        <div class="mb-3">
-            <div class="form-group">
-                {{ form_row(form.EtatLieuSortie, {'attr': {'class': 'form-control'}}) }}
-            </div>
-        </div>
+                <div class="mb-3">
+                    <div class="form-group">
+                        {{ form_row(form.AttestationAssurance, {'attr': {'class': 'form-control','placeholder': 'Blablaaa'}}) }}
+                    </div>
+                </div>
 
-        <div class="mb-3">
-            <div class="form-group">
-                {{ form_row(form.AttestationAssurance, {'attr': {'class': 'form-control'}}) }}
-            </div>
-        </div>
+                <div class="mb-3">
+                    <div class="form-group">
+                        {{ form_row(form.TrimestreReference, {'attr': {'class': 'form-control','placeholder': 'Blablaaa'}}) }}
+                    </div>
+                </div>
 
-        <div class="mb-3">
-            <div class="form-group">
-                {{ form_row(form.TrimestreReference, {'attr': {'class': 'form-control'}}) }}
-            </div>
-        </div>
+                <div class="mb-3">
+                    <div class="form-group">
+                        {{ form_row(form.associe, {'attr': {'class': 'form-control','placeholder': 'Seléctionner un associés'}}) }}
+                    </div>
+                </div>
 
-        <div class="mb-3">
-            <div class="form-group">
-                {{ form_row(form.associe, {'attr': {'class': 'form-control'}}) }}
-            </div>
-        </div>
+                <div class="mb-3">
+                    <div class="form-group">
+                        {{ form_row(form.PieceJustificative, {'attr': {'class': 'form-control','placeholder': 'Blablaaa'}}) }}
+                    </div>
+                </div>
 
-        <div class="mb-3">
-            <div class="form-group">
-                {{ form_row(form.PieceJustificative, {'attr': {'class': 'form-control'}}) }}
-            </div>
-        </div>
-
-        <div class="mb-3">
-            <div class="form-group">
-                {{ form_row(form.Archive, {'attr': {'class': 'form-control'}}) }}
+                <div class="mb-3">
+                    <div class="form-group">
+                        {{ form_row(form.Archive, {'attr': {'class': 'form-control','placeholder': 'Default: 0'}}) }}
+                    </div>
+                </div>
             </div>
         </div>
         {{ form_end(form) }}
