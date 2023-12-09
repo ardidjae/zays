@@ -89,6 +89,9 @@ class BailType extends AbstractType
                 'entry_options' => ['label' => false],
                 'allow_add' => true,
             ])
+            ->add('Archive', TextType::class, [
+                'label' => 'Archive',
+            ])
 
             ->add('enregistrer', SubmitType::class, array('label' => 'Nouvel Bail'))
         ;
