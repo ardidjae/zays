@@ -9,13 +9,8 @@
 <body>
     <!-- Inclusion des entêtes et pieds de page -->
     {% include 'header.html.twig' %}
-    {% include 'footer.html.twig' %}
     {% block titrePage %}
-    <h2 class="text-center display-5">
-        Information de l'Appartement n° de porte {{ appartement.porte }}
-    </h2></br>
     {% endblock %}
-
     <!-- Section d'information -->
     <section class="information">
         <div class="container-fluid">

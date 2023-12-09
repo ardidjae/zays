@@ -9,10 +9,6 @@
 <body>
     <!-- Inclusion des entêtes et pieds de page -->
     {% include 'header.html.twig' %}
-    {% include 'footer.html.twig' %}
-    <h2 class="text-center display-5">
-        Information du bail de {{bail.locataires[0].nom}} {% if bail.locataires[1] is defined %} {{bail.locataires[1].nom}}  {% endif %}
-    </h2></br>
     <!-- Section d'information -->
     <section class="information">
         <div class="container-fluid">
@@ -79,7 +75,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div></br>
                     <div class="card">
                         <div class="card-header border-bottom">
                             <h3 class="h4 mb-0">États des Lieux(d'entrée)</h3>
@@ -95,7 +91,7 @@
                                     </button>
                             </div>
                         </div>
-                    </div>
+                    </div></br>
                     <div class="card">
                         <div class="card-header border-bottom">
                             <h3 class="h4 mb-0">États des Lieux(sortie)</h3>
@@ -110,7 +106,7 @@
                                 </button>
                             </div>
                         </div>
-                    </div>
+                    </div></br>
                     <div class="card">
                         <div class="card-header border-bottom">
                             <h3 class="h4 mb-0">Historique des paiements</h3>
