@@ -25,6 +25,13 @@ class BailController extends AbstractController
         ]);
     }
 
+    public function home(): Response
+    {
+        return $this->render('bail/home.html.twig', [
+            'controller_name' => 'BailController',
+        ]);
+    }
+
     public function listerBaux(ManagerRegistry $doctrine){
 
         $repository = $doctrine->getRepository(Bail::class);
