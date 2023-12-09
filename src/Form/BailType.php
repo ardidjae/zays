@@ -52,7 +52,7 @@ class BailType extends AbstractType
                 'label' => 'Date de fin du bail :',
             ])
             ->add('DureeBail', IntegerType::class, [
-                'label' => 'Durée du bail (en mois) :',
+                'label' => 'Durée du bail (en années) :',
             ])
             ->add('BailSigne', TextType::class, [
                 'label' => 'Bail signé :',
