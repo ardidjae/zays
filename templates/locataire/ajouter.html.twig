@@ -4,32 +4,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>{% block title %}ZAYS{% endblock %}</title>
+    <title>{% block title %}SCI ZAYS{% endblock %}</title>
 
-    {# Inclure les stylesheets Bootstrap (assurez-vous d'avoir Bootstrap installé dans votre projet) #}
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    {% block stylesheets %}{% endblock %}
+    {% block stylesheets %}
+    <style>
+        body {
+            background-color: #f0f0f0 !important; /* Light gray background */
+            color: #333 !important; /* Dark gray text */
+        }
+    </style>
+    {% endblock %}
 </head>
 <body>
 
     {% include 'header.html.twig' %}
 
-    <div class="container my-4">
+    <div class="container my-4"></br></br></br></br>
         <div class="d-flex justify-content-center align-items-center mb-3">
-            <h5 class="text-center">AJOUT D'UN NOUVEAU LOCATAIRE</h5>
+            <h5 class="text-center"><i class="ri-user-line"></i>&nbsp; Nouveau locataire</h5>
         </div>
 
         {{ form_start(form) }}
 
         <div class="mb-3">
             <div class="form-group">
-                {{ form_row(form.Nom, {'attr': {'class': 'form-control'}}) }}
+                {{ form_row(form.Nom, {'attr': {'class': 'form-control','placeholder': 'Paul'}}) }}
             </div>
         </div>
 
         <div class="mb-3">
             <div class="form-group">
-                {{ form_row(form.Prenom, {'attr': {'class': 'form-control'}}) }}
+                {{ form_row(form.Prenom, {'attr': {'class': 'form-control','placeholder': 'Namine'}}) }}
             </div>
         </div>
 
@@ -41,19 +46,19 @@
 
         <div class="mb-3">
             <div class="form-group">
-                {{ form_row(form.LieuNaissance, {'attr': {'class': 'form-control'}}) }}
+                {{ form_row(form.LieuNaissance, {'attr': {'class': 'form-control','placeholder': 'Mamoudzou'}}) }}
             </div>
         </div>
 
         <div class="mb-3">
             <div class="form-group">
-                {{ form_row(form.MontantCaf, {'attr': {'class': 'form-control'}}) }}
+                {{ form_row(form.MontantCaf, {'attr': {'class': 'form-control','placeholder': '300 €'}}) }}
             </div>
         </div>
 
         <div class="mb-3">
             <div class="form-group">
-                {{ form_row(form.Archive, {'attr': {'class': 'form-control'}}) }}
+                {{ form_row(form.Archive, {'attr': {'class': 'form-control','placeholder': 'Default: 0'}}) }}
             </div>
         </div>
         {{ form_end(form) }}
