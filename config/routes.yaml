@@ -3,14 +3,9 @@ controllers:
     type: attribute
 
 # ACCUEIL
-route_accueil:
+accueil:
     path: /accueil
     controller: App\Controller\BailController::index
-
-# Home
-home:
-    path: /home
-    controller: App\Controller\BailController::home
 
 # AJOUTER BAIL
 ajouterBail:
