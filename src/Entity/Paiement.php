@@ -29,6 +29,9 @@ class Paiement
     #[ORM\ManyToOne(inversedBy: 'paiements')]
     private ?MoisAnnee $moisannee = null;
 
+    #[ORM\Column]
+    private ?float $caf = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -90,6 +93,18 @@ class Paiement
     public function setMoisannee(?MoisAnnee $moisannee): static
     {
         $this->moisannee = $moisannee;
+
+        return $this;
+    }
+
+    public function getCaf(): ?float
+    {
+        return $this->caf;
+    }
+
+    public function setCaf(float $caf): static
+    {
+        $this->caf = $caf;
 
         return $this;
     }
