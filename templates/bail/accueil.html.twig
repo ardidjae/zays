@@ -1,33 +1,256 @@
-{% extends 'base.html.twig' %}
-{% block title %}SCI ZAYS{% endblock %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}SCI ZAYS{% endblock %}</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+    {% block stylesheets %}{% endblock %}
+</head>
+<body>
+  {% include 'header.html.twig' %}
+  <!-- ======= Hero Section ======= -->
+  <section id="hero" class="d-flex align-items-center">
+    <div class="container position-relative" data-aos="fade-up" data-aos-delay="100">
+      <div class="row justify-content-center">
+        <div class="col-xl-7 col-lg-9 text-center">
+          <h1>Location immobilière</h1>
+          <h2>Expertise en location depuis 2016</h2>
+        </div>
+      </div>
+      <div class="text-center">
+        <a href="#about" class="btn-get-started scrollto">Explorer</a>
+      </div>
 
-{% block body %}
-{% include 'header.html.twig' %}
-{% include 'svg.html.twig' %}
-<style>
-        .example-wrapper {
-            margin: 1em auto;
-            max-width: 800px;
-            width: 95%;
-            font: 18px/1.5 sans-serif;
-        }
+      <div class="row icon-boxes">
+        <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0" data-aos="zoom-in" data-aos-delay="200">
+        <div class="icon-box">
+            <div class="icon"><i class="ri-home-line"></i></div>
+            <h4 class="title"><a href="">Demande de Logement</a></h4>
+            <p class="description">Facilitez le processus de demande de logement pour les étudiants et les locataires potentiels.</p>
+        </div>
+      </div>
 
-        .example-wrapper code {
-            background: #F5F5F5;
-            padding: 2px 6px;
-        }
+      <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0" data-aos="zoom-in" data-aos-delay="300">
+          <div class="icon-box">
+              <div class="icon"><i class="ri-user-line"></i></div>
+              <h4 class="title"><a href="">Relations Locataires</a></h4>
+              <p class="description">Favorisez des relations positives avec les locataires pour une expérience de logement satisfaisante.</p>
+          </div>
+      </div>
 
-        ul {
-            list-style-type: none;
-            padding: 0;
-        }
+      <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0" data-aos="zoom-in" data-aos-delay="400">
+          <div class="icon-box">
+              <div class="icon"><i class="ri-file-line"></i></div>
+              <h4 class="title"><a href="">Gestion des Contrats</a></h4>
+              <p class="description">Simplifiez la gestion des contrats de location pour assurer une procédure transparente et conforme.</p>
+          </div>
+      </div>
 
-        li {
-            margin-bottom: 10px;
-        }
-</style>
-<main>
-  <header>
-  </header>
-</main></br>
-{% endblock %}
+      <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0" data-aos="zoom-in" data-aos-delay="500">
+          <div class="icon-box">
+              <div class="icon"><i class="ri-building-line"></i></div>
+              <h4 class="title"><a href="">Portfolio de Logements</a></h4>
+              <p class="description">Étendez et optimisez le portefeuille de logements pour répondre aux besoins des étudiants.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section><!-- End Hero -->
+
+  <main id="main">
+
+    <!-- ======= About Section ======= -->
+    <section id="about" class="about">
+      <div class="container" data-aos="fade-up">
+
+        <div class="section-title">
+            <h2>À Propos de ZAYS</h2>
+            <p>Spécialistes de la location immobilière depuis 2016.</p>
+        </div>
+
+        <div class="row content">
+            <div class="col-lg-6">
+                <p>
+                    La société ZAYS, créée en 2016, s'est imposée comme un acteur majeur dans le domaine de la location
+                    immobilière. Nous nous engageons à offrir des solutions de logement de qualité, adaptées aux besoins de
+                    nos clients.
+                </p>
+                <ul>
+                    <li><i class="ri-check-double-line"></i> Gestion efficace des biens immobiliers</li>
+                    <li><i class="ri-check-double-line"></i> Relations positives avec les locataires</li>
+                    <li><i class="ri-check-double-line"></i> Simplification des contrats de location</li>
+                </ul>
+            </div>
+            <div class="col-lg-6 pt-4 pt-lg-0">
+                <p>
+                    Notre engagement envers l'excellence se reflète dans notre approche transparente et professionnelle. Nous
+                    sommes fiers de contribuer à la création de foyers heureux depuis notre création.
+                </p>
+                <a href="#" class="btn-learn-more">En savoir plus</a>
+            </div>
+        </div>
+
+      </div>
+    </section><!-- End About Section -->
+
+    <!-- ======= Team Section ======= -->
+    <section id="team" class="team section-bg">
+      <div class="container" data-aos="fade-up">
+
+        <div class="section-title">
+          <h2>Associes</h2>
+          <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
+        </div>
+
+        <div class="row">
+
+          <div class="col-lg-3 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="100">
+            <div class="member">
+              <div class="member-img">
+                <img src="assets/img/team/team-1.jpg" class="img-fluid" alt="">
+                <div class="social">
+                  <a href=""><i class="bi bi-twitter"></i></a>
+                  <a href=""><i class="bi bi-facebook"></i></a>
+                  <a href=""><i class="bi bi-instagram"></i></a>
+                  <a href=""><i class="bi bi-linkedin"></i></a>
+                </div>
+              </div>
+              <div class="member-info">
+                <h4>CAUVIN Sébastien</h4>
+                <span>Gérant</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="200">
+            <div class="member">
+              <div class="member-img">
+                <img src="assets/img/team/team-2.jpg" class="img-fluid" alt="">
+                <div class="social">
+                  <a href=""><i class="bi bi-twitter"></i></a>
+                  <a href=""><i class="bi bi-facebook"></i></a>
+                  <a href=""><i class="bi bi-instagram"></i></a>
+                  <a href=""><i class="bi bi-linkedin"></i></a>
+                </div>
+              </div>
+              <div class="member-info">
+                <h4>JOSEPH Aurore</h4>
+                <span>Co-Gérant</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="300">
+            <div class="member">
+              <div class="member-img">
+                <img src="assets/img/team/team-3.jpg" class="img-fluid" alt="">
+                <div class="social">
+                  <a href=""><i class="bi bi-twitter"></i></a>
+                  <a href=""><i class="bi bi-facebook"></i></a>
+                  <a href=""><i class="bi bi-instagram"></i></a>
+                  <a href=""><i class="bi bi-linkedin"></i></a>
+                </div>
+              </div>
+              <div class="member-info">
+                <h4>BUIRON Yann</h4>
+                <span>Associé</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="400">
+            <div class="member">
+              <div class="member-img">
+                <img src="assets/img/team/team-4.jpg" class="img-fluid" alt="">
+                <div class="social">
+                  <a href=""><i class="bi bi-twitter"></i></a>
+                  <a href=""><i class="bi bi-facebook"></i></a>
+                  <a href=""><i class="bi bi-instagram"></i></a>
+                  <a href=""><i class="bi bi-linkedin"></i></a>
+                </div>
+              </div>
+              <div class="member-info">
+                <h4>Zakina Annouche</h4>
+                <span>Associé</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section><!-- End Team Section -->
+
+    <!-- ======= Contact Section ======= -->
+    <section id="contact" class="contact">
+      <div class="container" data-aos="fade-up">
+
+        <div class="section-title">
+          <h2>Contact</h2>
+        </div>
+
+        <div>
+          <iframe width="100%" height="600" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=en&amp;q=97%20Rue%20de%20Falaise,%20Caen,%20France+(Zays)&amp;t=&amp;z=16&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"></iframe>
+        </div>
+
+        <div class="row mt-5">
+
+          <div class="col-lg-4">
+            <div class="info">
+              <div class="address">
+                <i class="bi bi-geo-alt"></i>
+                <h4>Location:</h4>
+                <p>97 Rue de Falaise, 14000 Caen</p>
+              </div>
+
+              <div class="email">
+                <i class="bi bi-envelope"></i>
+                <h4>Email:</h4>
+                <p>sci.zays@example.com</p>
+              </div>
+
+              <div class="phone">
+                <i class="bi bi-phone"></i>
+                <h4>Télephone:</h4>
+                <p>+1 5589 55488 55</p>
+              </div>
+
+            </div>
+
+          </div>
+
+          <div class="col-lg-8 mt-5 mt-lg-0">
+
+            <form action="forms/contact.php" method="post" role="form" class="php-email-form">
+              <div class="row gy-2 gx-md-3">
+                <div class="col-md-6 form-group">
+                  <input type="text" name="name" class="form-control" id="name" placeholder="Votre nom" required>
+                </div>
+                <div class="col-md-6 form-group">
+                  <input type="email" class="form-control" name="email" id="email" placeholder="Votre adresse e-mail" required>
+                </div>
+                <div class="form-group col-12">
+                  <input type="text" class="form-control" name="subject" id="subject" placeholder="Sujet" required>
+                </div>
+                <div class="form-group col-12">
+                  <textarea class="form-control" name="message" rows="5" placeholder="Message" required></textarea>
+                </div>
+                <div class="my-3 col-12">
+                  <div class="loading">Chargement</div>
+                  <div class="error-message"></div>
+                  <div class="sent-message">Votre message a été envoyé. Merci !</div>
+                </div>
+                <div class="text-center col-12"><button type="submit">Envoyer le message</button></div>
+              </div>
+            </form>
+
+          </div>
+
+        </div>
+
+      </div>
+    </section><!-- End Contact Section -->
+  </main><!-- End #main -->
+  {% include 'footer.html.twig' %}
+</body>
