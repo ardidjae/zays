@@ -8,13 +8,16 @@
 </head>
 <body>
     {% include 'header.html.twig' %}
-      <section class="tables">
+      <section class="tables"></br>
+      <div class="d-flex justify-content-center align-items-center mb-3">
+            <h5 class="text-center">Liste des contrats locations disponibles</h5>
+      </div>
         <div class="container-fluid">
           <div class="row">
-            <div class="col-lg-6">
+            <div class="col-lg-12">
               <div class="card">
                 <div class="card-header border-bottom">
-                  <h3 class="h4 mb-0">Section Contrats Actuelles</h3>
+                   <i class="ri-file-list-line"></i>&nbsp; Liste
                 </div>
                 <div class="card-body">
                   <div class="table-responsive">
@@ -41,22 +44,22 @@
                         </a>
                       </td>
                       <td>
-                          <button class="btn btn-secondary" onclick="genererQuittance()">
+                          <button class="btn btn-primary" onclick="genererQuittance()">
                               <a href="{{ path('contratLocationPDF', { 'id': b.id }) }}" style="color: white; text-decoration: none;">
-                                  Générer contrat de location
+                                  <i class="ri-draft-line"></i>&nbsp; Télécharger contrats
                               </a>
                           </button>
                         </td>
                       </tr>
                       {% else %}
                       <tr>
-                          <td colspan="2">Aucun baux n'a été trouvé.</td>
+                          <td colspan="2">Aucun Contrat de location n'a été trouvé.</td>
                       </tr>
                       {% endfor %}
                     </table></br>
-                    <button type="button" class="btn btn-primary mt-3">
+                    <button type="button" class="btn btn-secondary mt-3">
                       <a href="{{ asset('baux/listerContratLocationArchives') }}" style="color: white; text-decoration: none;">
-                          Contrat de location (Archivés)
+                          <i class="ri-archive-line"></i>&nbsp; Contrat de location (Archivés)
                       </a>
                     </button>
                   </div>
