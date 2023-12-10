@@ -10,13 +10,16 @@
     <!-- Inclusion des entêtes et pieds de page -->
     {% include 'header.html.twig' %}
     <!-- Section d'information -->
-    <section class="information">
+    <section class="information"></br>
+    <div class="d-flex justify-content-center align-items-center mb-3">
+        <h5 class="text-center">Détails du bail pour le locataire <strong>{{bail.locataires[0].nom}} {% if bail.locataires[1] is defined %} {{bail.locataires[1].nom}} {% endif %}</strong></h5>
+    </div></br>
         <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-6">
                     <div class="card">
                         <div class="card-header border-bottom">
-                            <h3 class="h4 mb-0">Information du Bail</h3>
+                            <i class="ri-file-info-line"></i>&nbsp; Bail
                         </div>
                         <div class="card-body">
                             <div class="information-container">
@@ -65,7 +68,7 @@
                 <div class="col-lg-6">
                     <div class="card">
                         <div class="card-header border-bottom">
-                            <h3 class="h4 mb-0">Autre Information</h3>
+                            <i class="ri-more-fill"></i>
                         </div>
                         <div class="card-body">
                             <div class="information-container">
@@ -78,7 +81,7 @@
                     </div></br>
                     <div class="card">
                         <div class="card-header border-bottom">
-                            <h3 class="h4 mb-0">États des Lieux(d'entrée)</h3>
+                            <i class="ri-door-open-line"></i>&nbsp; États des Lieux(d'entrée)
                         </div>
                         <div class="card-body">
                             <div class="information-container">
@@ -86,7 +89,7 @@
                                 <!-- Add more information as needed -->
                                     <button class="btn btn-success" onclick="genererQuittance()">
                                         <a href="{{ path('quittancePDF', { 'id': bail.id }) }}" style="color: white; text-decoration: none;">
-                                            Générer états des Lieux(d'entrée)
+                                            <i class="ri-file-list-2-line"></i>&nbsp; Créer un état des lieux (entrée)
                                         </a>
                                     </button>
                             </div>
@@ -94,14 +97,14 @@
                     </div></br>
                     <div class="card">
                         <div class="card-header border-bottom">
-                            <h3 class="h4 mb-0">États des Lieux(sortie)</h3>
+                            <i class="ri-logout-box-line"></i>&nbsp; États des Lieux(sortie)
                         </div>
                         <div class="card-body">
                             <div class="information-container">
                                 <!-- États des Lieux information -->
                                 <button class="btn btn-danger" onclick="genererQuittance()">
                                     <a href="{{ path('quittancePDF', { 'id': bail.id }) }}" style="color: white; text-decoration: none;">
-                                        Générer états des Lieux(sortie)
+                                        <i class="ri-file-list-2-line"></i>&nbsp; Créer un état des lieux (sortie)
                                     </a>
                                 </button>
                             </div>
@@ -109,7 +112,7 @@
                     </div></br>
                     <div class="card">
                         <div class="card-header border-bottom">
-                            <h3 class="h4 mb-0">Historique des paiements</h3>
+                            <i class="ri-file-list-3-fill"></i>&nbsp; Historique des paiements
                         </div>
 
                         <div class="table-responsive">
