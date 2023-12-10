@@ -2,16 +2,15 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>{% block title %}ZAYS{% endblock %}</title>
+    <title>{% block title %}SCI ZAYS{% endblock %}</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
     {% block stylesheets %}{% endblock %}
 </head>
 <body>
-    {% include 'header.html.twig' %}
-    {% include 'footer.html.twig' %}
+    {% include 'header.html.twig' %}</br></br>
     <div class="container mt-5 d-flex align-items-center justify-content-center">
         <div class="text-center">
-            <h1>Téléchargement de fichier</h1></br>
+            <h2>Importer un nouveau fichier</h2></br>
 
             <form action="/votre-action-de-telechargement" method="post" enctype="multipart/form-data">
                 <div class="form-group">
@@ -19,7 +18,7 @@
                     <input type="file" class="form-control-file" id="fileInput" name="file">
                 </div>
 
-                <button type="submit" class="btn btn-primary" id="downloadButton" disabled>Télécharger</button>
+                <button type="submit" class="btn btn-primary" id="downloadButton" disabled><i class="ri-download-fill"></i>&nbsp; Télécharger</button>
             </form>
         </div>
     </div>
