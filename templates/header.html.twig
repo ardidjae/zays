@@ -55,16 +55,19 @@
           <li><a class="nav-link scrollto active" href="{{ asset('home') }}">Accueil</a></li>
           <li class="dropdown"><a href="#"><span>Appartement</span> <i class="bi bi-chevron-down"></i></a>
             <ul>
-              <li><a href="{{ asset('paiement/listerLoyer') }}">Loyers reçus</a></li>
+              <li class="dropdown"><a href="{{ asset('paiement/listerLoyer') }}"><span>Loyers reçus</span> <i class="bi bi-chevron-right"></i></a>
+                <ul>
+                  <li><a href="#">Par mois</a></li>
+                </ul>
+              </li>
               <li><a href="{{ asset('baux/lister') }}">Apparts et Locataires</a></li>
-              <li><a href="{{ asset('baux/ajouter') }}">Nouveau Bail</a></li>
               <li><a href="{{ asset('locataire/ajouter') }}">Nouveau Locataire</a></li>
             </ul>
           </li>
           <li class="dropdown"><a href="#"><span>Location</span> <i class="bi bi-chevron-down"></i></a>
             <ul>
               <li><a href="{{ asset('baux/listerContratLocation') }}">Liste des contrats</a></li>
-              <li><a href="#">Nouveau contrat</a></li>
+              <li><a href="{{ asset('baux/ajouter') }}">Nouveau contrat</a></li>
               <li><a href="#">Modifier un contrat</a></li>
               <li><a href="#">Clôturer un contrat</a></li>
             </ul>
