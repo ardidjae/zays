@@ -157,6 +157,16 @@ class BailController extends AbstractController
 
     }
 
+    public function listerCloturerContratLocation(ManagerRegistry $doctrine){
+
+        $repository = $doctrine->getRepository(Bail::class);
+
+        $bails = $repository->findBy(['archive' => 0]);
+        return $this->render('bail/listerCloturerContratLocation.html.twig', [
+            'pBails' => $bails,]);
+
+    }
+
     public function listerContratLocationArchives(ManagerRegistry $doctrine){
 
         $repository = $doctrine->getRepository(Bail::class);
@@ -226,6 +236,32 @@ class BailController extends AbstractController
                }
                else{
                     return $this->render('bail/formModifierContratLocation.html.twig', array('form' => $form->createView(),));
+               }
+        }
+    }
+
+    public function cloturerContratLocation(ManagerRegistry $doctrine, $id, Request $request){
+ 
+        $bail = $doctrine->getRepository(Bail::class)->find($id);
+
+        if (!$bail) {
+            throw $this->createNotFoundException('Aucun bail trouvé avec le numéro '.$id);
+        }
+        else
+        {
+                $form = $this->createForm(BailModifierType::class, $bail);
+                $form->handleRequest($request);
+     
+                if ($form->isSubmitted() && $form->isValid()) {
+     
+                     $bail = $form->getData();
+                     $entityManager = $doctrine->getManager();
+                     $entityManager->persist($bail);
+                     $entityManager->flush();
+                     return $this->render('bail/lister.html.twig', ['bail' => $bail,]);
+               }
+               else{
+                    return $this->render('bail/cloturerContratLocation.html.twig', array('form' => $form->createView(),));
                }
         }
     }
