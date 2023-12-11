@@ -72,6 +72,16 @@ contratLocationModifier:
     path: /baux/modifierContratLocation/{id}
     controller: App\Controller\BailController::modifierContratLocation
 
+# LISTER CLOTURER CONTRAT DE LOCATION
+contratLocationListerCloturer:
+    path: /baux/listerCloturerContratLocation
+    controller: App\Controller\BailController::listerCloturerContratLocation
+
+# FORM CLOTURER CONTRAT DE LOCATION
+contratLocationCloturer:
+    path: /baux/cloturerContratLocation/{id}
+    controller: App\Controller\BailController::cloturerContratLocation
+
 # LISTER CONTRAT DE LOCATION ARCHIVES
 contratLocationArchivesLister:
     path: /baux/listerContratLocationArchives
