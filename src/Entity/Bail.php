@@ -79,6 +79,9 @@ class Bail
     #[ORM\Column]
     private ?int $archive = null;
 
+    #[ORM\Column]
+    private ?float $CautionRestituer = null;
+
     public function __construct()
     {
         $this->paiements = new ArrayCollection();
@@ -374,6 +377,18 @@ class Bail
     public function setArchive(int $archive): static
     {
         $this->archive = $archive;
+
+        return $this;
+    }
+
+    public function getCautionRestituer(): ?float
+    {
+        return $this->CautionRestituer;
+    }
+
+    public function setCautionRestituer(float $CautionRestituer): static
+    {
+        $this->CautionRestituer = $CautionRestituer;
 
         return $this;
     }
