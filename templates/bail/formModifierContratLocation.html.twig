@@ -221,7 +221,16 @@
                         {{ form_row(form.Archive, {'attr': {'class': 'form-control','placeholder': 'Default: 0'}}) }}
                     </div>
                 </div>
+
+                <div class="mb-3">
+                    <div class="form-group">
+                        {{ form_row(form.CautionRestituer, {'attr': {'class': 'form-control','placeholder': '400 €'}}) }}
+                    </div>
+                </div>
             </div>
+        </div>
+        <div class="mb-3">
+            {{ form_row(form.enregistrer, {'label': 'Modifier Bail', 'attr': {'class': 'btn btn-primary'}}) }}
         </div>
         {{ form_end(form) }}
     </div>
