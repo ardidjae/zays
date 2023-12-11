@@ -62,6 +62,16 @@ contratLocationLister:
     path: /baux/listerContratLocation
     controller: App\Controller\BailController::listerContratLocation
 
+# LISTER MODIFIER CONTRAT DE LOCATION
+contratLocationListerModifier:
+    path: /baux/listerModifierContratLocation
+    controller: App\Controller\BailController::listerModifierContratLocation
+
+# FORM MODIFIER CONTRAT DE LOCATION
+contratLocationModifier:
+    path: /baux/modifierContratLocation/{id}
+    controller: App\Controller\BailController::modifierContratLocation
+
 # LISTER CONTRAT DE LOCATION ARCHIVES
 contratLocationArchivesLister:
     path: /baux/listerContratLocationArchives

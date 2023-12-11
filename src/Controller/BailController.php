@@ -12,6 +12,7 @@ use App\Entity\Paiement;
 use Dompdf\Dompdf;
 use App\Form\BailType;
 use App\Entity\Locataire;
+use App\Form\BailModifierType;
 
 class BailController extends AbstractController
 {
@@ -146,6 +147,16 @@ class BailController extends AbstractController
 
     }
 
+    public function listerModifierContratLocation(ManagerRegistry $doctrine){
+
+        $repository = $doctrine->getRepository(Bail::class);
+
+        $bails = $repository->findBy(['archive' => 0]);
+        return $this->render('bail/listerModifierContratLocation.html.twig', [
+            'pBails' => $bails,]);
+
+    }
+
     public function listerContratLocationArchives(ManagerRegistry $doctrine){
 
         $repository = $doctrine->getRepository(Bail::class);
@@ -190,5 +201,32 @@ class BailController extends AbstractController
         $dompdf->stream("bail_".$bail->getId().".pdf", [
             "Attachment" => false
         ]);
+    }
+
+    public function modifierContratLocation(ManagerRegistry $doctrine, $id, Request $request){
+ 
+        //récupération de l'étudiant dont l'id est passé en paramètre
+        $bail = $doctrine->getRepository(Bail::class)->find($id);
+
+        if (!$bail) {
+            throw $this->createNotFoundException('Aucun bail trouvé avec le numéro '.$id);
+        }
+        else
+        {
+                $form = $this->createForm(BailModifierType::class, $bail);
+                $form->handleRequest($request);
+     
+                if ($form->isSubmitted() && $form->isValid()) {
+     
+                     $bail = $form->getData();
+                     $entityManager = $doctrine->getManager();
+                     $entityManager->persist($bail);
+                     $entityManager->flush();
+                     return $this->render('bail/consulter.html.twig', ['bail' => $bail,]);
+               }
+               else{
+                    return $this->render('bail/formModifierContratLocation.html.twig', array('form' => $form->createView(),));
+               }
+        }
     }
 }
