@@ -13,6 +13,7 @@ use Dompdf\Dompdf;
 use App\Form\BailType;
 use App\Entity\Locataire;
 use App\Form\BailModifierType;
+use App\Form\BailCloturerType;
 
 class BailController extends AbstractController
 {
@@ -243,17 +244,20 @@ class BailController extends AbstractController
     public function cloturerContratLocation(ManagerRegistry $doctrine, $id, Request $request){
  
         $bail = $doctrine->getRepository(Bail::class)->find($id);
+        $bail->setMontantDerEcheance($bail->getMontantHC() + $bail->getMontantCharges());
 
         if (!$bail) {
             throw $this->createNotFoundException('Aucun bail trouvé avec le numéro '.$id);
         }
         else
         {
-                $form = $this->createForm(BailModifierType::class, $bail);
+                $form = $this->createForm(BailCloturerType::class, $bail);
+
+
                 $form->handleRequest($request);
-     
+
                 if ($form->isSubmitted() && $form->isValid()) {
-     
+
                      $bail = $form->getData();
                      $entityManager = $doctrine->getManager();
                      $entityManager->persist($bail);
