@@ -93,6 +93,9 @@ class BailModifierType extends AbstractType
         ->add('Archive', TextType::class, [
             'label' => 'Archive',
         ])
+        ->add('CautionRestituer', TextType::class, [
+            'label' => 'Montant caution à restituer :',
+        ])
 
         ->add('enregistrer', SubmitType::class, array('label' => 'Modifier Bail'))
         ;
