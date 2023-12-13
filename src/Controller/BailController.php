@@ -259,13 +259,19 @@ class BailController extends AbstractController
                 if ($form->isSubmitted() && $form->isValid()) {
 
                      $bail = $form->getData();
+                     $bail->setArchive(1);
                      $entityManager = $doctrine->getManager();
                      $entityManager->persist($bail);
                      $entityManager->flush();
-                     return $this->render('bail/lister.html.twig', ['bail' => $bail,]);
+                     return $this->render('bail/accueil.html.twig', ['bail' => $bail,]);
                }
                else{
-                    return $this->render('bail/cloturerContratLocation.html.twig', array('form' => $form->createView(),));
+                $locataires = $bail->getLocataires();
+
+                return $this->render('bail/cloturerContratLocation.html.twig', [
+                    'form' => $form->createView(),
+                    'bail' => $bail,
+                ]);
                }
         }
     }

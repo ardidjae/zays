@@ -25,6 +25,11 @@
             .placeholder-light {
                 color: rgba(0, 0, 0, 0.5); /* Réglage de l'opacité du texte du placeholder */
             }
+            /* Ajoutez ce style pour aligner les éléments côte à côte */
+            .information-item .mb-2 p {
+                display: inline-block;
+                margin-right: 100px;
+            }
     </style>
     {% endblock %}
 
@@ -57,12 +62,13 @@
 
     {% include 'header.html.twig' %}
     <section class="information"></br>
-    {% for locataire in form.locataires %}
+    {{ form_start(form) }}
+    {% for locataire in bail.locataires %}
     <div class="d-flex justify-content-center align-items-center mb-3">
-       <h5 class="text-center"><i class="ri-close-line"></i>&nbsp; Cloturer Contrat location de <strong>{{ locataire.Nom.vars.value }}</strong></h5>
+       <h5 class="text-center"><i class="ri-close-line"></i>&nbsp; Cloturer Contrat location de <strong>{{ locataire.nom }}</strong></h5>
     </div></br>
     {% endfor %}
-    {{ form_start(form) }}
+
         <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-6">
@@ -72,36 +78,23 @@
                         </div>
                         <div class="card-body">
                             <div class="information-container">
-                            {% for locataire in form.locataires %}
+                            {% for locataire in bail.locataires %}
                             <div class="information-item">
                                 <div class="mb-2">
                                     <div class="form-group">
-                                        {{ form_row(locataire.Nom) }}
+                                        <p>Nom : {{ locataire.nom }}</p>
+                                        <p>Prénom : {{ locataire.prenom }}</p>
                                     </div>
                                 </div>
                                 <div class="mb-2">
                                     <div class="form-group">
-                                        {{ form_row(locataire.Prenom) }}
+                                        <p>Date de naissance : {{ locataire.DateNaissance|date("d/m/Y") }}</p>
+                                        <p>Lieu de naissance : {{ locataire.LieuNaissance}}</p>
                                     </div>
                                 </div>
                                 <div class="mb-2">
                                     <div class="form-group">
-                                        {{ form_row(locataire.DateNaissance) }}
-                                    </div>
-                                </div>
-                                <div class="mb-2">
-                                    <div class="form-group">
-                                        {{ form_row(locataire.LieuNaissance) }}
-                                    </div>
-                                </div>
-                                <div class="mb-2">
-                                    <div class="form-group">
-                                        {{ form_row(locataire.MontantCaf) }}
-                                    </div>
-                                </div>
-                                <div class="mb-2">
-                                    <div class="form-group">
-                                        {{ form_row(locataire.Archive) }}
+                                        <p>Montant Caf : {{ locataire.MontantCaf}} €</p>
                                     </div>
                                 </div>
                             </div>
@@ -116,27 +109,19 @@
                             <div class="information-item">
                                 <div class="mb-2">
                                     <div class="form-group">
-                                        {{ form_row(form.appartement) }}
+                                        <p>Appartement : {{ bail.appartement.id}}</p>
+                                        <p>Date de début : {{ bail.dateDebut|date("d/m/Y") }}</p>
                                     </div>
                                 </div>
                                 <div class="mb-2">
                                     <div class="form-group">
-                                        {{ form_row(form.dateDebut) }}
+                                        <p>Montant HC : {{ bail.MontantHC}} €</p>
+                                        <p>Montant Charges : {{ bail.MontantCharges}} €</p>
                                     </div>
                                 </div>
                                 <div class="mb-2">
                                     <div class="form-group">
-                                        {{ form_row(form.MontantHC) }}
-                                    </div>
-                                </div>
-                                <div class="mb-2">
-                                    <div class="form-group">
-                                        {{ form_row(form.MontantCharges) }}
-                                    </div>
-                                </div>
-                                <div class="mb-2">
-                                    <div class="form-group">
-                                        {{ form_row(form.MontantPremEcheance) }}
+                                        {{ form_row(form.DateFin)}}
                                     </div>
                                 </div>
                                 <div class="mb-2">
@@ -146,12 +131,7 @@
                                 </div>
                                 <div class="mb-2">
                                     <div class="form-group">
-                                        {{ form_row(form.MontantCaution) }}
-                                    </div>
-                                </div>
-                                <div class="mb-2">
-                                    <div class="form-group">
-                                        {{ form_row(form.DateFin) }}
+                                        {{ form_row(form.CautionRestituer) }}
                                     </div>
                                 </div>
                                 <div class="mb-2">
@@ -162,16 +142,6 @@
                                 <div class="mb-2">
                                     <div class="form-group">
                                         {{ form_row(form.EtatLieuSortie) }}
-                                    </div>
-                                </div>
-                                <div class="mb-2">
-                                    <div class="form-group">
-                                        {{ form_row(form.Archive) }}
-                                    </div>
-                                </div>
-                                <div class="mb-2">
-                                    <div class="form-group">
-                                        {{ form_row(form.CautionRestituer) }}
                                     </div>
                                 </div>
                             </div></br>
