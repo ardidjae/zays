@@ -106,3 +106,33 @@ locataireConsulter:
 versement:
     path: /paiement/versement
     controller: App\Controller\PaiementController::versement
+
+# AJOUTER CATEGORIE
+ajouterCategorie:
+    path: /admin/ajouterCategorie
+    controller: App\Controller\AdminController::ajouterCategorie
+
+# LISTER CATEGORIE
+listerCategorie:
+    path: /admin/listerCategorie
+    controller: App\Controller\AdminController::listerCategorie
+
+# MODIFIER CATEGORIE
+modifierCategorie:
+    path: /admin/modifierCategorie/{id}
+    controller: App\Controller\AdminController::modifierCategorie
+
+# AJOUTER SOUS-CATEGORIE
+ajouterSousCategorie:
+    path: /admin/ajouterSousCategorie
+    controller: App\Controller\AdminController::ajouterSousCategorie
+
+# LISTER SOUS-CATEGORIE
+listerSousCategorie:
+    path: /admin/listerSousCategorie
+    controller: App\Controller\AdminController::listerSousCategorie
+
+# MODIFIER SOUS-CATEGORIE
+modifierSousCategorie:
+    path: /admin/modifierSousCategorie/{id}
+    controller: App\Controller\AdminController::modifierSousCategorie
