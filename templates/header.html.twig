@@ -87,12 +87,16 @@
             <ul>
               <li class="dropdown"><a href="#"><span>Catégories</span> <i class="bi bi-chevron-right"></i></a>
                 <ul>
-                  <li><a href="#">Liste des Catégories</a></li>
+                  <li><a href="{{ asset('admin/listerCategorie') }}">Liste des Catégories</a></li>
+                  <li><a href="{{ asset('admin/ajouterCategorie') }}">Add Nouvelle Catégorie</a></li>
+                  <li><a href="#">Archiver une Catégorie</a></li>
                 </ul>
               </li>
               <li class="dropdown"><a href="#"><span>Sous-Categorie</span> <i class="bi bi-chevron-right"></i></a>
                 <ul>
-                  <li><a href="#">Liste des Sous-Catégories</a></li>
+                  <li><a href="{{ asset('admin/listerSousCategorie') }}">Liste des Sous-Catégories</a></li>
+                  <li><a href="{{ asset('admin/ajouterSousCategorie') }}">Add Sous-Catégories</a></li>
+                  <li><a href="#">Archiver une Sous-Catégorie</a></li>
                 </ul>
               </li>
             </ul>

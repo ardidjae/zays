@@ -1,0 +1,42 @@
+{# templates/admin/Categorie.html.twig #}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>{% block title %}SCI ZAYS{% endblock %}</title>
+
+    {% block stylesheets %}
+    <style>
+        body {
+            background-color: #f0f0f0 !important; /* Light gray background */
+            color: #333 !important; /* Dark gray text */
+        }
+    </style>
+    {% endblock %}
+</head>
+<body>
+
+    {% include 'header.html.twig' %}
+
+    <div class="container my-4"></br></br></br></br>
+        <div class="d-flex justify-content-center align-items-center mb-3">
+            <h5 class="text-center">Ajouter une nouvelle Categorie</h5>
+        </div>
+
+        {{ form_start(form) }}
+
+        <div class="mb-3">
+            <div class="form-group">
+                {{ form_row(form.libelle, {'attr': {'class': 'form-control','placeholder': 'Ex : Loyer'}}) }}
+            </div>
+        </div>
+        <div class="mb-3">
+            </div>
+                {{ form_row(form.enregistrer, {'label': 'Nouvel Categorie', 'attr': {'class': 'btn btn-primary'}}) }}
+            </div>
+        </div>
+        {{ form_end(form) }}
+    </div>
+</body>
+</html>

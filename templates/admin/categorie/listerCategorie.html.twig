@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}SCI ZAYS{% endblock %}</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+    {% block stylesheets %}{% endblock %}
+</head>
+<body>
+      {% include 'header.html.twig' %}
+      <section class="tables"></br>
+      <div class="d-flex justify-content-center align-items-center mb-3">
+            <h5 class="text-center">Liste des categories</h5>
+      </div>
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-lg-3">
+              <div class="card">
+                <div class="card-header border-bottom">
+                  <i class="ri-file-list-line"></i>&nbsp; Liste
+                </div>
+                <div class="card-body">
+                  <div class="table-responsive">
+                    <table class="table text-sm mb-0 table-striped">
+                      <thead>
+                        <tr>
+                          <thead>
+                            <tr>
+                                <th scope="col">Libelle</th>
+                                <th scope="col">Edit</th>
+                                <th scope="col">Archive</th>
+                            </tr>
+                          </thead>
+                        </tr>
+                      </thead>
+                      {% for c in categorie %}
+                        <tr>
+                            <td>{{ c.libelle }}</td>
+                            <td>
+                                <button class="btn btn-primary">
+                                    <a href="{{ path('modifierCategorie', { 'id': c.id }) }}" style="color: white; text-decoration: none;">
+                                        <i class="ri-edit-2-line"></i>
+                                    </a>
+                                </button>
+                            </td>
+                            <td>
+                                <button class="btn btn-secondary">
+                                    <a href="{{ path('modifierCategorie', { 'id': c.id }) }}" style="color: white; text-decoration: none;">
+                                        <i class="ri-archive-line"></i>
+                                    </a>
+                                </button>
+                            </td>
+                        </tr>
+                        {% else %}
+                        <tr>
+                            <td colspan="2">Aucun categorie n'a été trouvé.</td>
+                        </tr>
+                      {% endfor %}
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+</section>
