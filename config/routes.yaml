@@ -136,3 +136,18 @@ listerSousCategorie:
 modifierSousCategorie:
     path: /admin/modifierSousCategorie/{id}
     controller: App\Controller\AdminController::modifierSousCategorie
+
+# AJOUTER ASSOCIE
+ajouterAssocie:
+    path: /associe/ajouter
+    controller: App\Controller\AssocieController::ajouterAssocie
+
+# CONSULTER ASSOCIE
+consulterAssocie:
+    path: /associe/consulter/{id}
+    controller: App\Controller\AssocieController::consulterAssocie
+
+# LISTER ASSOCIE
+associeLister:
+    path: /associe/lister
+    controller: App\Controller\AssocieController::listerAssocie

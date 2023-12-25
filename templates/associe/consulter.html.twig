@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}SCI ZAYS{% endblock %}</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+    {% block stylesheets %}{% endblock %}
+</head>
+<body>
+    <!-- Inclusion des entêtes et pieds de page -->
+    {% include 'header.html.twig' %}
+    <!-- Section d'information -->
+    <section class="information"></br>
+    <div class="d-flex justify-content-center align-items-center mb-3">
+        <h5 class="text-center">Information de l'associe <strong>{{associe.prenom}}</strong></h5>
+    </div></br>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="card">
+                        <div class="card-header border-bottom">
+                            <i class="ri-file-info-line"></i>&nbsp; Information
+                        </div>
+                        <div class="card-body">
+                            <div class="information-container">
+                                <!-- Informations sur l'associe -->
+                                <div class="information-item">
+                                    <strong>N° Associe :</strong> {{associe.id}}
+                                </div></br>
+                                <div class="information-item">
+                                    <strong>Nom :</strong> {{associe.nom}}
+                                </div></br>
+                                <div class="information-item">
+                                    <strong>Prenom :</strong> {{associe.prenom}}
+                                </div></br>
+                                <div class="information-item">
+                                    <strong>Numero de la rue  :</strong> {{associe.numRue}}
+                                </div></br>
+                                <div class="information-item">
+                                    <strong>Rue :</strong> {{associe.rue}}
+                                </div></br>
+                                <div class="information-item">
+                                    <strong>Ville :</strong> {{associe.ville}}
+                                </div></br>
+                                <div class="information-item">
+                                    <strong>Numero de teléphone :</strong> {{associe.tel}}
+                                </div></br>
+                                <div class="information-item">
+                                    <strong>Email :</strong> {{associe.mail}}
+                                </div></br>
+                                <div class="information-item">
+                                    <strong>Code de postal :</strong> {{associe.copos}}
+                                </div></br>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+</html>
