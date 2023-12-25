@@ -1,0 +1,91 @@
+{# templates/associe/ajouter.html.twig #}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>{% block title %}SCI ZAYS{% endblock %}</title>
+
+    {% block stylesheets %}
+    <style>
+        body {
+            background-color: #f0f0f0 !important; /* Light gray background */
+            color: #333 !important; /* Dark gray text */
+        }
+    </style>
+    {% endblock %}
+</head>
+<body>
+
+    {% include 'header.html.twig' %}
+
+    <div class="container my-4"></br></br></br></br>
+        <div class="d-flex justify-content-center align-items-center mb-3">
+            <h5 class="text-center"><i class="ri-p2p-fill"></i>&nbsp; Nouveau Associés</h5>
+        </div>
+
+        {{ form_start(form) }}
+
+        <div class="mb-3">
+            <div class="form-group">
+                {{ form_row(form.Nom, {'attr': {'class': 'form-control'}}) }}
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <div class="form-group">
+                {{ form_row(form.Prenom, {'attr': {'class': 'form-control'}}) }}
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <div class="form-group">
+                {{ form_row(form.NumRue, {'attr': {'class': 'form-control','placeholder': 'Ex : 15'}}) }}
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <div class="form-group">
+                {{ form_row(form.Rue, {'attr': {'class': 'form-control','placeholder': 'Ex : Tourlaville ... '}}) }}
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <div class="form-group">
+                {{ form_row(form.Copos, {'attr': {'class': 'form-control'}}) }}
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <div class="form-group">
+                {{ form_row(form.Ville, {'attr': {'class': 'form-control'}}) }}
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <div class="form-group">
+                {{ form_row(form.Tel, {'attr': {'class': 'form-control'}}) }}
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <div class="form-group">
+                {{ form_row(form.Mail, {'attr': {'class': 'form-control'}}) }}
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <div class="form-group">
+                {{ form_row(form.NbPart, {'attr': {'class': 'form-control','placeholder': 'Defaut : 25'}}) }}
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <div class="form-group">
+                {{ form_row(form.societe, {'attr': {'class': 'form-control'}}) }}
+            </div>
+        </div>
+        {{ form_end(form) }}
+    </div>
+</body>
+</html>
