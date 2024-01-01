@@ -151,3 +151,8 @@ consulterAssocie:
 associeLister:
     path: /associe/lister
     controller: App\Controller\AssocieController::listerAssocie
+
+# PROFIL USER
+userProfil:
+    path: /user/profil
+    controller: App\Controller\UserController::profil
