@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>{% block title %}SCI ZAYS{% endblock %}</title>
+
+    {% block stylesheets %}
+    {% endblock %}
+</head>
+<body>
+
+    {% include 'header.html.twig' %}
+    <div class="container">
+        <div class="row justify-content-md-center mt-5">
+            <form method="post" class="form-signin">
+                {% if error %}
+                        <div class="alert alert-danger" role="alert">
+                            {{ error.messageKey|trans(error.messageData, 'security') }}
+                        </div>
+                    {% endif %}
+
+                    {% if app.user %}
+                        <div class="alert alert-success" role="alert">
+                            You are logged in as {{ app.user.userIdentifier }}.
+                            <a href="{{ path('app_logout') }}" class="alert-link">Logout</a>
+                        </div>
+                {% endif %}
+                <section>
+                    <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-4 col-md-6 d-flex flex-column align-items-center justify-content-center">
+
+                        <div class="d-flex justify-content-center py-9">
+                            <a href="index.html" class="logo d-flex align-items-center w-auto">
+                            <img src="/zays/public/img/zays.png" style="width: 30%; display: block; margin: auto;">
+                            </a>
+                        </div><!-- End Logo -->
+
+                        <div class="card mb-3">
+
+                            <div class="card-body">
+
+                            <div class="pt-4 pb-2">
+                                <h5 class="card-title text-center pb-0 fs-4">Connectez-vous à votre compte</h5>
+                                <p class="text-center small">Entrez votre IDF & MDP pour vous connecter</p>
+                            </div>
+
+                            <form class="row g-3 needs-validation" novalidate>
+
+                                <div class="col-12">
+                                <label for="yourUsername" class="form-label">Identifiant</label>
+                                <div class="input-group has-validation">
+                                    <span class="input-group-text" id="inputGroupPrepend"><i class="ri-user-line"></i></span>
+                                    <input type="text" value="{{ last_username }}" maxlength="80" name="_username" id="username" class="form-control" placeholder="" autocomplete="email" required autofocus>
+                                    <div class="invalid-feedback">Veuillez saisir vos identifiant.</div>
+                                </div>
+                                </div></br>
+
+                                <div class="col-12">
+                                <label for="yourPassword" class="form-label">Mot de passe</label>
+                                <div class="input-group has-validation">
+                                    <span class="input-group-text" id="inputGroupPrepend"><i class="ri-key-2-line"></i></span>
+                                    <input class="form-control" type="password" name="_password" id="password" class="form-control" placeholder="" autocomplete="current-password" required>
+                                    <div class="invalid-feedback">Veuillez saisir votre mot de passe !</div>
+                                </div>
+                                </div></br>
+
+                                <div class="col-12">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="remember" value="true" id="rememberMe">
+                                    <label class="form-check-label" for="rememberMe">Se souvenir de moi</label>
+                                </div>
+                                </div></br>
+                                <div class="col-12">
+                                <button class="btn btn-primary w-100" type="submit">Connexion</button>
+                                </div></br>
+                                <div class="col-12">
+                                <p class="small mb-0">Vous n'avez pas de compte ? <a href="{{ asset('register') }}">Créer un compte</a></p>
+                                </div>
+                                <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+                            </form>
+
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                    </div>
+
+                </section>
+            </form>
+        </div>
+    </div>
+</body>
