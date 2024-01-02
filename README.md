@@ -19,7 +19,7 @@ git clone https://github.com/ardidjae/zays.git
 ## Contributeurs
 
 - Ardelaide DJAE (@ardidjae) - Développeur principal
-- Zakina Annouche (ZakinaA) - CodeReview
+- Zakina Annouche (@ZakinaA) - CodeReview
 - BootstrapMade - Designer
 
 ## Commandes Git Utiles
