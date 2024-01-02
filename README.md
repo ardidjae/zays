@@ -19,7 +19,46 @@ git clone https://github.com/ardidjae/zays.git
 ## Contributeurs
 
 - Ardelaide DJAE (@ardidjae) - Développeur principal
-- BootstrapMade - Designer 
+- BootstrapMade - Designer
+
+## Commandes Git Utiles
+
+Créer une nouvelle branche : 
+
+```bash
+git branch ma-nouvelle-branche
+```
+
+Effectuer un commit : 
+
+```bash
+git add .
+git commit -m "Description du changement"
+```
+
+Pousser vers la branche distante :
+
+```bash
+git push origin ma-nouvelle-branche
+```
+
+Tirer les dernières modifications depuis la branche distante :
+
+```bash
+git pull origin ma-nouvelle-branche
+```
+
+Récupérer les dernières modifications sans fusionner : 
+
+```bash
+git fetch origin ma-nouvelle-branche
+```
+
+Changer de branche : 
+
+```bash
+git checkout nom-de-la-branche
+```
 
 ## Points Importants
 
