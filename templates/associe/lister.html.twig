@@ -16,7 +16,7 @@
       </div>
         <div class="container-fluid">
           <div class="row">
-            <div class="col-lg-12">
+            <div class="col-lg-6">
               <div class="card">
                 <div class="card-header border-bottom">
                   <i class="ri-file-list-line"></i>&nbsp; Liste
@@ -30,20 +30,27 @@
                             <tr>
                                 <th width="10%" scope="col">Nom</th>
                                 <th width="15%" scope="col">Prenom</th>
-                                <th scope="col">Numero de la rue</th>
-                                <th scope="col">Rue</th>
-                                <th scope="col">Ville</th>
-                                <th scope="col">Teléphone</th>
-                                <th scope="col">Email</th>
-                                <th scope="col">Code postal</th>
                             </tr>
                           </thead>
                         </tr>
                       </thead>
                       </tr>
+                      {% for a in pAssocies %}
+                      <tr>
+                        <td>
+                        <a href="{{ path('consulterAssocie', { 'id': a.id }) }}">
+                          {{ a.nom }}
+                        </a>
+                        </td>
+                        <td>
+                          {{ a.prenom }}
+                        </td>
+                      </tr>
+                      {% else %}
                       <tr>
                           <td colspan="2">Aucun associe n'a été trouvé.</td>
                       </tr>
+                      {% endfor %}
                     </table></br>
                     <button type="button" class="btn btn-secondary mt-3">
                       <a href="{{ asset('#') }}" style="color: white; text-decoration: none;">
