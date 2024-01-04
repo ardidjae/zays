@@ -61,6 +61,17 @@ Changer de branche :
 git checkout nom-de-la-branche
 ```
 
+## Suggestions d'amélioration
+
+### Traducteur en anglais
+- Ajouter un traducteur en anglais en haut de l'en-tête pour faciliter l'accès aux informations du projet pour les utilisateurs anglophones.
+
+### Prise de rendez-vous pour l'état des lieux d'entrée
+- Ajouter une page dédiée permettant de prendre un rendez-vous pour un état des lieux d'entrée. Cela facilitera la gestion des rendez-vous et améliorera l'expérience utilisateur.
+
+### Demandes de logement disponibles
+- Créer des pages spécifiques pour les demandes de logement disponibles, en catégorisant par type (T1, T2, T3, T4). Cela simplifiera le processus pour les utilisateurs cherchant des logements spécifiques.
+
 ## Points Importants
 
 - Assurez-vous de créer une branche pour chaque fonctionnalité que vous développez.
