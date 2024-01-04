@@ -2,12 +2,6 @@
 
 Bienvenue dans le projet Zays ! Ce document vous fournira toutes les informations nécessaires pour démarrer et contribuer au projet.
 
-## Identifiants de session
-
-Pour accéder à la session, utilisez les identifiants suivants :
-- **Nom d'utilisateur :** mickael@hotmail.com
-- **Mot de passe :** mickael@hotmail.com1
-
 ## Récupération du projet en local
 
 Pour récupérer le projet en local, exécutez la commande suivante dans votre terminal :
@@ -15,6 +9,12 @@ Pour récupérer le projet en local, exécutez la commande suivante dans votre t
 ```bash
 git clone https://github.com/ardidjae/zays.git
 ```
+
+## Identifiants de session
+
+Pour accéder à la session, utilisez les identifiants suivants :
+- **Nom d'utilisateur :** mickael@hotmail.com
+- **Mot de passe :** mickael@hotmail.com1
 
 ## Contributeurs
 
