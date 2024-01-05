@@ -78,4 +78,4 @@ git checkout nom-de-la-branche
 - Suivez les conventions de dénomination et de style du code définies dans le projet.
 - Avant de soumettre une pull request, assurez-vous que vos modifications passent les tests unitaires.
   
-Merci de contribuer au Projet Zays! 🚀
+Merci de contribuer au Projet Zays ! 🚀
