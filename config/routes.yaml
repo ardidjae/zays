@@ -93,9 +93,9 @@ contratLocationPDF:
     controller: App\Controller\BailController::contratLocationPDF
 
 # AJOUTER LOCATAIRE
-ajouterLocataire:
-    path: /locataire/ajouter
-    controller: App\Controller\LocataireController::ajouterLocataire
+#ajouterLocataire:
+#    path: /locataire/ajouter
+#    controller: App\Controller\LocataireController::ajouterLocataire
 
 # CONSULTER LOCATAIRE
 locataireConsulter:
