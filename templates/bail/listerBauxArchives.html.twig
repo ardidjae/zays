@@ -26,13 +26,13 @@
                         <tr>
                           <thead class="thead-dark">
                             <tr>
-                                <th width="10%" scope="col">Appartement</th>
+                                <th width="10%" scope="col">Appt</th>
                                 <th width="15%" scope="col">Locataire</th>
-                                <th scope="col">Loyer HC</th>
-                                <th scope="col">Caution</th>
-                                <th scope="col">Loyer TTC</th>
                                 <th scope="col">Date entrée</th>
-                                <th scope="col">Surface Habitation</th>
+                                <th scope="col">Date sortie</th>
+                                <th scope="col">Loyer brut</th>
+                                <th scope="col">Charges</th>
+                                <th scope="col">Loyer net</th>
                             </tr>
                           </thead>
                         </tr>
@@ -48,11 +48,11 @@
                           {% endif %}
                         </a>
                       </td>
-                      <td>{{ b.montantHC }} {% if b.montantHC != null %}€{% endif %}</td>
-                      <td>{{ b.montantCaution }} {% if b.montantCaution != null %}€{% endif %}</td>
-                      <td>{{ b.montantHC + b.montantCharges }} {% if b.montantHC + b.montantCharges != null %}€{% endif %}</td>
                       <td>{{ b.dateDebut|date("d/m/Y") }}</td>
-                      <td>{{ b.appartement.surfaceHabitable }} {% if b.appartement.surfaceHabitable != null %}m²{% endif %}</td>
+                      <td>{{ b.dateFin|date("d/m/Y") }}</td>
+                      <td>{{ b.montantHC }} {% if b.montantHC != null %}€{% endif %}</td>
+                      <td>{{b.montantCharges}} €</td>
+                      <td>{{ b.montantHC + b.montantCharges }} {% if b.montantHC + b.montantCharges != null %}€{% endif %}</td>
                       </tr>
                       {% else %}
                       <tr>
