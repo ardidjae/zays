@@ -27,6 +27,9 @@
                             <div class="information-container">
                                 <!-- Informations sur le l'appartement -->
                                 <div class="information-item">
+                                    <strong>Porte :</strong> {{appartement.porte}}
+                                </div></br>
+                                <div class="information-item">
                                     <strong>Immeuble :</strong> {{appartement.immeuble.nom}}
                                 </div></br>
                                 <div class="information-item">
@@ -38,12 +41,64 @@
                                 <div class="information-item">
                                     <strong>Surface au sol :</strong> {{appartement.surfaceSol}} m²
                                 </div></br>
+                                <div class="information-item">
+                                    <strong>Numéro compteur :</strong>
+                                </div></br>
+                                {% for b in appartement.bails %}
+                                    {% for locataire in b.locataires %}
+                                        {% if b.archive == 0 %}
+                                            <div class="information-item">
+                                                <strong>Locataire actuel :</strong> {{b.locataires[0].nom}} {% if b.locataires[1] is defined %}{{b.locataires[1].nom}}{% endif %} {{b.locataires[0].prenom}} {% if b.locataires[1] is defined %}{{b.locataires[1].prenom}}{% endif %}
+                                            </div></br>
+                                            <div class="information-item">
+                                                <strong>Date d'entrée :</strong> {{b.dateDebut|date("d/m/Y")}}
+                                            </div>
+                                        {% endif %}
+                                    {% endfor %}
+                                {% endfor %}
                             </div>
                         </div>
                     </div>
                 </div></br>
                 <!-- Second Card -->
                 <div class="col-lg-6">
+                    <div class="card">
+                        <div class="card-header border-bottom">
+                            <i class="ri-team-line"></i>&nbsp; Anciens locataire
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table text-sm mb-0 table-striped">
+                                <thead>
+                                    <tr>
+                                    <thead class="thead-dark">
+                                        <tr>
+                                            <th scope="col">Nom</th>
+                                            <th scope="col">Prenom</th>
+                                            <th scope="col">Date d'entrée</th>
+                                            <th scope="col">Date sortie</th>
+                                            <th scope="col">Loyer brut</th>
+                                        </tr>
+                                    </thead>
+                                    </tr>
+                                </thead>
+                                {% for b in appartement.bails %}
+                                    {% for locataire in b.locataires %}
+                                        {% if b.archive == 1 %}
+                                <tr>
+                                <td>{{b.locataires[0].nom}} {% if b.locataires[1] is defined %}{{b.locataires[1].nom}}{% endif %}</td>
+                                <td>{{b.locataires[0].prenom}} {% if b.locataires[1] is defined %}{{b.locataires[1].prenom}}{% endif %}</td>
+                                <td>{{b.dateDebut|date("d/m/Y")}}</td>
+                                <td>{{b.dateFin|date("d/m/Y")}}</td>
+                                <td>{{b.MontantHC}} €</td>
+                                </tr>
+                                        {% endif %}
+                                    {% endfor %}
+                                {% endfor %}
+                                </table>
+                            </div>
+                            </div>
+                    </div></br>
                     <div class="card">
                         <div class="card-header border-bottom">
                             <i class="ri-settings-6-line"></i>&nbsp; Equipements
@@ -57,27 +112,6 @@
                             </div>
                         </div>
                     </div></br>
-                    <div class="card">
-                        <div class="card-header border-bottom">
-                            <i class="ri-team-line"></i>&nbsp; Locataires
-                        </div>
-                        <div class="card-body">
-                            <div class="information-container">
-                                {% for b in appartement.bails %}
-                                <!-- États des Lieux information -->
-                                <div class="information-item">
-                                    <strong>Nom :</strong> {{b.locataires[0].nom}} {% if b.locataires[1] is defined %}{{b.locataires[1].nom}}{% endif %}
-                                </div>
-                                <div class="information-item">
-                                    <strong>Prenom :</strong> {{b.locataires[0].prenom}} {% if b.locataires[1] is defined %}{{b.locataires[1].prenom}}{% endif %}
-                                </div>
-                                <div class="information-item">
-                                    <strong>Numero de bail :</strong> <a href="{{ path('bauxConsulter', { 'id': b.id }) }}">{{ b.id }}
-                                </div>
-                                {% endfor %}
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
