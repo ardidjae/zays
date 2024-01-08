@@ -135,7 +135,8 @@ class BailController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
 
                 $bail = $form->getData();
-
+                $bail->setArchive(0);
+                $locataire->setArchive(0);
                 $entityManager = $doctrine->getManager();
                 $entityManager->persist($bail);
                 $entityManager->flush();
