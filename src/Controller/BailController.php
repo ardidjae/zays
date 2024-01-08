@@ -10,6 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 use App\Entity\Bail;
 use App\Entity\Paiement;
 use Dompdf\Dompdf;
+use Dompdf\Options;
 use App\Form\BailType;
 use App\Entity\Locataire;
 use App\Form\BailModifierType;
@@ -70,6 +71,10 @@ class BailController extends AbstractController
             );
         }
 
+        // Récupérer les dates actuelles du mois
+        $dateDebut = new \DateTime('first day of this month');
+        $dateFin = new \DateTime('last day of this month');
+
         // Instanciation de la librairie DOMPDF
         $dompdf = new Dompdf();
 
@@ -77,6 +82,8 @@ class BailController extends AbstractController
         $html = $this->renderView('bail/quittancePDF.html.twig', [
             'bail' => $bail,
             'pPaiements' => $paiements,
+            'dateDebut' => $dateDebut,
+            'dateFin' => $dateFin,
         ]);
 
         // Chargement du contenu HTML
@@ -88,8 +95,11 @@ class BailController extends AbstractController
         // Rendu du PDF
         $dompdf->render();
 
-        // Envoi du PDF dans la réponse
-        $dompdf->stream("bail_".$bail->getId().".pdf", [
+        $numeroAppartement = $bail->getAppartement()->getPorte(); // Mettez à jour selon votre entité Appartement
+        $fileName = sprintf("%04d_%02d_%d.pdf", date('Y'), date('m'), $numeroAppartement);
+
+        // Envoi du PDF dans la réponse avec le nom de fichier spécifié
+        return $dompdf->stream($fileName, [
             "Attachment" => false
         ]);
     }
@@ -125,7 +135,8 @@ class BailController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
 
                 $bail = $form->getData();
-
+                $bail->setArchive(0);
+                $locataire->setArchive(0);
                 $entityManager = $doctrine->getManager();
                 $entityManager->persist($bail);
                 $entityManager->flush();

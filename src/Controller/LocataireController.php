@@ -29,7 +29,7 @@ class LocataireController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
 
                 $locataire = $form->getData();
-
+                $locataire->setArchive(0);
                 $entityManager = $doctrine->getManager();
                 $entityManager->persist($locataire);
                 $entityManager->flush();

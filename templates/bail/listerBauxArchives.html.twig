@@ -37,7 +37,8 @@
                           </thead>
                         </tr>
                       </thead>
-                      {% for b in pBails %}
+                      {% set sortedBails = pBails|sort((a, b) => a.appartement.porte <=> b.appartement.porte) %}
+                      {% for b in sortedBails %}
                       <tr>
                       <td><a href="{{ path('appartementConsulter', { 'id': b.appartement.id }) }}">{{ b.appartement.porte }}</a></td>
                       <td>

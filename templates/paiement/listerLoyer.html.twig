@@ -13,7 +13,7 @@
 </div>
       <section class="tables"></br>
       <div class="d-flex justify-content-center align-items-center mb-3">
-            <h5 class="text-center">Loyer reçus <i class="ri-money-euro-circle-line"></i></h5>
+            <h5 class="text-center" id="loyersTitle">Loyers perçus mois année</h5>
       </div>
         <div class="container-fluid">
           <div class="row">
@@ -31,12 +31,10 @@
                             <tr>
                                 <th scope="col">Appt</th>
                                 <th scope="col">Locataire</th>
-                                <th scope="col">Versement</th>
-                                <th scope="col">Caf</th>
-                                <th scope="col">Total</th>
                                 <th scope="col">Loyer dû</th>
+                                <th scope="col">Loyer perçu</th>
                                 <th scope="col">Solde du mois</th>
-                                <th scope="col">Solde locataire</th>
+                                <th scope="col">Solde année</th>
                                 <th scope="col"></th>
                             </tr>
                           </thead>
@@ -44,6 +42,9 @@
                       </thead>
                       <tr>
                       {% for p in pPaiements %}
+                        {% set paiementMonth = p.dateP|date("m") %}
+                        {% set currentMonth = "now"|date("m") %}
+                        {% if paiementMonth == currentMonth %}
                         <td>{{ p.bail.appartement.porte }}</td>
                         <td>
                         {{ p.bail.locataires[0].nom }} {{ p.bail.locataires[0].prenom }}
@@ -51,10 +52,8 @@
                             et {{ p.bail.locataires[1].nom }} {{ p.bail.locataires[1].prenom }}
                       {% endif %}
                         </td>
-                        <td>{{ p.montant }} €</td>
-                        <td>{{ p.caf }} €</td>
-                        <td>{{ p.montant + p.caf }} €</td>
                         <td>{{ p.bail.montantHC + p.bail.montantCharges }} €</td>
+                        <td>{{ p.montant }} € | Le {{ p.dateP |date('d/m/Y') }}</td>
                         <td>{{ p.bail.montantHC + p.bail.montantCharges - p.montant - p.caf  }} €</td>
                         <td>{{ p.bail.montantHC + p.bail.montantCharges - p.montant - p.caf  }} €</td>
                         <td>
@@ -65,9 +64,10 @@
                           </button>
                         </td>
                       </tr>
+                      {% endif %}
                       {% else %}
                       <tr>
-                          <td colspan="2">Aucun paiement n'a été trouvé.</td>
+                          <td colspan="2">Aucun paiement n'a été trouvé pour le mois en cours.</td>
                       </tr>
                       {% endfor %}
                     </table></br>
@@ -104,4 +104,26 @@
                 }
             });
         });
+    </script>
+
+    <script>
+        function updateTitle() {
+            var currentDate = new Date();
+            var monthNames = ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"];
+            var currentMonth = monthNames[currentDate.getMonth()];
+            var currentYear = currentDate.getFullYear();
+
+            var titleElement = document.getElementById("loyersTitle");
+            titleElement.textContent = "Loyers perçus " + currentMonth + " " + currentYear;
+        }
+
+        // Appeler la fonction pour mettre à jour le titre au chargement de la page
+        updateTitle();
+    </script>
+
+    <script>
+    function genererQuittance(bailId) {
+        // Redirige vers l'action du contrôleur Symfony avec l'ID du bail
+        window.location.href = "{{ path('quittancePDF', { 'id': '_bailId_' }) }}".replace('_bailId_', bailId);
+    }
     </script>

@@ -42,6 +42,15 @@ class Locataire
     #[ORM\ManyToMany(targetEntity: Bail::class, mappedBy: 'locataire')]
     private Collection $bails;
 
+    #[ORM\Column(length: 255)]
+    private ?string $email = null;
+
+    #[ORM\Column]
+    private ?float $telephone = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $pieceJustificative = null;
+
     public function __construct()
     {
         $this->bails = new ArrayCollection();
@@ -178,6 +187,42 @@ class Locataire
                 $pieceJointe->setLocataire(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getEmail(): ?string
+    {
+        return $this->email;
+    }
+
+    public function setEmail(string $email): static
+    {
+        $this->email = $email;
+
+        return $this;
+    }
+
+    public function getTelephone(): ?float
+    {
+        return $this->telephone;
+    }
+
+    public function setTelephone(float $telephone): static
+    {
+        $this->telephone = $telephone;
+
+        return $this;
+    }
+
+    public function getPieceJustificative(): ?string
+    {
+        return $this->pieceJustificative;
+    }
+
+    public function setPieceJustificative(string $pieceJustificative): static
+    {
+        $this->pieceJustificative = $pieceJustificative;
 
         return $this;
     }
