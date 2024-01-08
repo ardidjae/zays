@@ -27,6 +27,12 @@ class LocataireType extends AbstractType
             ->add('Prenom', TextType::class, [
                 'label' => 'Prenom',
             ])
+            ->add('email', TextType::class, [
+                'label' => 'Email',
+            ])
+            ->add('telephone', TextType::class, [
+                'label' => 'Téléphone',
+            ])
             ->add('DateNaissance', DateType::class, [
                 'widget' => 'single_text',
                 'format' => 'yyyy-MM-dd',
@@ -34,15 +40,8 @@ class LocataireType extends AbstractType
             ->add('LieuNaissance', TextType::class, [
                 'label' => 'Lieu de Naissance',
             ])
-            ->add('MontantCaf', TextType::class, [
-                'label' => 'Montant de la Caf',
-            ])
-            ->add('Archive', TextType::class, [
-                'label' => 'Archive',
-            ])
             //->add('bails')
 
-            ->add('enregistrer', SubmitType::class, array('label' => 'Nouvel locataire'))
         ;
     }
 
