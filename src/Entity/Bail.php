@@ -82,10 +82,20 @@ class Bail
     #[ORM\Column]
     private ?float $CautionRestituer = null;
 
+    #[ORM\Column(length: 255)]
+    private ?string $EtatLieuEntreeSigne = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $EtatLieuSortieSigne = null;
+
+    #[ORM\OneToMany(mappedBy: 'bail', targetEntity: SousCategorie::class)]
+    private Collection $sousCategories;
+
     public function __construct()
     {
         $this->paiements = new ArrayCollection();
         $this->locataires = new ArrayCollection();
+        $this->sousCategories = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -389,6 +399,60 @@ class Bail
     public function setCautionRestituer(float $CautionRestituer): static
     {
         $this->CautionRestituer = $CautionRestituer;
+
+        return $this;
+    }
+
+    public function getEtatLieuEntreeSigne(): ?string
+    {
+        return $this->EtatLieuEntreeSigne;
+    }
+
+    public function setEtatLieuEntreeSigne(string $EtatLieuEntreeSigne): static
+    {
+        $this->EtatLieuEntreeSigne = $EtatLieuEntreeSigne;
+
+        return $this;
+    }
+
+    public function getEtatLieuSortieSigne(): ?string
+    {
+        return $this->EtatLieuSortieSigne;
+    }
+
+    public function setEtatLieuSortieSigne(string $EtatLieuSortieSigne): static
+    {
+        $this->EtatLieuSortieSigne = $EtatLieuSortieSigne;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, SousCategorie>
+     */
+    public function getSousCategories(): Collection
+    {
+        return $this->sousCategories;
+    }
+
+    public function addSousCategory(SousCategorie $sousCategory): static
+    {
+        if (!$this->sousCategories->contains($sousCategory)) {
+            $this->sousCategories->add($sousCategory);
+            $sousCategory->setBail($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSousCategory(SousCategorie $sousCategory): static
+    {
+        if ($this->sousCategories->removeElement($sousCategory)) {
+            // set the owning side to null (unless already changed)
+            if ($sousCategory->getBail() === $this) {
+                $sousCategory->setBail(null);
+            }
+        }
 
         return $this;
     }

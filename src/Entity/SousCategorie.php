@@ -24,6 +24,9 @@ class SousCategorie
     #[ORM\OneToMany(mappedBy: 'souscategorie', targetEntity: Mouvement::class)]
     private Collection $mouvements;
 
+    #[ORM\ManyToOne(inversedBy: 'sousCategories')]
+    private ?Bail $bail = null;
+
     public function __construct()
     {
         $this->mouvements = new ArrayCollection();
@@ -84,6 +87,18 @@ class SousCategorie
                 $mouvement->setSouscategorie(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getBail(): ?Bail
+    {
+        return $this->bail;
+    }
+
+    public function setBail(?Bail $bail): static
+    {
+        $this->bail = $bail;
 
         return $this;
     }
