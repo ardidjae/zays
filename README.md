@@ -13,8 +13,14 @@ git clone https://github.com/ardidjae/zays.git
 ## Identifiants de session
 
 Pour accéder à la session, utilisez les identifiants suivants :
+
+[ROLE ASSOCIE]
 - **Nom d'utilisateur :** mickael@hotmail.com
 - **Mot de passe :** mickael@hotmail.com1
+  
+[ROLE SUPER ADMIN]
+- **Nom d'utilisateur :** superadmin@zays.com
+- **Mot de passe :** superadmin@zays.com1
 
 ## Contributeurs
 
