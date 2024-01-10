@@ -35,6 +35,9 @@ class User implements PasswordAuthenticatedUserInterface, UserInterface
     #[ORM\Column(type: 'boolean')]
     private $isVerified = false;
 
+    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
+    private ?Associe $associe = null;
+
     /**
      * @see UserInterface
      */
@@ -131,6 +134,18 @@ class User implements PasswordAuthenticatedUserInterface, UserInterface
     public function setPassword(string $password): static
     {
         $this->password = $password;
+
+        return $this;
+    }
+
+    public function getAssocie(): ?Associe
+    {
+        return $this->associe;
+    }
+
+    public function setAssocie(?Associe $associe): static
+    {
+        $this->associe = $associe;
 
         return $this;
     }
