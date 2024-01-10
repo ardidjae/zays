@@ -45,15 +45,15 @@ security:
          - { path: ^/admin, roles: ROLE_ADMIN }
          - { path: ^/associe/ajouter, roles: ROLE_ADMIN }
          - { path: ^/associe/lister, roles: ROLE_ADMIN }
-         - { path: ^/baux/ajouter, roles: ROLE_ADMIN }
          - { path: ^/baux/listerContratLocation, roles: ROLE_ADMIN }
-         - { path: ^/baux/ajouter, roles: ROLE_ADMIN }
          - { path: ^/baux/baux/listerCloturerContratLocation, roles: ROLE_ADMIN }
 
         # ACCES ROLE ASSOCIES - ASSOCIE
          - { path: ^/baux/lister, roles: ROLE_ASSOCIE }
          - { path: ^/appartement/consulter, roles: ROLE_ASSOCIE }
          - { path: ^/paiement/listerLoyer, roles: ROLE_ASSOCIE }
+         - { path: ^/baux/ajouter, roles: ROLE_ASSOCIE }
+         - { path: ^/baux/listerContratLocation, roles: ROLE_ASSOCIE }
 
         # ACCES ROLE LOCATAIRE - LOCATAIRE
          - { path: ^/paiement/versement, roles: ROLE_LOCATAIRE }
