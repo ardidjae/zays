@@ -42,16 +42,13 @@
                                     <strong>Surface au sol :</strong> {{appartement.surfaceSol}} m²
                                 </div></br>
                                 <div class="information-item">
-                                    <strong>Numéro compteur :</strong>
+                                    <strong>Numéro compteur :</strong> {{appartement.numCompteur}}
                                 </div></br>
                                 {% for b in appartement.bails %}
                                     {% for locataire in b.locataires %}
                                         {% if b.archive == 0 %}
                                             <div class="information-item">
-                                                <strong>Locataire actuel :</strong> {{b.locataires[0].nom}} {% if b.locataires[1] is defined %}{{b.locataires[1].nom}}{% endif %} {{b.locataires[0].prenom}} {% if b.locataires[1] is defined %}{{b.locataires[1].prenom}}{% endif %}
-                                            </div></br>
-                                            <div class="information-item">
-                                                <strong>Date d'entrée :</strong> {{b.dateDebut|date("d/m/Y")}}
+                                                <strong>Locataire actuel :</strong> {{b.locataires[0].nom}} {% if b.locataires[1] is defined %}{{b.locataires[1].nom}}{% endif %} {{b.locataires[0].prenom}} {% if b.locataires[1] is defined %}{{b.locataires[1].prenom}}{% endif %}, le {{b.dateDebut|date("d/m/Y")}}
                                             </div>
                                         {% endif %}
                                     {% endfor %}
