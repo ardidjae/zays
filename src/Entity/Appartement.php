@@ -39,6 +39,9 @@ class Appartement
     #[ORM\ManyToMany(targetEntity: Equipement::class, inversedBy: 'appartements')]
     private Collection $equipement;
 
+    #[ORM\Column]
+    private ?float $NumCompteur = null;
+
     public function __construct()
     {
         $this->bails = new ArrayCollection();
@@ -172,6 +175,18 @@ class Appartement
     public function removeEquipement(Equipement $equipement): static
     {
         $this->equipement->removeElement($equipement);
+
+        return $this;
+    }
+
+    public function getNumCompteur(): ?float
+    {
+        return $this->NumCompteur;
+    }
+
+    public function setNumCompteur(float $NumCompteur): static
+    {
+        $this->NumCompteur = $NumCompteur;
 
         return $this;
     }
