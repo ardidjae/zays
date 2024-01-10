@@ -15,6 +15,7 @@ use App\Form\BailType;
 use App\Entity\Locataire;
 use App\Form\BailModifierType;
 use App\Form\BailCloturerType;
+use Symfony\Component\Security\Core\Security;
 
 class BailController extends AbstractController
 {
@@ -123,10 +124,27 @@ class BailController extends AbstractController
         ]);
     }
 
-    public function ajouterBail(ManagerRegistry $doctrine,Request $request){
+    public function ajouterBail(ManagerRegistry $doctrine,Request $request, Security $security){
         $bail = new Bail();
 
         $locataire = new Locataire();
+
+        // Récupérer l'associé connecté
+        $user = $security->getUser();
+
+        if ($user) {
+
+            $associe = $user->getAssocie();
+
+            // Vérifier que l'associé existe
+            if ($associe) {
+                // Associer le bail à l'associé
+                $bail->setAssocie($associe);
+            } else {
+
+            }
+        }
+
         $bail->getLocataires()->add($locataire);
 
         $form = $this->createForm(BailType::class, $bail);
