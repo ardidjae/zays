@@ -16,6 +16,9 @@ use App\Entity\Locataire;
 use App\Form\BailModifierType;
 use App\Form\BailCloturerType;
 use Symfony\Component\Security\Core\Security;
+use App\Entity\SousCategorie;
+use App\Entity\Categorie;
+
 
 class BailController extends AbstractController
 {
@@ -159,6 +162,42 @@ class BailController extends AbstractController
                 $entityManager->persist($bail);
                 $entityManager->flush();
 
+                // Création de la sous-catégorie (Categorie Loyer)
+                $categorie = $entityManager->getRepository(Categorie::class)->find(1); // Remplacez 1 par l'id de la catégorie "Loyer"
+                $sousCategorieLibelle = "Appartement " . $bail->getAppartement()->getPorte() . " - " . $locataire->getNom() . " " . $locataire->getPrenom();
+
+                $sousCategorie = new SousCategorie();
+                $sousCategorie->setLibelle($sousCategorieLibelle);
+                $sousCategorie->setCategorie($categorie);
+                $sousCategorie->setBail($bail);
+
+                $entityManager->persist($sousCategorie);
+                $entityManager->flush();
+
+                // Création de la sous-catégorie (Categorie Caution – renommer dépôt de garantie)
+                $categorie = $entityManager->getRepository(Categorie::class)->find(2); // Remplacez 2 par l'id de la catégorie "Caution"
+                $sousCategorieLibelle = "Dépôt garantie " . $bail->getAppartement()->getPorte() . " - " . $locataire->getNom() . " " . $locataire->getPrenom();
+
+                $sousCategorie = new SousCategorie();
+                $sousCategorie->setLibelle($sousCategorieLibelle);
+                $sousCategorie->setCategorie($categorie);
+                $sousCategorie->setBail($bail);
+
+                $entityManager->persist($sousCategorie);
+                $entityManager->flush();
+
+                // Création de la sous-catégorie (Categorie Caution – renommer dépôt de garantie)
+                $categorie = $entityManager->getRepository(Categorie::class)->find(2); // Remplacez 2 par l'id de la catégorie "Caution"
+                $sousCategorieLibelle = "Restitution dépôt garantie " . $bail->getAppartement()->getPorte() . " - " . $locataire->getNom() . " " . $locataire->getPrenom();
+
+                $sousCategorie = new SousCategorie();
+                $sousCategorie->setLibelle($sousCategorieLibelle);
+                $sousCategorie->setCategorie($categorie);
+                $sousCategorie->setBail($bail);
+
+                $entityManager->persist($sousCategorie);
+                $entityManager->flush();
+
             return $this->render('bail/consulter.html.twig', ['bail' => $bail,]);
         }
         else
@@ -278,22 +317,30 @@ class BailController extends AbstractController
         if (!$bail) {
             throw $this->createNotFoundException('Aucun bail trouvé avec le numéro '.$id);
         }
-        else
-        {
+
+                // Récupérer les locataires liés au bail
+                $locataires = $bail->getLocataires();
                 $form = $this->createForm(BailCloturerType::class, $bail);
-
-
                 $form->handleRequest($request);
 
                 if ($form->isSubmitted() && $form->isValid()) {
 
-                     $bail = $form->getData();
-                     $bail->setArchive(1);
+                    // Effectuer les opérations nécessaires lors de la clôture du bail
+
+                    // Supprimer les sous-catégories liées au bail
+                    $this->supprimerSousCategories($doctrine, $bail);
+
+                    // Mettre en archive le bail et les locataires
+                    $bail->setArchive(1);
+                    foreach ($locataires as $locataire) {
+                        $locataire->setArchive(1);
+                    }
+
                      $entityManager = $doctrine->getManager();
                      $entityManager->persist($bail);
                      $entityManager->flush();
                      return $this->render('bail/accueil.html.twig', ['bail' => $bail,]);
-               }
+                }
                else{
                 $locataires = $bail->getLocataires();
 
@@ -301,7 +348,18 @@ class BailController extends AbstractController
                     'form' => $form->createView(),
                     'bail' => $bail,
                 ]);
-               }
+                }
+    }
+
+    private function supprimerSousCategories(ManagerRegistry $doctrine, Bail $bail)
+    {
+        $entityManager = $doctrine->getManager();
+        $sousCategories = $entityManager->getRepository(SousCategorie::class)->findBy(['bail' => $bail]);
+
+        foreach ($sousCategories as $sousCategorie) {
+            $entityManager->remove($sousCategorie);
         }
+
+        $entityManager->flush();
     }
 }
