@@ -217,6 +217,39 @@
                 </div>
 
                 <div class="mb-3">
+                    <label class="btn btn-success" id="augmenterLoyerButton" data-toggle="modal" data-target="#augmenterLoyerModal">
+                        <i class="ri-funds-line"></i> Augmenter le loyer
+                    </label>
+                </div>
+
+                <!-- Modal -->
+                <div class="modal fade" id="augmenterLoyerModal" tabindex="-1" role="dialog" aria-labelledby="augmenterLoyerModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="augmenterLoyerModalLabel">Augmenter le loyer</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <!-- Ajoutez les champs du formulaire pour l'ancien et le nouveau loyer ici -->
+                                <div class="mb-3">
+                                    <h6> Anciens Loyer : </h6>
+                                </div>
+                                <div class="mb-3">
+                                    <h6> Nouveau Loyer : </h6>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                                <button type="button" class="btn btn-primary" id="soumettreAugmentationLoyer">Soumettre</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-3">
                     <button type="button" class="btn btn-secondary" id="CloturerContrat"><i class="ri-check-line"></i> Clôturer le contrat</button>
                 </div>
             </div>
@@ -227,5 +260,22 @@
         </div>
         {{ form_end(form) }}
     </div>
+        <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const augmenterLoyerButton = document.getElementById('augmenterLoyerButton');
+            const augmenterLoyerModal = new bootstrap.Modal(document.getElementById('augmenterLoyerModal'));
+
+            augmenterLoyerButton.addEventListener('click', function() {
+                augmenterLoyerModal.show();
+            });
+
+            // Ajoutez le code pour traiter la soumission du formulaire ici (si nécessaire)
+            const soumettreAugmentationLoyerButton = document.getElementById('soumettreAugmentationLoyer');
+            soumettreAugmentationLoyerButton.addEventListener('click', function() {
+                // Ajoutez le code pour gérer la soumission du formulaire ici
+                augmenterLoyerModal.hide();
+            });
+        });
+        </script>
 </body>
 </html>
