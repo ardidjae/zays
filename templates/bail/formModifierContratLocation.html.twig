@@ -133,7 +133,8 @@
                         </div>
                         <div class="mb-3">
                             <div class="form-group">
-                                {{ form_row(form.MontantHC, {'attr': {'class': 'form-control'}}) }}
+                                {% set montantHCValue = form.MontantHC.vars.value %}
+                                {{ form_row(form.MontantHC, {'attr': {'class': 'form-control', 'readonly': 'readonly'}}) }}
                             </div>
                         </div>
                         <div class="mb-3">
@@ -234,11 +235,13 @@
                             </div>
                             <div class="modal-body">
                                 <!-- Ajoutez les champs du formulaire pour l'ancien et le nouveau loyer ici -->
-                                <div class="mb-3">
-                                    <h6> Anciens Loyer : </h6>
-                                </div>
-                                <div class="mb-3">
-                                    <h6> Nouveau Loyer : </h6>
+                                <div class="form-group">
+                                    <label for="ancienLoyer">Ancien Loyer :</label>
+                                    <input type="text" class="form-control" id="ancienLoyer" value="{{ montantHCValue }}" readonly>
+                                </div></br>
+                                <div class="form-group">
+                                    <label for="nouveauLoyer">Nouveau Loyer :</label>
+                                    <input type="text" class="form-control" id="nouveauLoyer">
                                 </div>
                             </div>
                             <div class="modal-footer">
@@ -250,7 +253,39 @@
                 </div>
 
                 <div class="mb-3">
-                    <button type="button" class="btn btn-secondary" id="CloturerContrat"><i class="ri-check-line"></i> Clôturer le contrat</button>
+                    <button type="button" class="btn btn-secondary" id="cloturerContratButton" data-toggle="modal" data-target="#cloturerContratModal">
+                        <i class="ri-check-line"></i> Clôturer le contrat
+                    </button>
+                </div>
+
+                <!-- Modal de clôture du contrat -->
+                <div class="modal fade" id="cloturerContratModal" tabindex="-1" role="dialog" aria-labelledby="cloturerContratModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="cloturerContratModalLabel">Clôturer le contrat</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <!-- Formulaire de clôture du contrat -->
+                                <div class="mb-3">
+                                    <h6> Date de Sortie : </h6>
+                                </div>
+                                <div class="mb-3">
+                                    <h6> Montant Derniere Echeance : </h6>
+                                </div>
+                                <div class="mb-3">
+                                    <h6> Montant Depot de garantie à restituer : </h6>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                                <button type="submit" class="btn btn-danger" form="cloturerContratForm">Clôturer</button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -276,6 +311,17 @@
                 augmenterLoyerModal.hide();
             });
         });
+        </script>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const cloturerContratButton = document.getElementById('cloturerContratButton');
+                const cloturerContratModal = new bootstrap.Modal(document.getElementById('cloturerContratModal'));
+
+                cloturerContratButton.addEventListener('click', function() {
+                    cloturerContratModal.show();
+                });
+            });
         </script>
 </body>
 </html>
