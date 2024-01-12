@@ -25,12 +25,13 @@ class BailModifierType extends AbstractType
         ->add('dateDebut', DateType::class, [
             'widget' => 'single_text',
             'format' => 'yyyy-MM-dd',
+            'label' => 'Date de Début :',
         ])
         ->add('MontantHC', TextType::class, [
             'label' => 'Loyer brut :',
         ])
         ->add('MontantCharges', TextType::class, [
-            'label' => 'Montant des charges :',
+            'label' => 'Montant des Charges :',
         ])
         ->add('MontantCaution', TextType::class, [
             'label' => 'Dépôt de garantie :',
@@ -68,7 +69,7 @@ class BailModifierType extends AbstractType
             'disabled' => true,
         ])
         ->add('CautionRestituer', TextType::class, [
-            'label' => 'Montant caution à restituer :',
+            'label' => 'Montant de la Caution à Restituer :',
         ])
         ->add('EtatLieuEntreeSigne', FileType::class, [
             'label' => 'Joindre Etat Lieu Entree Signe :',
