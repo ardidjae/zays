@@ -22,9 +22,11 @@
       <div class="d-flex justify-content-center align-items-center mb-3">
             <h5 class="text-center"><i class="ri-download-fill"></i>&nbsp; Liste des derniers mouvements importes</h5>
       </div>
+      {% if is_granted('ROLE_ADMIN') %}
       <div class="d-flex justify-content-end mb-3">
         <a class="btn btn-secondary mr-3" href="{{ asset('mouvement/uploadFile') }}"><i class="ri-upload-fill"></i>&nbsp; Importer un nouveau fichier</a>
       </div>
+      {% endif %}
         <div class="container-fluid">
           <div class="row">
             <div class="col-lg-12">
@@ -44,7 +46,9 @@
                                 <th scope="col">Debit</th>
                                 <th scope="col">Credit</th>
                                 <th scope="col">Sous Categorie</th>
-                                <th scope="col">Action</th>
+                                {% if is_granted('ROLE_ADMIN') %}
+                                  <th scope="col">Action</th>
+                                {% endif %}
                             </tr>
                           </thead>
                         </tr>
@@ -56,21 +60,27 @@
                             <td>{{ m.debit }}</td>
                             <td>{{ m.credit }}</td>
                             <td>
-                                <select>
-                                    {% for s in pSousCategories %}
-                                        <option value="{{ s.id }}">{{ s.libelle }}</option>
-                                    {% endfor %}
-                                </select>
+                                {% if is_granted('ROLE_ADMIN') %}
+                                            <select>
+                                                {% for s in pSousCategories %}
+                                                    <option value="{{ s.id }}">{{ s.libelle }}</option>
+                                                {% endfor %}
+                                            </select>
+                                        {% else %}
+                                            {{ m.souscategorie.libelle }}
+                                {% endif %}
                             </td>
-                            <td colspan="5" style="text-align: right;">
-                              <a href="{{ path('modifierMouvement', { 'id': m.id }) }}" class="bouton-editer">
-                                Éditer
-                              </a>
-                            </td>
+                            {% if is_granted('ROLE_ADMIN') %}
+                              <td colspan="5" style="text-align: right;">
+                                <a href="{{ path('modifierMouvement', { 'id': m.id }) }}" class="bouton-editer">
+                                  Éditer
+                                </a>
+                              </td>
+                            {% endif %}
                         </tr>
                         {% else %}
                         <tr>
-                            <td colspan="2">Aucun mouvement n'a été trouvé.</td>
+                            <td colspan="{% if is_granted('ROLE_ADMIN') %}6{% else %}5{% endif %}">Aucun mouvement n'a été trouvé.</td>
                         </tr>
                         {% endfor %}
                     </table>
