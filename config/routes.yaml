@@ -156,3 +156,8 @@ associeLister:
 userProfil:
     path: /user/profil
     controller: App\Controller\UserController::profil
+
+# LISTER DES EMPRUNTS
+empruntLister:
+    path: /emprunt/lister
+    controller: App\Controller\EmpruntController::listerEmprunt
