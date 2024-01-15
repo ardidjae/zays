@@ -46,7 +46,10 @@ security:
          - { path: ^/associe/ajouter, roles: ROLE_ADMIN }
          - { path: ^/associe/lister, roles: ROLE_ADMIN }
          - { path: ^/baux/listerContratLocation, roles: ROLE_ADMIN }
-         - { path: ^/baux/baux/listerCloturerContratLocation, roles: ROLE_ADMIN }
+         - { path: ^/baux/listerCloturerContratLocation, roles: ROLE_ADMIN }
+         - { path: ^/admin/ajouterCategorie, roles: ROLE_ADMIN }
+         - { path: ^/admin/listerCategorie, roles: ROLE_ADMIN }
+         - { path: ^/admin/listerSousCategorie, roles: ROLE_ADMIN }
 
         # ACCES ROLE ASSOCIES - ASSOCIE
          - { path: ^/baux/lister, roles: ROLE_ASSOCIE }

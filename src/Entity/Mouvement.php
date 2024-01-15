@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\MouvementRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -28,6 +30,14 @@ class Mouvement
 
     #[ORM\ManyToOne(inversedBy: 'mouvements')]
     private ?SousCategorie $souscategorie = null;
+
+    #[ORM\OneToMany(mappedBy: 'mouvement', targetEntity: Paiement::class)]
+    private Collection $paiements;
+
+    public function __construct()
+    {
+        $this->paiements = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -90,6 +100,36 @@ class Mouvement
     public function setSouscategorie(?SousCategorie $souscategorie): static
     {
         $this->souscategorie = $souscategorie;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Paiement>
+     */
+    public function getPaiements(): Collection
+    {
+        return $this->paiements;
+    }
+
+    public function addPaiement(Paiement $paiement): static
+    {
+        if (!$this->paiements->contains($paiement)) {
+            $this->paiements->add($paiement);
+            $paiement->setMouvement($this);
+        }
+
+        return $this;
+    }
+
+    public function removePaiement(Paiement $paiement): static
+    {
+        if ($this->paiements->removeElement($paiement)) {
+            // set the owning side to null (unless already changed)
+            if ($paiement->getMouvement() === $this) {
+                $paiement->setMouvement(null);
+            }
+        }
 
         return $this;
     }
