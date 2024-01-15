@@ -32,6 +32,9 @@ class Paiement
     #[ORM\Column]
     private ?float $caf = null;
 
+    #[ORM\ManyToOne(inversedBy: 'paiements')]
+    private ?Mouvement $mouvement = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -105,6 +108,18 @@ class Paiement
     public function setCaf(float $caf): static
     {
         $this->caf = $caf;
+
+        return $this;
+    }
+
+    public function getMouvement(): ?Mouvement
+    {
+        return $this->mouvement;
+    }
+
+    public function setMouvement(?Mouvement $mouvement): static
+    {
+        $this->mouvement = $mouvement;
 
         return $this;
     }
