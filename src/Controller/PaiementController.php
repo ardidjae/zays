@@ -33,11 +33,4 @@ class PaiementController extends AbstractController
         ]);
 
     }
-
-    public function versement(): Response
-    {
-        return $this->render('paiement/nouveauVersement.html.twig', [
-            'controller_name' => 'PaiementController',
-        ]);
-    }
 }
