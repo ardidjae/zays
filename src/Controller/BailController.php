@@ -294,9 +294,9 @@ class BailController extends AbstractController
         {
                 $form = $this->createForm(BailModifierType::class, $bail);
                 $form->handleRequest($request);
-     
+
                 if ($form->isSubmitted() && $form->isValid()) {
-     
+
                      $bail = $form->getData();
                      $entityManager = $doctrine->getManager();
                      $entityManager->persist($bail);
