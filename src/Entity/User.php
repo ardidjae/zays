@@ -38,6 +38,9 @@ class User implements PasswordAuthenticatedUserInterface, UserInterface
     #[ORM\OneToOne(cascade: ['persist', 'remove'])]
     private ?Associe $associe = null;
 
+    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
+    private ?Locataire $locataire = null;
+
     /**
      * @see UserInterface
      */
@@ -146,6 +149,18 @@ class User implements PasswordAuthenticatedUserInterface, UserInterface
     public function setAssocie(?Associe $associe): static
     {
         $this->associe = $associe;
+
+        return $this;
+    }
+
+    public function getLocataire(): ?Locataire
+    {
+        return $this->locataire;
+    }
+
+    public function setLocataire(?Locataire $locataire): static
+    {
+        $this->locataire = $locataire;
 
         return $this;
     }
