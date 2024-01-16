@@ -102,11 +102,6 @@ locataireConsulter:
     path: /locataire/consulter/{id}
     controller: App\Controller\LocataireController::consulterLocataire
 
-# NOUVEAU VERSEMENT
-versement:
-    path: /paiement/versement
-    controller: App\Controller\PaiementController::versement
-
 # AJOUTER CATEGORIE
 ajouterCategorie:
     path: /admin/ajouterCategorie

@@ -72,8 +72,8 @@
                             </td>
                             {% if is_granted('ROLE_ADMIN') %}
                               <td colspan="5" style="text-align: right;">
-                                <a href="{{ path('modifierMouvement', { 'id': m.id }) }}" class="bouton-editer">
-                                  Éditer
+                                <a class="btn btn-success">
+                                  Enregistrer
                                 </a>
                               </td>
                             {% endif %}
