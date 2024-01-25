@@ -115,23 +115,27 @@
         </ul>
         <ul class="navbar-nav">
           {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
-            <div class="dropdown text-end">
-              <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-                <img src="{{ asset('img/default.jpg') }}" alt="mdo" width="35" height="35" class="rounded-circle">
-              </a>
-              <ul class="dropdown-menu text-small" aria-labelledby="dropdownUser1">
-                <li><a class="dropdown-item" href="#">Mon profil</a></li>
-                <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item" href="#">
-                <span>Paramètres</span></a></li>
-                <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item" href="{{ path('app_logout') }}">Se déconnecter</a></li>
-              </ul>
-            </div>
+              <div class="dropdown text-end">
+                  <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle custom-icon" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+                      <img src="{{ asset('img/default.jpg') }}" alt="mdo" width="35" height="35" class="rounded-circle">
+                  </a>
+                  <ul class="dropdown-menu text-small custom-dropdown" aria-labelledby="dropdownUser1">
+                      <li><a class="dropdown-item" href="#"><i class="ri-profile-line"></i>Profil</a></li>
+                      <li><hr class="dropdown-divider"></li>
+                      {% if is_granted('ROLE_ASSOCIE') %}
+                          <li><a class="dropdown-item" href="{{ asset('appartement/lister') }}"><i class="ri-building-2-line"></i>Appart</a></li>
+                          <li><hr class="dropdown-divider"></li>
+                      {% endif %}
+                      <li><a class="dropdown-item" href="#"><i class="ri-settings-3-line"></i>Paramètres</a></li>
+                      <li><hr class="dropdown-divider"></li>
+                      <li><a class="dropdown-item" href="{{ path('app_logout') }}"><i class="ri-login-box-line"></i>Se déconnecter</a></li>
+                  </ul>
+              </div>
           {% else %}
-            <li><a class="getstarted scrollto" href="/zays/public/login"><i class="ri-login-box-line"></i>&nbsp; Login</a></li>
+              <li><a class="getstarted scrollto" href="/zays/public/login"><i class="ri-login-box-line"></i>&nbsp; Login</a></li>
           {% endif %}
-        </ul>
+      </ul>
+
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
 
