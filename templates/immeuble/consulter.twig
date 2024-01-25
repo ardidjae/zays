@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Consulter Immeuble{% endblock %}</title>
+    <!-- Mettez vos liens CSS et JavaScript ici si nécessaire -->
+</head>
+<body>
+    {% include 'header.html.twig' %}
+
+    <section class="details">
+        <div class="container">
+            <h2>Details de l'immeuble</h2>
+            <div class="card">
+                <div class="card-header">
+                    <i class="ri-building-line"></i>&nbsp; Immeuble {{ immeuble.nom }}
+                </div>
+                <div class="card-body">
+                    <p class="card-text">Adresse: {{ immeuble.num_rue }} {{ immeuble.rue }}, {{ immeuble.copos }} {{ immeuble.ville }}</p>
+                    <p class="card-text">Société: {{ immeuble.societe_id }}</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="appartements">
+        <div class="container">
+            <h2>Liste des Appartements</h2>
+            {% if appartements is not empty %}
+                <div class="row">
+                    {% for appartement in appartements %}
+                        <div class="col-lg-4 mb-4">
+                            <div class="card">
+                                <div class="card-header">
+                                    <i class="ri-file-list-line"></i>&nbsp; Appartement {{ appartement.porte }}
+                                </div>
+                                <div class="card-body">
+                                    <p class="card-text">Situation: {{ appartement.situation }}</p>
+                                    <a href="{{ path('appartConsulter', { 'id': appartement.id }) }}" class="btn btn-primary">Voir les détails</a>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <p>Aucun appartement associé à cet immeuble.</p>
+            {% endif %}
+        </div>
+    </section>
+
+</body>
+</html>
