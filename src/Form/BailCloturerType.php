@@ -26,20 +26,17 @@ class BailCloturerType extends AbstractType
         $builder
         ->add('MontantDerEcheance', TextType::class, [
             'label' => 'Montant Derniere Echeance :',
+            'required' => false,
         ])
         ->add('DateFin', DateType::class, [
             'widget' => 'single_text',
             'format' => 'yyyy-MM-dd',
             'label' => 'Date de fin du bail :',
-        ])
-        ->add('EtatLieuEntree', TextType::class, [
-            'label' => 'État des lieux à l\'entrée :',
-        ])
-        ->add('EtatLieuSortie', TextType::class, [
-            'label' => 'État des lieux à la sortie :',
+            'required' => false,
         ])
         ->add('CautionRestituer', TextType::class, [
             'label' => 'Montant caution à restituer :',
+            'required' => false,
         ])
         ->add('enregistrer', SubmitType::class, array('label' => 'Modifier Bail'))
         ;
