@@ -42,6 +42,9 @@ class Appartement
     #[ORM\Column]
     private ?float $NumCompteur = null;
 
+    #[ORM\Column(length: 255)]
+    private ?string $image = null;
+
     public function __construct()
     {
         $this->bails = new ArrayCollection();
@@ -187,6 +190,18 @@ class Appartement
     public function setNumCompteur(float $NumCompteur): static
     {
         $this->NumCompteur = $NumCompteur;
+
+        return $this;
+    }
+
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    public function setImage(string $image): static
+    {
+        $this->image = $image;
 
         return $this;
     }
