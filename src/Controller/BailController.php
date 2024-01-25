@@ -18,6 +18,12 @@ use App\Form\BailCloturerType;
 use Symfony\Component\Security\Core\Security;
 use App\Entity\SousCategorie;
 use App\Entity\Categorie;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\String\Slugger\SluggerInterface;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
+use PhpOffice\PhpWord\PhpWord;
+use PhpOffice\PhpWord\IOFactory;
+use Doctrine\Common\Collections\ArrayCollection;
 
 
 class BailController extends AbstractController
@@ -127,7 +133,7 @@ class BailController extends AbstractController
         ]);
     }
 
-    public function ajouterBail(ManagerRegistry $doctrine,Request $request, Security $security){
+    public function ajouterBail(ManagerRegistry $doctrine,Request $request, Security $security, SluggerInterface $slugger){
         $bail = new Bail();
 
         $locataire = new Locataire();
@@ -156,6 +162,43 @@ class BailController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
 
                 $bail = $form->getData();
+
+                $locatairesForms = $form->get('locataires')->all();
+
+                foreach ($bail->getLocataires() as $index => $locataire) {
+                    /** @var UploadedFile $pieceJustificativeFile */
+                    $pieceJustificativeFile = $locatairesForms[$index]->get('pieceJustificative')->getData();
+
+                    // Vérifier si un fichier a été téléchargé
+                    if ($pieceJustificativeFile) {
+
+                        // Créer un répertoire pour le locataire
+                        $numeroPorteAppartement = $bail->getAppartement()->getPorte();
+                        $locataireDirectory = $this->getParameter('pieces_directory') . '/' . $slugger->slug($numeroPorteAppartement . ' - ' .$locataire->getNom(). '  ' . $locataire->getPrenom());
+                        if (!is_dir($locataireDirectory)) {
+                            mkdir($locataireDirectory);
+                        }
+
+                        $originalFilename = pathinfo($pieceJustificativeFile->getClientOriginalName(), PATHINFO_FILENAME);
+                        $safeFilename = $slugger->slug($originalFilename);
+                        $newFilename = $safeFilename . '-' . uniqid() . '.' . $pieceJustificativeFile->guessExtension();
+
+                        try {
+                            $pieceJustificativeFile->move(
+                                $locataireDirectory,
+                                $newFilename
+                            );
+                        } catch (FileException $e) {
+                            // Gérer l'exception en cas d'échec du téléchargement
+                        }
+
+                        // Mettre à jour le champ pieceJustificative pour le locataire
+                        $locataire->setPieceJustificative($newFilename);
+                    }
+
+                    // Assurez-vous de mettre à jour d'autres propriétés du locataire si nécessaire
+                    $locataire->setArchive(0);
+                }
                 $bail->setArchive(0);
                 $locataire->setArchive(0);
                 $entityManager = $doctrine->getManager();
@@ -282,32 +325,115 @@ class BailController extends AbstractController
         ]);
     }
 
-    public function modifierContratLocation(ManagerRegistry $doctrine, $id, Request $request){
- 
-        //récupération de l'étudiant dont l'id est passé en paramètre
+    public function genererContratOdt(ManagerRegistry $doctrine, Request $request, Security $security, SluggerInterface $slugger)
+    {
+
+        // Créer une nouvelle instance de PhpWord
+        $phpWord = new PhpWord();
+
+        // Créer une nouvelle section dans le document
+        $section = $phpWord->addSection();
+
+        // Ajouter du texte ou d'autres éléments à votre document
+        $section->addText('CONTRAT DE LOCATION', ['bold' => true]);
+
+        // Ajouter d'autres éléments et remplacer les balises avec les données réelles du contrat
+        // ...
+
+        // Chemin de sortie pour le fichier ODT généré
+        $outputPath = $this->getParameter('pieces_directory') . '/contrat_location_' . uniqid() . '.odt';
+
+        // Enregistrez le document en format ODT
+        $objWriter = IOFactory::createWriter($phpWord, 'ODText');
+        $objWriter->save($outputPath);
+
+        // Vous pouvez maintenant envoyer le fichier au navigateur ou le stocker selon vos besoins
+        // ...
+
+        return $this->redirectToRoute('route_vers_document', ['filename' => 'le_nom_du_fichier_généré.odt']);
+    }
+
+    public function modifierContratLocation(ManagerRegistry $doctrine, SluggerInterface $slugger, $id, Request $request)
+    {
+        // récupération du bail dont l'id est passé en paramètre
         $bail = $doctrine->getRepository(Bail::class)->find($id);
 
         if (!$bail) {
-            throw $this->createNotFoundException('Aucun bail trouvé avec le numéro '.$id);
-        }
-        else
-        {
-                $form = $this->createForm(BailModifierType::class, $bail);
-                $form->handleRequest($request);
+            throw $this->createNotFoundException('Aucun bail trouvé avec le numéro ' . $id);
+        } else {
+            $form = $this->createForm(BailModifierType::class, $bail);
+            $form->handleRequest($request);
 
-                if ($form->isSubmitted() && $form->isValid()) {
+            if ($form->isSubmitted() && $form->isValid()) {
+                // récupération des fichiers depuis le formulaire
+                $bailSigneFile = $form->get('BailSigne')->getData();
+                if ($bailSigneFile) {
+                    $newBailSigneFilename = $this->uploadFile($bailSigneFile, $slugger, $this->getParameter('pieces_directory'), $bail->getLocataires(), $bail);
+                    $bail->setBailSigne($newBailSigneFilename);
+                }
+                $attestationAssuranceFile = $form->get('AttestationAssurance')->getData();
+                $etatLieuEntreeSigneFile = $form->get('EtatLieuEntreeSigne')->getData();
+                $etatLieuSortieSigneFile = $form->get('EtatLieuSortieSigne')->getData();
 
-                     $bail = $form->getData();
-                     $entityManager = $doctrine->getManager();
-                     $entityManager->persist($bail);
-                     $entityManager->flush();
-                     return $this->render('bail/consulter.html.twig', ['bail' => $bail,]);
-               }
-               else{
-                    return $this->render('bail/formModifierContratLocation.html.twig', array('form' => $form->createView(),));
-               }
+                // traitement des fichiers s'ils ont été uploadés
+                if ($bailSigneFile) {
+                    $newBailSigneFilename = $this->uploadFile($bailSigneFile, $slugger, 'pieces_directory', $bail->getLocataires(), $bail);
+                    $bail->setBailSigne($newBailSigneFilename);
+                }
+
+                if ($attestationAssuranceFile) {
+                    $newAttestationAssuranceFilename = $this->uploadFile($attestationAssuranceFile, $slugger, 'pieces_directory', $bail->getLocataires(), $bail);
+                    $bail->setAttestationAssurance($newAttestationAssuranceFilename);
+                }
+
+                if ($etatLieuEntreeSigneFile) {
+                    $newEtatLieuEntreeSigneFilename = $this->uploadFile($etatLieuEntreeSigneFile, $slugger, 'pieces_directory', $bail->getLocataires(), $bail);
+                    $bail->setEtatLieuEntreeSigne($newEtatLieuEntreeSigneFilename);
+                }
+
+                if ($etatLieuSortieSigneFile) {
+                    $newEtatLieuSortieSigneFilename = $this->uploadFile($etatLieuSortieSigneFile, $slugger, 'pieces_directory', $bail->getLocataires(), $bail);
+                    $bail->setEtatLieuSortieSigne($newEtatLieuSortieSigneFilename);
+                }
+
+                // persiste les changements dans la base de données
+                $entityManager = $doctrine->getManager();
+                $entityManager->persist($bail);
+                $entityManager->flush();
+
+                // redirige vers la page de consultation du bail
+                return $this->render('bail/formModifierContratLocation.html.twig', ['form' => $form->createView()]);
+            } else {
+                // affiche le formulaire de modification s'il y a des erreurs
+                return $this->render('bail/formModifierContratLocation.html.twig', ['form' => $form->createView()]);
+            }
         }
     }
+
+    private function uploadFile(UploadedFile $file, SluggerInterface $slugger, $directory, $locataire, $bail)
+    {
+        $originalFilename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
+        $safeFilename = $slugger->slug($originalFilename);
+        $newFilename = $safeFilename . '-' . uniqid() . '.' . $file->guessExtension();
+
+        $directory = $this->getParameter('kernel.project_dir') . '/ressources';
+        foreach ($bail->getLocataires() as $locataire) {
+        // Adjust the directory based on tenant information
+        $numeroPorteAppartement = $bail->getAppartement()->getPorte();
+        $locataireDirectory = $directory . '/' . $slugger->slug($numeroPorteAppartement . ' - ' . $locataire->getNom() . '  ' . $locataire->getPrenom());
+
+        try {
+            $file->move($locataireDirectory, $newFilename);
+        } catch (FileException $e) {
+            // Handle the exception if the file cannot be moved
+            throw new \Exception('Error uploading the file');
+        }}
+
+        // Perform any additional logic here, e.g., update database fields or associations
+
+        return $newFilename;
+    }
+
 
     public function cloturerContratLocation(ManagerRegistry $doctrine, $id, Request $request){
  

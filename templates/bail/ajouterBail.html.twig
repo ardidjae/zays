@@ -109,7 +109,9 @@
                                 </div>
                             </div>
                             <div class="mb-3">
-                                <button type="button" class="btn btn-primary" id="addPieceJustificativeButton">Ajouter une pièce justificative</button>
+                                <div class="form-group">
+                                    {{ form_row(locataire.pieceJustificative, {'attr': {'class': 'form-control'}}) }}
+                                </div>
                             </div>
                         {% endfor %}
                     </div>
@@ -173,7 +175,9 @@
                 <h5 class="card-title"><i class="ri-file-text-line"></i>&nbsp; Contrat et état des lieux</h5></br>
                 <!-- Boutons de génération de contrat et état des lieux ici -->
                 <div class="mb-3">
-                    <button type="button" class="btn btn-success" id="GenereContrat">Générer contrat </button>
+                    <button type="button" class="btn btn-success">
+                        <a href="{{ path('generer_contrat_odt') }}">Générer le contrat</a>
+                    </button>
                 </div>
                 <div class="mb-3">
                     <button type="button" class="btn btn-primary" id="GenereEtatLieux">Générer etat des lieux</button>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}SCI ZAYS{% endblock %}</title>
+    <!-- Google Fonts -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+    <!-- Stylesheets specific to this page -->
+    {% block stylesheets %}{% endblock %}
+</head>
+<body>
+    <!-- Header section -->
+    {% include 'header.html.twig' %}
+
+    <!-- Main content section -->
+    <section class="cards mt-5">
+        <div class="d-flex justify-content-center align-items-center mb-3">
+            <h5 class="text-center"><i class="ri-community-line"></i>&nbsp; Liste des appartements</h5>
+        </div>
+        <div class="container-fluid">
+            <div class="row">
+                {% for a in pAppartements %}
+                <!-- Single Appartement Card -->
+                <div class="col-lg-4 mb-4">
+                    <div class="card">
+                        <div class="card-header">
+                            <i class="ri-home-3-line"></i>&nbsp; Appartement {{ a.porte }}
+                            <span class="badge badge-success float-right">Disponible</span>
+                        </div>
+                        <div class="card-body">
+                            <p class="card-text">Situation: {{ a.situation }}</p>
+                            <a href="{{ path('appartConsulter', { 'id': a.id }) }}" class="btn btn-primary">Voir les détails</a>
+                        </div>
+                    </div>
+                </div>
+                {% else %}
+                <!-- No Appartements Found -->
+                <div class="col-lg-12">
+                    <p>Aucun appartement n'a été trouvé.</p>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+</body>
+</html>

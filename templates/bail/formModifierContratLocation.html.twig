@@ -111,7 +111,9 @@
                                 </div>
                             </div>
                             <div class="mb-3">
-                                <button type="button" class="btn btn-primary" id="addPieceJustificativeButton">Ajouter une pièce justificative</button>
+                                <div class="form-group">
+                                    {{ form_row(locataire.pieceJustificative, {'attr': {'class': 'form-control'}}) }}
+                                </div>
                             </div>
                         {% endfor %}
                     </div>
@@ -188,33 +190,31 @@
         <div class="card mb-4">
             <div class="card-body">
                 <h5 class="card-title"><i class="ri-file-text-line"></i>&nbsp; Action Contrat</h5></br>
+                <div class="row">
+                    <div class="col-md-4">
                 <!-- Boutons de génération de contrat et état des lieux ici -->
                 <div class="mb-3">
-                    <label for="{{ form.BailSigne.vars.id }}" class="btn btn-success">
-                        <i class="ri-draft-line"></i> Joindre le bail signé
-                        {{ form_widget(form.BailSigne, {'attr': {'style': 'display:none;'}}) }}
-                    </label>
+                    <div class="form-group">
+                        {{ form_row(form.BailSigne, {'attr': {'class': 'form-control'}}) }}
+                    </div>
                 </div>
 
                 <div class="mb-3">
-                    <label for="{{ form.EtatLieuEntreeSigne.vars.id }}" class="btn btn-info">
-                        <i class="ri-file-list-line"></i> Joindre l’état des lieux d’entrée signé
-                        {{ form_widget(form.EtatLieuEntreeSigne, {'attr': {'style': 'display:none;'}}) }}
-                    </label>
+                    <div class="form-group">
+                        {{ form_row(form.EtatLieuEntreeSigne, {'attr': {'class': 'form-control'}}) }}
+                    </div>
                 </div>
 
                 <div class="mb-3">
-                    <label for="{{ form.AttestationAssurance.vars.id }}" class="btn btn-warning">
-                        <i class="ri-shield-check-line"></i> Joindre attestation assurance locataire
-                        {{ form_widget(form.AttestationAssurance, {'attr': {'style': 'display:none;'}}) }}
-                    </label>
+                    <div class="form-group">
+                        {{ form_row(form.AttestationAssurance, {'attr': {'class': 'form-control'}}) }}
+                    </div>
                 </div>
 
                 <div class="mb-3">
-                    <label for="{{ form.EtatLieuSortieSigne.vars.id }}" class="btn btn-danger">
-                        <i class="ri-file-list-line"></i> Joindre l’état des lieux de sortie signé
-                        {{ form_widget(form.EtatLieuSortieSigne, {'attr': {'style': 'display:none;'}}) }}
-                    </label>
+                    <div class="form-group">
+                        {{ form_row(form.EtatLieuSortieSigne, {'attr': {'class': 'form-control'}}) }}
+                    </div>
                 </div>
 
                 <div class="mb-3">
@@ -286,6 +286,8 @@
                             </div>
                         </div>
                     </div>
+                </div>
+                </div>
                 </div>
             </div>
         </div>

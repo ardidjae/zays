@@ -28,13 +28,25 @@
 
         <div class="mb-3">
             <div class="form-group">
-                {{ form_row(form.Nom, {'attr': {'class': 'form-control','placeholder': 'Paul'}}) }}
+                {{ form_row(form.Nom, {'attr': {'class': 'form-control'}}) }}
             </div>
         </div>
 
         <div class="mb-3">
             <div class="form-group">
-                {{ form_row(form.Prenom, {'attr': {'class': 'form-control','placeholder': 'Namine'}}) }}
+                {{ form_row(form.Prenom, {'attr': {'class': 'form-control'}}) }}
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <div class="form-group">
+                {{ form_row(form.email, {'attr': {'class': 'form-control',}}) }}
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <div class="form-group">
+                {{ form_row(form.telephone, {'attr': {'class': 'form-control'}}) }}
             </div>
         </div>
 
@@ -52,15 +64,10 @@
 
         <div class="mb-3">
             <div class="form-group">
-                {{ form_row(form.MontantCaf, {'attr': {'class': 'form-control','placeholder': '300 €'}}) }}
+                {{ form_row(form.pieceJustificative, {'attr': {'class': 'form-control'}}) }}
             </div>
         </div>
-
-        <div class="mb-3">
-            <div class="form-group">
-                {{ form_row(form.Archive, {'attr': {'class': 'form-control','placeholder': 'Default: 0'}}) }}
-            </div>
-        </div>
+        {{ form_row(form.enregistrer)}}
         {{ form_end(form) }}
     </div>
 </body>

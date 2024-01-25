@@ -52,10 +52,19 @@ quittancePDF:
     path: /baux/{id}/quittance
     controller: App\Controller\BailController::quittancePDF
 
-# CONSULTER APPARTEMENT
+# CONSULTER APPARTEMENT AVEC LOCATAIRE
 appartementConsulter:
     path: /appartement/consulter/{id}
     controller: App\Controller\AppartementController::consulterAppartement
+
+# LISTE DES APPARTEMENTS SIMPLEMENT 
+appartementLister:
+    path: /appartement/lister
+    controller: App\Controller\AppartementController::listerAppartement
+
+appartConsulter:
+    path: /appartement/consulterAppart/{id}
+    controller: App\Controller\AppartementController::consulterAppart
 
 # LISTER CONTRAT DE LOCATION
 contratLocationLister:
@@ -93,9 +102,9 @@ contratLocationPDF:
     controller: App\Controller\BailController::contratLocationPDF
 
 # AJOUTER LOCATAIRE
-#ajouterLocataire:
-#    path: /locataire/ajouter
-#    controller: App\Controller\LocataireController::ajouterLocataire
+ajouterLocataire:
+    path: /locataire/ajouter
+    controller: App\Controller\LocataireController::ajouterLocataire
 
 # CONSULTER LOCATAIRE
 locataireConsulter:
@@ -156,3 +165,22 @@ userProfil:
 empruntLister:
     path: /emprunt/lister
     controller: App\Controller\EmpruntController::listerEmprunt
+
+# AJOUTER PRODUCT
+new:
+    path: /product/new
+    controller: App\Controller\ProductController::new
+
+generer_contrat_odt:
+    path: /baux/genererContratOdt
+    controller: App\Controller\BailController::genererContratOdt
+
+# LISTE DES IMMEUBLES 
+immeubleLister:
+    path: /immeuble/lister
+    controller: App\Controller\ImmeubleController::listerImmeuble
+
+# CONSULTER DES IMMEUBLES 
+immeubleConsulter:
+    path: /immeuble/consulter/{id}
+    controller: App\Controller\ImmeubleController::consulterImmeuble

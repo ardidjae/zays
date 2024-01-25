@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}SCI ZAYS{% endblock %}</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+    {% block stylesheets %}{% endblock %}
+</head>
+<body>
+    <!-- Inclusion des entêtes et pieds de page -->
+    {% include 'header.html.twig' %}
+    {% block titrePage %}
+    {% endblock %}
+    <!-- Section d'information -->
+    <section class="information"></br>
+    <div class="d-flex justify-content-center align-items-center mb-3">
+            <h5 class="text-center">Details sur l'appartement</h5>
+    </div></br>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="card">
+                        <div class="card-header border-bottom">
+                            <i class="ri-file-list-line"></i>&nbsp; Fiche d'appartement
+                        </div>
+                        <div class="card-body">
+                            <div class="information-container">
+                                <!-- Informations sur le l'appartement -->
+                                <div class="information-item">
+                                    <strong>Porte :</strong> {{appartement.porte}}
+                                </div></br>
+                                <div class="information-item">
+                                    <strong>Immeuble :</strong> {{appartement.immeuble.nom}}
+                                </div></br>
+                                <div class="information-item">
+                                    <strong>Situation :</strong> {{appartement.situation}}
+                                </div></br>
+                                <div class="information-item">
+                                    <strong>Surface Habitable :</strong> {{appartement.surfaceHabitable}} m²
+                                </div></br>
+                                <div class="information-item">
+                                    <strong>Surface au sol :</strong> {{appartement.surfaceSol}} m²
+                                </div></br>
+                            </div>
+                        </div>
+                    </div>
+                </div></br>
+
+                <div class="col-lg-6">
+                    <div class="card">
+                        <div class="card-header border-bottom">
+                            <i class="ri-download-fill"></i>&nbsp; Téléverser une image
+                        </div>
+                        {{ form_start(form) }}
+                        <div class="card-body">
+                            <div class="information-container mb-3">
+                                <!-- Additional information for the second card -->
+                                    {{ form_row(form.image) }}
+                            </div>
+                            <div class="mb-3">
+                                {{ form_row(form.enregistrer, {'label': 'Enregistrer', 'attr': {'class': 'btn btn-primary'}}) }}
+                            </div>
+                        </div>
+                        {{ form_end(form) }}
+                    </div>
+                </div></br>
+            </div></br>
+
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="card">
+                        <div class="card-header border-bottom">
+                            <i class="ri-folder-image-line"></i>&nbsp; Images de l'appartement
+                        </div>
+                        <div class="card-body">
+                            {% if files|length > 0 %}
+                                <ul>
+                                    {% for file in files %}
+                                        <!-- Ajoutez ici le code pour afficher les images, par exemple, avec une balise <img> -->
+                                        {% set imagePath = app.request.schemeAndHttpHost ~ '/zays/ressources/appartement/' ~ appartement.porte ~ '/' ~ file.getFilename() %}
+                                        <img src="{{ imagePath }}" alt="{{ file.getFilename() }}" class="img-thumbnail">
+                                    {% endfor %}
+                                </ul>
+                            {% else %}
+                                <p>Aucune image dans le dossier.</p>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div></br>
+            <div class="mb-3">
+                <a class="btn btn-primary" href="http://localhost/zays/public/appartement/lister">Retour</a>
+            </div>
+        </div>
+    </section>
+</body>
+</html>
