@@ -8,6 +8,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\MoneyType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
@@ -15,6 +16,7 @@ use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
+use Symfony\Component\Validator\Constraints\File;
 
 class BailType extends AbstractType
 {
@@ -46,9 +48,11 @@ class BailType extends AbstractType
                 'choice_label' => 'porte',
                 'label' => 'Selectionner une appart :',
             ])
-            ->add('locataires', CollectionType::class, ['entry_type' => LocataireType::class,
+            ->add('locataires', CollectionType::class, [
+                'entry_type' => LocataireType::class,
                 'entry_options' => ['label' => false],
                 'allow_add' => true,
+                'by_reference' => true,
             ])
 
             ->add('enregistrer', SubmitType::class, array('label' => 'Nouvel Bail'))
