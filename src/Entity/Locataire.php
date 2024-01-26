@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: LocataireRepository::class)]
 class Locataire
@@ -17,15 +18,36 @@ class Locataire
     private ?int $id = null;
 
     #[ORM\Column(length: 50)]
+    #[Assert\NotBlank(message: "Le nom est requis.")]
+    #[Assert\Length(
+        min: 2,
+        max: 50,
+        minMessage: "Le nom doit contenir au moins {{ limit }} caractères.",
+        maxMessage: "Le nom doit comporter au maximum 50 caractères",
+    )]
     private ?string $Nom = null;
 
     #[ORM\Column(length: 50)]
+    #[Assert\NotBlank(message: "Le prénom est requis.")]
+    #[Assert\Length(
+        min: 2,
+        minMessage: "Le nom doit contenir au moins {{ limit }} caractères."
+    )]
     private ?string $Prenom = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
+    #[Assert\NotBlank(message: "La date de naissance est requise.")]
+    #[Assert\LessThan('today', message:'La date ne peut pas être supérieure à aujourd\'hui')]
     private ?\DateTimeInterface $DateNaissance = null;
 
     #[ORM\Column(length: 50)]
+    #[Assert\NotBlank(message: "Le lieu de naissance est requis.")]
+    #[Assert\Length(
+        min: 2,
+        max: 50,
+        minMessage: "Le lieu de naissance doit contenir au moins {{ limit }} caractères.",
+        maxMessage: "Le lieu de naissance doit comporter au maximum 50 caractères",
+    )]
     private ?string $LieuNaissance = null;
 
     #[ORM\Column]
@@ -43,9 +65,13 @@ class Locataire
     private Collection $bails;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message: "L'adresse e-mail est requise.")]
+    #[Assert\Email(message: "L'adresse e-mail n'est pas valide.")]
     private ?string $email = null;
 
     #[ORM\Column]
+    #[Assert\NotBlank(message: "Le numéro de téléphone est requis.")]
+    #[Assert\Type(type: "numeric", message: "Le numéro de téléphone doit être numérique.")]
     private ?float $telephone = null;
 
     #[ORM\Column(length: 255)]

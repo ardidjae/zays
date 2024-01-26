@@ -24,7 +24,7 @@
             <h5 class="text-center"><i class="ri-user-line"></i>&nbsp; Nouveau locataire</h5>
         </div>
 
-        {{ form_start(form) }}
+        {{ form_start(form,{attr:{novalidate:'novalidate'}}) }}
 
         <div class="mb-3">
             <div class="form-group">
@@ -46,7 +46,7 @@
 
         <div class="mb-3">
             <div class="form-group">
-                {{ form_row(form.telephone, {'attr': {'class': 'form-control'}}) }}
+                {{ form_row(form.telephone, {'attr': {'class': 'form-control', placeholder: '0789632541'}}) }}
             </div>
         </div>
 
