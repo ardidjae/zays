@@ -13,48 +13,77 @@
     {% include 'header.html.twig' %}</br></br></br>
     <div class="container">
         <div class="row justify-content-md-center mt-5">
-            <div class="col-md-6">
+            <div class="col-md-4">
                 <form method="post" class="form-signin">
                     <div class="text-center">
                         <img src="/zays/public/img/zays.png" alt="Logo" style="width: 25%;">
                     </div>
-                    <h1 class="h4 mb-3 font-weight-normal">Inscription</h1>
+
+                    <div class="card mb-3">
+
+                    <div class="card-body">
+
+                    <div class="pt-4 pb-2">
+                        <h5 class="card-title text-center pb-0 fs-4">Créez un compte</h5>
+                        <p class="text-center small">Saisissez votre DCP pour vous inscrire</p>
+                    </div>
+
                     {{ form_start(registrationForm) }}
-                    <div class="form-group">
-                        {{ form_row(registrationForm.nom, {
-                            'attr': {
-                                'class': 'form-control',
-                                'placeholder': 'Lonardino'
-                            }
-                        }) }}
-                    </div></br>
-                    {{ form_row(registrationForm.prenom, {
-                            'attr': {
-                                'class': 'form-control',
-                                'placeholder': 'Mickael'
-                            }
-                        }) }}</br>
+                    <div class="mb-3">
+                        {{ form_label(registrationForm.nom, 'Nom') }}
+                        <div class="input-group has-validation">
+                            <span class="input-group-text" id="inputGroupPrepend"><i class="ri-user-line"></i></span>
+                            {{ form_widget(registrationForm.nom, {
+                                'attr': {
+                                    'class': 'form-control',
+                                }
+                            }) }}
+                            <div class="invalid-feedback">Veuillez saisir votre nom !</div>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        {{ form_label(registrationForm.prenom, 'Prénom') }}
+                        <div class="input-group has-validation">
+                            <span class="input-group-text" id="inputGroupPrepend"><i class="ri-user-line"></i></span>
+                            {{ form_widget(registrationForm.prenom, {
+                                'attr': {
+                                    'class': 'form-control',
+                                }
+                            }) }}
+                            <div class="invalid-feedback">Veuillez saisir votre prénom !</div>
+                        </div>
+                    </div>
+
                     {{ form_errors(registrationForm) }}
-                    <div class="form-group">
-                        {{ form_row(registrationForm.email, {
-                            'attr': {
-                                'class': 'form-control',
-                                'placeholder': 'mickael@hotmail.com'
-                            }
-                        }) }}
-                    </div></br>
 
-                    <div class="form-group">
-                        {{ form_row(registrationForm.plainPassword, {
-                            'label': 'Mot de passe',
-                            'attr': {
-                                'class': 'form-control',
-                                'placeholder': 'Mot de passe'
-                            }
-                        }) }}
-                    </div></br>
+                    <div class="mb-3">
+                        {{ form_label(registrationForm.email, 'Adresse e-mail') }}
+                        <div class="input-group has-validation">
+                            <span class="input-group-text" id="inputGroupPrepend"><i class="ri-mail-line"></i></span>
+                            {{ form_widget(registrationForm.email, {
+                                'attr': {
+                                    'class': 'form-control',
+                                }
+                            }) }}
+                            <div class="invalid-feedback">Veuillez saisir votre adresse e-mail !</div>
+                        </div>
+                    </div>
 
-                    <div class="form-check mb-3">
+                    <div class="mb-3">
+                        {{ form_label(registrationForm.plainPassword, 'Mot de passe') }}
+                        <div class="input-group has-validation">
+                            <span class="input-group-text" id="inputGroupPrepend"><i class="ri-key-2-line"></i></span>
+                            {{ form_widget(registrationForm.plainPassword, {
+                                'attr': {
+                                    'class': 'form-control',
+                                }
+                            }) }}
+                            <div class="invalid-feedback">Veuillez saisir votre mot de passe !</div>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
                         {{ form_row(registrationForm.agreeTerms, {
                             'label': 'J\'accepte les termes et conditions',
                             'attr': {
@@ -63,8 +92,16 @@
                         }) }}
                     </div>
 
-                    <button type="submit" class="btn btn-primary btn-block">S'inscrire</button>
+                    <div class="col-12">
+                        <button type="submit" class="btn btn-primary btn-block w-100">S'inscrire</button>
+                    </div></br>
+
+                    <div class="col-12">
+                        <p class="small mb-0">Vous avez déja un compte ? <a href="{{ asset('login') }}">Connectez-vous</a></p>
+                    </div>
                     {{ form_end(registrationForm) }}
+                    </div>
+                    </div>
                 </form>
             </div>
         </div>
