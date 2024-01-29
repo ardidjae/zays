@@ -5,6 +5,13 @@
     <title>{% block title %}SCI ZAYS{% endblock %}</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
     {% block stylesheets %}{% endblock %}
+    <style>
+    .img-thumbnail {
+        width: 200px; /* Remplacez 200px par la largeur souhaitée */
+        height: 200px; /* Remplacez 150px par la hauteur souhaitée */
+        object-fit: cover; /* Optionnel : ajuste la taille sans déformer l'image */
+    }
+    </style>
 </head>
 <body>
     <!-- Inclusion des entêtes et pieds de page -->
