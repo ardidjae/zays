@@ -24,7 +24,7 @@ class AppartementController extends AbstractController
         ]);
     }
 
-    public function consulterAppartement(ManagerRegistry $doctrine, int $id){
+    public function consulterAppartement(ManagerRegistry $doctrine, int $id, SluggerInterface $slugger){
 
         $appartement = $doctrine->getRepository(Appartement::class)->find($id);
 
@@ -34,8 +34,17 @@ class AppartementController extends AbstractController
             );
         }
 
+        // Récupérer le répertoire de l'appartement
+        $numeroPorteAppartement = $appartement->getPorte();
+        $appartementDirectory = $this->getParameter('appartement_directory') . '/' . $slugger->slug($numeroPorteAppartement);
+
+        // Utiliser Finder pour récupérer la liste des fichiers dans le répertoire
+        $finder = new Finder();
+        $files = $finder->files()->in($appartementDirectory);
+
         return $this->render('appartement/consulter.html.twig', [
             'appartement' => $appartement,
+            'files' => $files,
         ]);
     }
 
