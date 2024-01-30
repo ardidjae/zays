@@ -18,19 +18,15 @@ class Bail
     private ?int $id = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
-    #[Assert\NotBlank(message: "La date de début est requise.")]
     private ?\DateTimeInterface $dateDebut = null;
 
     #[ORM\Column]
-    #[Assert\NotBlank(message: "Le loyer brut est requis.")]
     private ?float $MontantHC = null;
 
     #[ORM\Column]
-    #[Assert\NotBlank(message: "Le mont de charges est requis.")]
     private ?float $MontantCharges = null;
 
     #[ORM\Column]
-    #[Assert\NotBlank(message: "Le montant de la caution est requis.")]
     private ?float $MontantCaution = null;
 
     #[ORM\Column(length: 255)]
@@ -40,11 +36,9 @@ class Bail
     private ?string $NomCaution2 = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
-    #[Assert\NotBlank(message: "La date de fin est requis.")]
     private ?\DateTimeInterface $DateFin = null;
 
     #[ORM\Column(length: 255)]
-    #[Assert\NotBlank(message: "La durée du bail est requis.")]
     private ?string $DureeBail = null;
 
     #[ORM\Column(length: 255)]
@@ -72,15 +66,12 @@ class Bail
     private Collection $locataires;
 
     #[ORM\Column]
-    #[Assert\NotBlank(message: "Le montant premiére écheance est requis.")]
     private ?float $MontantPremEcheance = null;
 
     #[ORM\Column]
-    #[Assert\NotBlank(message: "Le montant derniére écheance est requis.")]
     private ?float $MontantDerEcheance = null;
 
     #[ORM\Column(length: 255)]
-    #[Assert\NotBlank(message: "Le trimestre référence est requis.")]
     private ?string $TrimestreReference = null;
 
     #[ORM\Column(length: 255)]
@@ -90,7 +81,6 @@ class Bail
     private ?int $archive = null;
 
     #[ORM\Column]
-    #[Assert\NotBlank(message: "Le caution restituer est requis.")]
     private ?float $CautionRestituer = null;
 
     #[ORM\Column(length: 255)]
