@@ -34,8 +34,8 @@ paiementLister:
 
 # LISTER MOUVEMENT
 mouvementLister:
-    path: /mouvement/lister
-    controller: App\Controller\MouvementController::listerMouvement
+    path: /mouvement/listerEtModifierMouvements
+    controller: App\Controller\MouvementController::listerEtModifierMouvements
 
 # UPLOAD FILE MOUVEMENT
 mouvementUploadFile:
@@ -44,7 +44,7 @@ mouvementUploadFile:
 
 # MODIFIER MOUVEMENT
 modifierMouvement:
-    path: /mouvement/modifier/{id}
+    path: /mouvement/modifier
     controller: App\Controller\MouvementController::modifierMouvement
 
 # PDF QUITTANCE
@@ -184,3 +184,13 @@ immeubleLister:
 immeubleConsulter:
     path: /immeuble/consulter/{id}
     controller: App\Controller\ImmeubleController::consulterImmeuble
+
+# CONSULTER DISSOCIER MOUVEMENT
+dissocierMouvement:
+    path: /mouvement/dissocier-mouvement/{id}
+    controller: App\Controller\MouvementController::dissocierMouvement
+
+# CONSULTER TRAITER DISSOCIATION MOUVEMENT
+traiterdissocierMouvement:
+    path: /mouvement/traiter-dissociation/{id}
+    controller: App\Controller\MouvementController::traiterDissociation
