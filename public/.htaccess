@@ -18,6 +18,10 @@ DirectoryIndex index.php
 </IfModule>
 
 <IfModule mod_rewrite.c>
+
+    # Ajoutez la ligne suivante pour augmenter la limite de mémoire
+    php_value memory_limit 512M
+
     # This Option needs to be enabled for RewriteRule, otherwise it will show an error like
     # 'Options FollowSymLinks or SymLinksIfOwnerMatch is off which implies that RewriteRule directive is forbidden'
     Options +FollowSymlinks
