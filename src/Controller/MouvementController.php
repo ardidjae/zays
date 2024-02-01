@@ -11,6 +11,10 @@ use App\Entity\Mouvement;
 use App\Entity\SousCategorie;
 use App\Form\MouvementModifierType;
 use Symfony\Component\Security\Core\Security;
+use Symfony\Component\Form\FormFactoryInterface;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use App\Entity\Paiement;
+use App\Entity\Bail;
 
 class MouvementController extends AbstractController
 {
@@ -75,10 +79,13 @@ class MouvementController extends AbstractController
                      $entityManager = $doctrine->getManager();
                      $entityManager->persist($mouvement);
                      $entityManager->flush();
+
+                     $this->addFlash('success', 'Mouvements modifiés avec succès.');
+
                      return $this->render('mouvement/lister.html.twig', ['mouvement' => $mouvement,]);
                }
                else{
-                    return $this->render('mouvement/modifier.html.twig', array('form' => $form->createView(),));
+                    return $this->render('mouvement/modifier_mouvements.html.twig', array('form' => $form->createView(),));
                }
         }
     }
@@ -87,6 +94,54 @@ class MouvementController extends AbstractController
     {
         return $this->render('mouvement/uploadFile.html.twig', [
             'controller_name' => 'MouvementController',
+        ]);
+    }
+
+    public function listerEtModifierMouvements(Request $request, ManagerRegistry $doctrine)
+    {
+        // Récupérez vos mouvements à partir de la base de données
+        $entityManager = $doctrine->getManager();
+        $mouvementRepository = $doctrine->getRepository(Mouvement::class);
+        $mouvements = $mouvementRepository->findAll();
+
+        // Créez un formulaire avec une collection de formulaires pour chaque mouvement
+        $form = $this->createFormBuilder(['mouvements' => $mouvements])
+            ->add('mouvements', CollectionType::class, [
+                'entry_type' => MouvementModifierType::class,
+                'entry_options' => ['label' => false], // Supprimez les étiquettes pour chaque sous-formulaire
+            ])
+            ->getForm();
+
+        // Gérez la soumission du formulaire
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            // Traitez les données du formulaire et enregistrez-les en base de données
+            // ...
+
+            // Parcourez chaque mouvement pour effectuer les mises à jour nécessaires
+            foreach ($mouvements as $mouvement) {
+                // Récupérer l'entité Mouvement associée au formulaire
+                $mouvementToUpdate = $mouvementRepository->find($mouvement->getId());
+
+                if ($mouvementToUpdate) {
+                    // Mettre à jour uniquement la sous-catégorie
+                    $sousCategorie = $mouvement->getSousCategorie();
+                    $mouvementToUpdate->setSousCategorie($sousCategorie);
+                    $this->addFlash('success', 'Mouvement modifié avec succès.');
+                } else {
+                    // Handle case where the Mouvement with the given ID was not found
+                    $this->addFlash('error', 'Mouvement non trouvé.');
+                }
+            }
+            // Redirigez ou affichez un message de confirmation
+            // ...
+            // Flush une seule fois après la boucle
+            $entityManager->flush();
+        }
+
+        return $this->render('mouvement/modifier_mouvements.html.twig', [
+            'form' => $form->createView(),
         ]);
     }
 }
