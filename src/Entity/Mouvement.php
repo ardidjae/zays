@@ -9,6 +9,7 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: MouvementRepository::class)]
+#[ORM\HasLifecycleCallbacks]
 class Mouvement
 {
     #[ORM\Id]
@@ -23,7 +24,17 @@ class Mouvement
     private ?string $libelle = null;
 
     #[ORM\Column]
+    /**
+     * @ORM\Column(type="decimal", precision=10, scale=2, nullable=true)
+     */
     private ?float $debit = null;
+
+    #[ORM\PrePersist]
+    public function prePersist(): void
+    {
+        // Convertir le séparateur décimal de virgule à point avant la sauvegarde
+        $this->debit = str_replace(',', '.', $this->debit);
+    }
 
     #[ORM\Column]
     private ?float $credit = null;
