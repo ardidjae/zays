@@ -194,3 +194,8 @@ dissocierMouvement:
 traiterdissocierMouvement:
     path: /mouvement/traiter-dissociation/{id}
     controller: App\Controller\MouvementController::traiterDissociation
+
+# IMPORTER FILE MOUVEMENT
+mouvementImporter:
+    path: /mouvement/importerFichier
+    controller: App\Controller\MouvementController::importerFichier

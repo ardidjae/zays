@@ -15,6 +15,7 @@ use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use App\Entity\Paiement;
 use App\Entity\Bail;
+use PhpOffice\PhpSpreadsheet\Reader\Xlsx;
 
 class MouvementController extends AbstractController
 {
@@ -142,6 +143,81 @@ class MouvementController extends AbstractController
 
         return $this->render('mouvement/modifier_mouvements.html.twig', [
             'form' => $form->createView(),
+        ]);
+    }
+
+    public function importerFichier(Request $request, ManagerRegistry $doctrine): Response
+    {
+        $entityManager = $doctrine->getManager();
+        // Vérifiez si le formulaire est soumis
+        if ($request->isMethod('POST')) {
+            // Gérer le téléchargement du fichier
+            $file = $request->files->get('file');
+
+            // Vérifiez si un fichier a été téléchargé
+            if ($file) {
+                $reader = new Xlsx();
+                $spreadsheet = $reader->load($file->getPathname());
+                $worksheet = $spreadsheet->getActiveSheet();
+
+                foreach ($worksheet->getRowIterator() as $row) {
+                    $rowData = [];
+                    foreach ($row->getCellIterator() as $cell) {
+                        $rowData[] = $cell->getValue();
+                    }
+
+                    // Créer une nouvelle entité Mouvement et définir ses propriétés
+                    $mouvement = new Mouvement();
+                    $dateValue = $rowData[0];
+                    if ($dateValue !== null) {
+                        // Convertir la date en objet DateTime avec le format "d/m/Y"
+                        $dateObject = \DateTime::createFromFormat('d/m/Y', $dateValue);
+
+                        if ($dateObject !== false) {
+                            // Convertir l'objet DateTime au format "Y-m-d"
+                            $formattedDate = $dateObject->format('Y-m-d');
+                            $mouvement->setDateM(\DateTime::createFromFormat('Y-m-d', $formattedDate));
+                        } else {
+                            // Gérer le cas où la conversion de la date échoue
+                            $this->addFlash('error', 'La conversion de la date a échoué pour cette ligne : ' . $dateValue);
+                            // Vous pouvez également décider de ne pas persister cette entité dans ce cas
+                        }
+                    } else {
+                        // Gérer le cas où la valeur de la date est nulle
+                        $this->addFlash('error', 'La valeur de la date est nulle pour cette ligne.');
+                        // Vous pouvez également décider de ne pas persister cette entité dans ce cas
+                    }
+                    $libelleValue = $rowData[1];
+                    if ($libelleValue !== null) {
+                        $mouvement->setLibelle($libelleValue);
+                    } else {
+                        // Gérer le cas où la valeur du libellé est nulle
+                        // Par exemple, enregistrer un message dans le journal ou ajouter un message flash
+                        $this->addFlash('error', 'La valeur du libellé est nulle pour cette ligne.');
+                        // Vous pouvez également décider de ne pas persister cette entité dans ce cas
+                    }
+                    $mouvement->setDebit(floatval($rowData[2])); // Supposons que la troisième colonne est le débit
+                    $mouvement->setCredit(floatval($rowData[3])); // Supposons que la quatrième colonne est le crédit
+
+                    // Ajouter d'autres propriétés au besoin
+
+                    // Persister l'entité
+                    $entityManager->persist($mouvement);
+                }
+
+                // Appliquer les changements à la base de données
+                $entityManager->flush();
+
+                // Ajouter un message flash ou tout autre retour d'information
+                $this->addFlash('success', 'Importation réussie !');
+            } else {
+                // Gérer le cas où aucun fichier n'est téléchargé
+                $this->addFlash('error', 'Aucun fichier téléchargé !');
+            }
+        }
+
+        return $this->render('mouvement/importExcel.html.twig', [
+            'controller_name' => 'MouvementController',
         ]);
     }
 }
