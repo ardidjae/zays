@@ -24,6 +24,7 @@ use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use PhpOffice\PhpWord\PhpWord;
 use PhpOffice\PhpWord\IOFactory;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 
 class BailController extends AbstractController
@@ -46,6 +47,59 @@ class BailController extends AbstractController
         return $this->render('bail/lister.html.twig', [
             'pBails' => $bails,]);
 
+    }
+
+    #[Route('/api/baux', name: 'api_baux')]
+    public function listerBauxAPI(ManagerRegistry $doctrine): JsonResponse
+    {
+        $repository = $doctrine->getRepository(Bail::class);
+        $bails = $repository->findBy(['archive' => 0]);
+
+        // Convertir les données en format JSON et les renvoyer
+        $data = [];
+        foreach ($bails as $bail) {
+            $data[] = [
+                'id' => $bail->getId(),
+                'montantHC' => $bail->getMontantHC(),
+                'MontantCharges' => $bail->getMontantCharges(),
+                'MontantCaution' => $bail->getMontantCaution(),
+                'dateDebut' => $bail->getDateDebut()->format('Y-m-d'),
+                'dateFin' => $bail->getDateFin() ? $bail->getDateFin()->format('Y-m-d') : null,
+                'dureeBail' => $bail->getDureeBail(),
+                'appartement' => [
+                    'id' => $bail->getAppartement()->getId(),
+                    'porte' => $bail->getAppartement()->getPorte(),
+                    'surfaceHabitable' => $bail->getAppartement()->getSurfaceHabitable(),
+                    'situation' => $bail->getAppartement()->getSituation(),
+                    'immeuble' => $bail->getAppartement()->getImmeuble()->getNom(),
+                    'numCompteur' => $bail->getAppartement()->getNumCompteur(),
+                ],
+                'associe' => [
+                    'nom' => $bail->getAssocie() ? $bail->getAssocie()->getNom() : null,
+                    // Add other properties if needed
+                ],
+                'locataires' => $bail->getLocataires()->map(function($locataire) {
+                    return [
+                        'nom' => $locataire->getNom(),
+                        'prenom' => $locataire->getPrenom(),
+                        // Add other properties if needed
+                    ];
+                })->toArray(),
+                'nomCaution1' => $bail->getNomCaution1(),
+                'nomCaution2' => $bail->getNomCaution2(),
+                'paiements' => $bail->getPaiements()->map(function ($paiement) {
+                    return [
+                        'dateP' => $paiement->getDateP()->format('Y-m-d'),
+                        'montant' => $paiement->getMontant(),
+                        // Add other properties if needed
+                    ];
+                })->toArray(),
+
+                // Ajoutez d'autres propriétés au besoin
+            ];
+        }
+
+        return new JsonResponse($data);
     }
 
     public function listerBauxArchives(ManagerRegistry $doctrine){
@@ -132,6 +186,52 @@ class BailController extends AbstractController
             'pPaiements' => $paiements,
         ]);
     }
+
+    #[Route('/api/baux/consulter/{id}', name: 'api_consulter_baux')]
+    public function consulterBauxAPI(ManagerRegistry $doctrine, int $id): JsonResponse
+    {
+        $bail = $doctrine->getRepository(Bail::class)->find($id);
+
+        $data = [];
+        $data[] = [
+            'id' => $bail->getId(),
+            'montantHC' => $bail->getMontantHC(),
+            'MontantCharges' => $bail->getMontantCharges(),
+            'MontantCaution' => $bail->getMontantCaution(),
+            'dateDebut' => $bail->getDateDebut()->format('Y-m-d'),
+            'dateFin' => $bail->getDateFin() ? $bail->getDateFin()->format('Y-m-d') : null,
+            'dureeBail' => $bail->getDureeBail(),
+            'associe' => [
+                'nom' => $bail->getAssocie() ? $bail->getAssocie()->getNom() : null,
+                // Add other properties if needed
+            ],
+            'appartement' => [
+                'id' => $bail->getAppartement()->getId(),
+                'porte' => $bail->getAppartement()->getPorte(),
+                'surfaceHabitable' => $bail->getAppartement()->getSurfaceHabitable(),
+            ],
+            'locataires' => $bail->getLocataires()->map(function ($locataire) {
+                return [
+                    'id' => $locataire->getId(),
+                    'nom' => $locataire->getNom(),
+                    'prenom' => $locataire->getPrenom(),
+                    // Add other properties if needed
+                ];
+            })->toArray(),
+            'nomCaution1' => $bail->getNomCaution1(),
+            'nomCaution2' => $bail->getNomCaution2(),
+            'paiements' => $bail->getPaiements()->map(function ($paiement) {
+                return [
+                    'dateP' => $paiement->getDateP()->format('Y-m-d'),
+                    'montant' => $paiement->getMontant(),
+                    // Add other properties if needed
+                ];
+            })->toArray(),
+        ];
+
+        return new JsonResponse($data);
+    }
+
 
     public function ajouterBail(ManagerRegistry $doctrine,Request $request, Security $security, SluggerInterface $slugger){
         $bail = new Bail();
@@ -249,6 +349,70 @@ class BailController extends AbstractController
 	    }
     }
 
+    #[Route('/api/bail/ajouter', name: 'api_ajouter_bail', methods: ['POST'])]
+    public function ajouterBailAPI(ManagerRegistry $doctrine, Request $request, SluggerInterface $slugger): JsonResponse
+    {
+        $data = [];
+
+        // Récupérer les données de la requête JSON
+        $requestData = json_decode($request->getContent(), true);
+
+        // Créer une nouvelle instance de Bail
+        $bail = new Bail();
+
+        // Assurez-vous que toutes les données requises sont présentes
+        if (!isset($requestData['appartement'], $requestData['locataires'])) {
+            $data['error'] = 'Données manquantes';
+            return new JsonResponse($data, JsonResponse::HTTP_BAD_REQUEST);
+        }
+
+        // Manipulez les données de l'appartement comme nécessaire et associez-les au bail
+        // Assurez-vous que vous avez le bon ID de l'appartement
+        // $bail->setAppartement($appartement);
+
+        // Manipulez les données des locataires et associez-les au bail
+        foreach ($requestData['locataires'] as $locataireData) {
+            $locataire = new Locataire();
+            $locataire->setNom($locataireData['nom']);
+            $locataire->setPrenom($locataireData['prenom']);
+            $locataire->setDateNaissance($locataireData['dateNaissance']);
+            $locataire->setLieuNaissance($locataireData['lieuNaissance']);
+            $locataire->setEmail($locataireData['email']);
+            $locataire->setTelephone($locataireData['telephone']);
+            $locataire->setPieceJustificative($locataireData['pieceJustificative']);
+
+
+            // Générez un nouveau nom de fichier pour la pièce justificative du locataire si nécessaire
+            // Exemple :
+            $newFilename = $slugger->slug($locataire->getNom() . '-' . $locataire->getPrenom()) . '-' . uniqid() . '.pdf';
+            $locataire->setPieceJustificative($newFilename);
+
+            // Ajoutez le locataire à la liste des locataires du bail
+            $bail->addLocataire($locataire);
+        }
+
+        // Manipulez les autres données du bail
+        // Exemple :
+        $bail->setDateDebut(new \DateTime($requestData['dateDebut']));
+        $bail->setMontantHC($requestData['montantHC']);
+        $bail->setMontantCharges($requestData['montantCharges']);
+        $bail->setMontantCaution($requestData['montantCaution']);
+        $bail->setDureeBail($requestData['dureeBail']);
+        $bail->getAppartement()->setPorte($requestData['porte']);
+
+
+        // Enregistrez le bail dans la base de données
+        $entityManager = $doctrine->getManager();
+        $entityManager->persist($bail);
+        $entityManager->flush();
+
+        // Vous pouvez retourner l'ID du bail nouvellement ajouté si nécessaire
+        $data['id'] = $bail->getId();
+        $data['message'] = 'Bail ajouté avec succès!';
+
+        return new JsonResponse($data, JsonResponse::HTTP_CREATED);
+    }
+
     public function listerContratLocation(ManagerRegistry $doctrine){
 
         $repository = $doctrine->getRepository(Bail::class);
@@ -256,6 +420,36 @@ class BailController extends AbstractController
         $bails = $repository->findBy(['archive' => 0]);
         return $this->render('bail/listerContratLocation.html.twig', [
             'pBails' => $bails,]);
+
+    }
+
+    #[Route('/api/contrat', name: 'api_lister_contrat_location')]
+    public function listerContratLocationAPI(ManagerRegistry $doctrine): JsonResponse
+    {
+
+        $repository = $doctrine->getRepository(Bail::class);
+        $bails = $repository->findBy(['archive' => 0]);
+
+        // Convertir les données en format JSON et les renvoyer
+        $data = [];
+        foreach ($bails as $bail) {
+            $data[] = [
+                'appartement' => [
+                    'porte' => $bail->getAppartement()->getPorte(),
+                ],
+                'locataires' => $bail->getLocataires()->map(function($locataire) {
+                    return [
+                        'nom' => $locataire->getNom(),
+                        'prenom' => $locataire->getPrenom(),
+                        // Add other properties if needed
+                    ];
+                })->toArray(),
+
+                // Ajoutez d'autres propriétés au besoin
+            ];
+        }
+
+        return new JsonResponse($data);
 
     }
 
@@ -323,6 +517,52 @@ class BailController extends AbstractController
         $dompdf->stream("bail_".$bail->getId().".pdf", [
             "Attachment" => false
         ]);
+    }
+
+    #[Route('/api/baux/contrat-pdf/{id}', name: 'api_pdf_contrat_location')]
+    public function contratLocationPDFAPI(ManagerRegistry $doctrine, int $id) : Response
+    {
+        $bail = $doctrine->getRepository(Bail::class)->find($id);
+        $repositoryPaiement = $doctrine->getRepository(Paiement::class);
+        $paiements= $repositoryPaiement->findAll();
+
+        if (!$bail) {
+            throw $this->createNotFoundException(
+            'Aucun bail trouvé'
+            );
+        }
+
+        // Instanciation de la librairie DOMPDF
+        $dompdf = new Dompdf();
+
+        // Contenu HTML
+        $html = $this->renderView('bail/contratLocationPDF.html.twig', [
+            'bail' => $bail,
+        ]);
+
+        // Chargement du contenu HTML
+        $dompdf->loadHtml($html);
+
+        // Configuration des options
+        $dompdf->setPaper('A4', 'portrait');
+
+        // Rendu du PDF
+        $dompdf->render();
+
+        // Envoi du PDF dans la réponse
+        $dompdf->stream("bail_".$bail->getId().".pdf", [
+            "Attachment" => false
+        ]);
+
+        // Renvoyer le PDF en tant que réponse
+        return new Response(
+            $dompdf->output(),
+            Response::HTTP_OK,
+            [
+                'Content-Type' => 'application/pdf',
+                'Content-Disposition' => 'inline; filename="bail_' . $bail->getId() . '.pdf"',
+            ]
+        );
     }
 
     public function genererContratOdt(ManagerRegistry $doctrine, Request $request, Security $security, SluggerInterface $slugger)
