@@ -16,6 +16,7 @@ use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use App\Entity\Paiement;
 use App\Entity\Bail;
 use PhpOffice\PhpSpreadsheet\Reader\Xlsx;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 class MouvementController extends AbstractController
 {
@@ -144,6 +145,69 @@ class MouvementController extends AbstractController
         return $this->render('mouvement/modifier_mouvements.html.twig', [
             'form' => $form->createView(),
         ]);
+    }
+
+    #[Route('/api/mouvements', name: 'api_mouvements')]
+    public function listerEtModifierMouvementsAPI(Request $request, ManagerRegistry $doctrine)
+    {
+        // Récupérez vos mouvements à partir de la base de données
+        $entityManager = $doctrine->getManager();
+        $mouvementRepository = $doctrine->getRepository(Mouvement::class);
+        $mouvements = $mouvementRepository->findAll();
+
+        // Vérifiez la méthode de la requête
+        if ($request->getMethod() === 'POST') {
+            // Récupérez les données JSON envoyées dans la requête
+            $data = json_decode($request->getContent(), true);
+
+            // Traitez les données du formulaire et enregistrez-les en base de données
+            // ...
+
+            // Parcourez chaque mouvement pour effectuer les mises à jour nécessaires
+            foreach ($data['mouvements'] as $mouvementData) {
+                // Récupérer l'entité Mouvement associée au formulaire
+                $mouvementToUpdate = $mouvementRepository->find($mouvementData['id']);
+
+                if ($mouvementToUpdate) {
+                    // Mettre à jour uniquement la sous-catégorie
+                    $sousCategorie = $mouvementData['sousCategorie'];
+                    $mouvementToUpdate->setSousCategorie($sousCategorie);
+                    $this->addFlash('success', 'Mouvement modifié avec succès.');
+                } else {
+                    // Handle case where the Mouvement with the given ID was not found
+                    $this->addFlash('error', 'Mouvement non trouvé.');
+                }
+            }
+            // Flush une seule fois après la boucle
+            $entityManager->flush();
+
+            return new JsonResponse(['message' => 'Mouvements mis à jour avec succès'], JsonResponse::HTTP_OK);
+        }
+
+        // Retournez les données JSON des mouvements
+        $mouvementsData = [];
+        foreach ($mouvements as $mouvement) {
+            $sousCategorie = $mouvement->getSousCategorie();
+            $sousCategorieData = null;
+
+            if ($sousCategorie) {
+                $sousCategorieData = [
+                    'id' => $sousCategorie->getId(),
+                    'libelle' => $sousCategorie->getLibelle(),
+                ];
+            }
+
+            $mouvementsData[] = [
+                'id' => $mouvement->getId(),
+                'dateM' => $mouvement->getDateM()->format('Y-m-d'),
+                'libelle' => $mouvement->getLibelle(),
+                'debit' => $mouvement->getDebit(),
+                'credit' => $mouvement->getCredit(),
+                'sousCategorie' => $sousCategorieData,
+            ];
+        }
+
+        return new JsonResponse($mouvementsData);
     }
 
     public function importerFichier(Request $request, ManagerRegistry $doctrine): Response

@@ -8,6 +8,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\Persistence\ManagerRegistry;
 use App\Entity\Paiement;
 use App\Entity\Bail;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 class PaiementController extends AbstractController
 {
@@ -32,5 +33,34 @@ class PaiementController extends AbstractController
             'pBails' => $bails,
         ]);
 
+    }
+
+    #[Route('/api/loyer', name: 'api_loyer')]
+    public function listerLoyerAPI(ManagerRegistry $doctrine): JsonResponse
+    {
+        $repository = $doctrine->getRepository(Paiement::class);
+        $paiements= $repository->findAll();
+        // Convertir les données en format JSON et les renvoyer
+        $data = [];
+        foreach ($paiements as $paiement) {
+            $bail = $paiement->getBail();
+            $montantTotalLoyer = $bail->getMontantHC() + $bail->getMontantCharges();
+            $soldeMois = $bail->getMontantHC()  + $bail->getMontantCharges() - $paiement->getMontant();
+            $soldeAnnee = $bail->getMontantHC()  + $bail->getMontantCharges() - $paiement->getMontant();
+
+            $data[] = [
+                'id' => $paiement->getId(),
+                'appartement' => $paiement->getBail()->getAppartement()->getPorte(),
+                'locataire' => implode(', ', array_map(function($locataire) {
+                    return $locataire->getNom() . ' ' . $locataire->getPrenom();
+                }, $paiement->getBail()->getLocataires()->toArray())),
+                'loyer_du' => $montantTotalLoyer.' € ',
+                'loyer_percu' => $paiement->getMontant() . ' € | Le ' . $paiement->getDateP()->format('d/m/Y'),
+                'solde_mois' => $soldeMois.' € ',
+                'solde_annee' => $soldeAnnee,
+            ];
+        }
+
+        return new JsonResponse($data);
     }
 }

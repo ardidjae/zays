@@ -13,6 +13,7 @@ use App\Form\CategorieModifierType;
 use App\Form\SousCategorieType;
 use App\Entity\SousCategorie;
 use App\Form\SousCategorieModifierType;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 class AdminController extends AbstractController
 {
@@ -54,6 +55,25 @@ class AdminController extends AbstractController
         return $this->render('admin/categorie/listerCategorie.html.twig', [
             'categorie' => $categorie,]);
 
+    }
+
+    #[Route('/api/categories', name: 'api_categories')]
+    public function listerCategoriesAPI(ManagerRegistry $doctrine): JsonResponse
+    {
+        $repository = $doctrine->getRepository(Categorie::class);
+        $categories = $repository->findAll();
+
+        // Convertir les données en format JSON et les renvoyer
+        $data = [];
+        foreach ($categories as $categorie) {
+            $data[] = [
+                'id' => $categorie->getId(),
+                'nom' => $categorie->getNom(),
+                // Ajoutez d'autres propriétés au besoin
+            ];
+        }
+
+        return new JsonResponse($data);
     }
 
     public function modifierCategorie(ManagerRegistry $doctrine, $id, Request $request){
