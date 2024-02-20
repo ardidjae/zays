@@ -4,8 +4,8 @@ controllers:
 
 # ACCUEIL
 accueil:
-    path: /accueil
-    controller: App\Controller\BailController::index
+    path: /paiement/listerLoyer
+    controller: App\Controller\PaiementController::listerLoyer
 
 # AJOUTER BAIL
 ajouterBail:
