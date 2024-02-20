@@ -32,10 +32,25 @@ class BailController extends AbstractController
     /*
      * #[Route('/bail', name: 'app_bail')]
      */
-    public function index(): Response
+    /*
+    public function indexs(): Response
     {
         return $this->render('bail/accueil.html.twig', [
             'controller_name' => 'BailController',
+        ]);
+    }
+    */
+
+    public function index(Security $security): Response
+    {
+        if (!$security->isGranted('IS_AUTHENTICATED_FULLY')) {
+            // Redirige vers la page de connexion s'ils ne sont pas connectés
+            return $this->redirectToRoute('app_login');
+        }
+
+        // Redirige vers la page d'accueil s'ils sont connectés
+        return $this->render('paiement/listerLoyer.html.twig', [
+            'controller_name' => 'PaiementController',
         ]);
     }
 
